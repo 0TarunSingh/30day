@@ -15,10 +15,10 @@ const hugSound = document.getElementById('hugSound');
 
 const MESSAGES = [
   "You are loved, Sabrina. 💕",
-  "Close your eyes — feel this hug. 🤍",
+  "Close your eyes, feel this hug. 🤍",
   "Tiny arms, huge love. I'm with you. 🌸",
   "Breathe in. Breathe out. You are safe. 🌿",
-  "One more hug — for your brave heart. ✨"
+  "One more hug, for your brave heart. ✨"
 ];
 
 let msgIndex = 0;
