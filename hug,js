@@ -1,0 +1,13 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const hug = document.querySelector(".hug-emoji");
+    if (!hug) {
+        console.error("No element with class 'hug-emoji' found.");
+        return;
+    }
+    setInterval(() => {
+        hug.style.transform = "scale(1.15)";
+        setTimeout(() => {
+            hug.style.transform = "scale(1)";
+        }, 300);
+    }, 1000);
+});

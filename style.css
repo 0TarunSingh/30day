@@ -1,0 +1,80 @@
+:root{
+  --bg1: #fff0f6;
+  --bg2: #ffe6f0;
+  --accent:#ff5f87;
+  --accent-2:#ff2f66;
+  --muted:#6b5056;
+  --card: rgba(255,255,255,0.75);
+  --glass: rgba(255,255,255,0.35);
+  --max-width:880px;
+  --radius:20px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow-x:hidden;
+  color: #3b2b2e;
+}
+
+/* soft moving gradient overlay */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background: radial-gradient(600px 300px at 10% 20%, rgba(255,95,135,0.08), transparent),
+              radial-gradient(500px 250px at 90% 80%, rgba(255,170,200,0.06), transparent);
+  pointer-events:none;
+  z-index:0;
+  animation: floatBG 14s ease-in-out infinite;
+}
+@keyframes floatBG{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
+  100%{transform:translateY(0)}
+}
+
+/* layout */
+.page{max-width:var(--max-width);margin:32px auto;padding:28px;position:relative;z-index:1}
+.head{text-align:center;margin-bottom:8px}
+.title{font-weight:700}
+.subtitle{color:var(--muted);margin-top:6px}
+
+/* hug stage */
+.hug-stage{margin:28px auto;background:var(--card);backdrop-filter: blur(6px);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:0 12px 40px rgba(50,20,30,0.08);position:relative}
+.hug-svg{width:420px;height:auto;max-width:96%;display:block;margin:6px auto 0}
+
+/* arms & heart animation helpers */
+.arm{transform-origin:center; transition:transform 420ms cubic-bezier(.2,.9,.25,1)}
+.left-arm{transform: translateX(-6px) rotate(-6deg)}
+.right-arm{transform: translateX(6px) rotate(6deg)}
+.hug-visual.hugging .left-arm{transform: translateX(-36px) rotate(-18deg)}
+.hug-visual.hugging .right-arm{transform: translateX(36px) rotate(18deg)}
+#heart{transform-origin:250px 200px; transition: transform 420ms cubic-bezier(.2,.9,.25,1)}
+
+/* message bubble */
+.bubble{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));padding:12px 18px;border-radius:999px;color:#3b2b2e;font-weight:600;box-shadow:0 6px 20px rgba(50,20,30,0.06);max-width:78%;text-align:center;transition:opacity .28s, transform .28s}
+.bubble.fade-out{opacity:0;transform:translateY(6px)}
+.bubble.fade-in{opacity:1;transform:translateY(0)}
+
+/* buttons */
+.controls{display:flex;gap:12px;align-items:center;margin-top:6px}
+.btn{padding:12px 20px;border-radius:999px;border:none;text-decoration:none;cursor:pointer;font-weight:700;box-shadow:0 8px 30px rgba(99,40,70,0.08)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;color:#fff;box-shadow:0 10px 30px rgba(255,95,135,0.18);transition:transform .18s}
+.btn.primary:active{transform:scale(.98)}
+.btn.ghost{background:transparent;border:1px solid rgba(60,20,30,0.06);color:var(--accent-2)}
+
+/* floating layer (hearts & sparkles) */
+.float-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:var(--radius)}
+.float{position:absolute;font-size:16px;opacity:0.98;transform:translateY(0);animation: floatUp linear forwards}
+
+/* footer */
+.foot{color:var(--muted);text-align:center;margin-top:18px;font-size:13px}
+
+/* responsive */
+@media (max-width:520px){
+  .hug-svg{width:320px}
+  .bubble{max-width:92%}
+  .controls{flex-direction:column}
+}

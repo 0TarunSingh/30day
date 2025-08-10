@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Virtual Hug for Sabrina 💖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page" role="main" aria-labelledby="pageTitle">
+    <header class="head">
+      <h1 id="pageTitle">A Warm Hug For Sabrina</h1>
+      <p class="subtitle">Whenever you need one, click the heart - this hug is from Volon 💌</p>
+    </header>
+
+    <section class="hug-stage" aria-label="Virtual hug area">
+      <!-- Cartoon arms + heart SVG -->
+      <div class="hug-visual" id="hugVisual" aria-hidden="false" tabindex="0">
+        <svg viewBox="0 0 500 360" class="hug-svg" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Cartoon arms hugging a heart</title>
+          <desc id="svgDesc">Two soft arms wrap around a heart. Click to send another hug.</desc>
+
+          <!-- left arm -->
+          <g id="leftArm" class="arm left-arm" transform="translate(0,0)">
+            <path d="M120 220 q-60 -40 -40 -90 q30 -60 80 -40 q30 14 30 60 q0 50 -70 70 z" fill="#ffd6da"/>
+            <path d="M110 210 q-40 -30 -25 -60 q18 -36 52 -22 q22 10 20 44 q0 36 -47 38 z" fill="#ffbcbc"/>
+          </g>
+
+          <!-- right arm -->
+          <g id="rightArm" class="arm right-arm" transform="translate(0,0)">
+            <path d="M380 220 q60 -40 40 -90 q-30 -60 -80 -40 q-30 14 -30 60 q0 50 70 70 z" fill="#ffd6da"/>
+            <path d="M390 210 q40 -30 25 -60 q-18 -36 -52 -22 q-22 10 -20 44 q0 36 47 38 z" fill="#ffbcbc"/>
+          </g>
+
+          <!-- heart -->
+          <g id="heartGroup" transform="translate(0,0)">
+            <path id="heart" d="M250 180
+              C250 140 210 130 210 170
+              C210 210 250 230 250 260
+              C250 230 290 210 290 170
+              C290 130 250 140 250 180 Z"
+              fill="#ff5f87" stroke="#ff2f66" stroke-width="3" />
+            <!-- tiny shine -->
+            <ellipse cx="230" cy="150" rx="6" ry="10" fill="rgba(255,255,255,0.35)" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- message bubble -->
+      <div class="bubble" id="bubble" aria-live="polite">You are loved. 💕</div>
+
+      <!-- controls -->
+      <div class="controls">
+        <button id="hugBtn" class="btn primary" aria-pressed="false">Another Hug 💗</button>
+        <a href="plan.html" class="btn ghost">📅 30-Day Plan</a>
+      </div>
+
+      <!-- subtle decorative floating hearts container (JS uses) -->
+      <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
+    </section>
+
+    <footer class="foot">Made with care • Only for Jiji • She's my world</footer>
+  </main>
+
+  <audio id="hugSound" preload="auto">
+    <!-- simple beep-like sound encoded as data URI (tiny) -->
+    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
