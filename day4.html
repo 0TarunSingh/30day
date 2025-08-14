@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 4 - Meet the Legend!</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffe6ed, #fff0f5);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    color: #ff4d6d;
+    text-shadow: 1px 1px 2px #ffa1b8;
+    margin-bottom: 20px;
+  }
+  .random-container img {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .random-container img:hover { transform: scale(1.05); }
+  .btn {
+    background-color: #ff6b81;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px 5px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn:hover { background-color: #ff4757; }
+
+  .gallery-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    border-radius: 20px;
+    background-color: #fff5f8;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 0;
+  }
+  .gallery-header h2 { margin: 0; color: #ff4d6d; }
+  .gallery-header span {
+    font-size: 28px;
+    transition: transform 0.3s;
+  }
+  .gallery-header.active span { transform: rotate(180deg); }
+
+  .gallery-content {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  .gallery-content img, .gallery-content video {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .gallery-content img:hover, .gallery-content video:hover { transform: scale(1.05); }
+
+  .video-wrapper { position: relative; }
+  .play-button {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: white;
+    opacity: 0.8;
+    pointer-events: none;
+    text-shadow: 0 0 6px black;
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed; top:0; left:0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img, .lightbox video {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 20px;
+  }
+
+  .nav-buttons { margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<h1>Day 4 - Meet the legend himself!</h1>
+
+<div class="random-container">
+  <img id="randomPic" src="Juicy/1.jpg" alt="Random Cat" onclick="openLightbox(this.src, false)">
+  <br>
+  <button class="btn" onclick="showRandom()">Show Random Picture</button>
+</div>
+
+<div class="gallery-container">
+  <div class="gallery-header" onclick="toggleGallery()">
+    <h2>Full Gallery</h2>
+    <span>▼</span>
+  </div>
+  <div class="gallery-content" id="galleryContent">
+    <!-- Images 1-24 -->
+    <img src="Juicy/1.jpg" alt="Cat 1" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/2.jpg" alt="Cat 2" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/3.jpg" alt="Cat 3" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/4.jpg" alt="Cat 4" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/5.jpg" alt="Cat 5" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/6.jpg" alt="Cat 6" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/7.jpg" alt="Cat 7" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/8.jpg" alt="Cat 8" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/9.jpg" alt="Cat 9" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/10.jpg" alt="Cat 10" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/11.jpg" alt="Cat 11" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/12.jpg" alt="Cat 12" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/13.jpg" alt="Cat 13" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/14.jpg" alt="Cat 14" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/15.jpg" alt="Cat 15" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/16.jpg" alt="Cat 16" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/17.jpg" alt="Cat 17" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/18.jpg" alt="Cat 18" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/19.jpg" alt="Cat 19" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/20.jpg" alt="Cat 20" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/21.jpg" alt="Cat 21" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/22.jpg" alt="Cat 22" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/23.jpg" alt="Cat 23" onclick="openLightbox(this.src, false)">
+    <img src="Juicy/24.jpg" alt="Cat 24" onclick="openLightbox(this.src, false)">
+
+    <!-- Videos 1-5 -->
+    <div class="video-wrapper" onclick="openLightbox(this.querySelector('video').src, true)">
+      <video src="Juicy/1.mp4"></video>
+      <div class="play-button">▶</div>
+    </div>
+    <div class="video-wrapper" onclick="openLightbox(this.querySelector('video').src, true)">
+      <video src="Juicy/2.mp4"></video>
+      <div class="play-button">▶</div>
+    </div>
+    <div class="video-wrapper" onclick="openLightbox(this.querySelector('video').src, true)">
+      <video src="Juicy/3.mp4"></video>
+      <div class="play-button">▶</div>
+    </div>
+    <div class="video-wrapper" onclick="openLightbox(this.querySelector('video').src, true)">
+      <video src="Juicy/4.mp4"></video>
+      <div class="play-button">▶</div>
+    </div>
+    <div class="video-wrapper" onclick="openLightbox(this.querySelector('video').src, true)">
+      <video src="Juicy/5.mp4"></video>
+      <div class="play-button">▶</div>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="nav-buttons">
+  <a class="btn" href="day3.html">⬅ Previous Day</a>
+  <a class="btn" href="index.html">🏠 Back</a>
+  <a class="btn" href="next.html">Next Day ➡</a>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="Zoomed Cat" style="display:none;">
+  <video id="lightboxVideo" controls style="display:none;"></video>
+</div>
+
+<script>
+const totalPics = 24;
+
+function showRandom() {
+  const rand = Math.floor(Math.random() * totalPics) + 1;
+  document.getElementById('randomPic').src = `Juicy/${rand}.jpg`;
+}
+
+function toggleGallery() {
+  const header = document.querySelector('.gallery-header');
+  const content = document.getElementById('galleryContent');
+  content.style.display = content.style.display === 'grid' ? 'none' : 'grid';
+  header.classList.toggle('active');
+}
+
+function openLightbox(src, isVideo) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const video = document.getElementById('lightboxVideo');
+
+  if(isVideo){
+    img.style.display = 'none';
+    video.style.display = 'block';
+    video.src = src;
+    video.play();
+  } else {
+    video.style.display = 'none';
+    video.pause();
+    img.style.display = 'block';
+    img.src = src;
+  }
+  lb.classList.add('active');
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  const video = document.getElementById('lightboxVideo');
+  video.pause();
+  lb.classList.remove('active');
+}
+</script>
+
+</body>
+</html>
