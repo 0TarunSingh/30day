@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 Reasons I Love Sabrina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #fff0f6 50%, #ffeef5 100%);
+      color: #333;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts animation */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.3);
+      font-size: 20px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+    .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+    .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+    .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+    .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .heart:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+    .heart:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+    .heart:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%, 90% { opacity: 1; }
+      50% { transform: translateY(-10vh) rotate(180deg); }
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      color: #ff4d6d;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.3);
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .love-meter {
+      max-width: 300px;
+      margin: 0 auto 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 25px;
+      padding: 15px;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
+    }
+
+    .meter-label {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ff4d6d;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .meter-bar {
+      height: 12px;
+      background: #ffe6f0;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff4d6d, #ff6b85);
+      border-radius: 6px;
+      width: 0%;
+      animation: fillMeter 3s ease-out forwards;
+      position: relative;
+    }
+
+    .meter-fill::after {
+      content: '💖';
+      position: absolute;
+      right: -15px;
+      top: -8px;
+      font-size: 16px;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes fillMeter {
+      to { width: 100%; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .reasons-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .reason {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 248, 0.9));
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
+      display: flex;
+      align-items: flex-start;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reason::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 77, 109, 0.1) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.6s ease;
+    }
+
+    .reason:hover::before {
+      transform: scale(1);
+    }
+
+    .reason:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 77, 109, 0.3);
+      box-shadow: 0 25px 50px rgba(255, 77, 109, 0.25);
+    }
+
+    .reason-number {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ff4d6d;
+      margin-right: 25px;
+      text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+      position: relative;
+      z-index: 1;
+      min-width: 60px;
+    }
+
+    .reason-text {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: #444;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .reason:nth-child(odd) {
+      animation: slideInLeft 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    .reason:nth-child(even) {
+      animation: slideInRight 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(50px);
+    }
+
+    .reason:nth-child(1) { animation-delay: 0.1s; }
+    .reason:nth-child(2) { animation-delay: 0.2s; }
+    .reason:nth-child(3) { animation-delay: 0.3s; }
+    .reason:nth-child(4) { animation-delay: 0.4s; }
+    .reason:nth-child(5) { animation-delay: 0.5s; }
+    .reason:nth-child(6) { animation-delay: 0.6s; }
+    .reason:nth-child(7) { animation-delay: 0.7s; }
+    .reason:nth-child(8) { animation-delay: 0.8s; }
+    .reason:nth-child(9) { animation-delay: 0.9s; }
+    .reason:nth-child(10) { animation-delay: 1.0s; }
+
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 60px 0 80px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-buttons a {
+      background: linear-gradient(135deg, #ff4d6d, #ff6b85);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-buttons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-buttons a:hover::before {
+      left: 100%;
+    }
+
+    .nav-buttons a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #ff4d6d;
+      font-weight: 600;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer::before {
+      content: '💕';
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #fff, #fff5f8);
+      margin: 5% auto;
+      padding: 40px;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(255, 77, 109, 0.3);
+      animation: modalSlideIn 0.4s ease-out;
+      border: 3px solid rgba(255, 77, 109, 0.2);
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .close {
+      color: #ff4d6d;
+      float: right;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      transition: all 0.3s ease;
+    }
+
+    .close:hover {
+      color: #e63e5d;
+      transform: scale(1.1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 77, 109, 0.2);
+    }
+
+    .modal-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ff4d6d;
+      margin-right: 20px;
+      text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #444;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .modal-body {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #555;
+      text-align: left;
+    }
+
+    .modal-emoji {
+      font-size: 2rem;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .reasons-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      header h1 {
+        font-size: 3rem;
+      }
+      
+      .reason {
+        padding: 25px;
+      }
+      
+      .reason-number {
+        font-size: 2.2rem;
+        margin-right: 20px;
+      }
+      
+      .reason-text {
+        font-size: 1.1rem;
+      }
+
+      .modal-content {
+        margin: 10% auto;
+        padding: 30px 25px;
+        width: 95%;
+      }
+
+      .modal-number {
+        font-size: 2.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.3rem;
+      }
+
+      .modal-body {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts">
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+  </div>
+
+  <header>
+    <h1>💖 10 Reasons I Love Sabrina</h1>
+    <p>Every reason makes my heart beat faster ❤️
+        P.s, click them, there's a message in each of it.
+    </p>
+    
+    <div class="love-meter">
+      <div class="meter-label">Love Level</div>
+      <div class="meter-bar">
+        <div class="meter-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="reasons-container">
+    <div class="reason" onclick="openModal(1)"><div class="reason-number">1</div><div class="reason-text">You always make me feel safe and loved.</div></div>
+    <div class="reason" onclick="openModal(2)"><div class="reason-number">2</div><div class="reason-text">Your smile brightens even my darkest days.</div></div>
+    <div class="reason" onclick="openModal(3)"><div class="reason-number">3</div><div class="reason-text">You're kind and caring, even when no one is watching.</div></div>
+    <div class="reason" onclick="openModal(4)"><div class="reason-number">4</div><div class="reason-text">Your laugh is my favorite sound.</div></div>
+    <div class="reason" onclick="openModal(5)"><div class="reason-number">5</div><div class="reason-text">You make me want to be a better person every day.</div></div>
+    <div class="reason" onclick="openModal(6)"><div class="reason-number">6</div><div class="reason-text">You're strong, even when things are tough.</div></div>
+    <div class="reason" onclick="openModal(7)"><div class="reason-number">7</div><div class="reason-text">You understand me like no one else does.</div></div>
+    <div class="reason" onclick="openModal(8)"><div class="reason-number">8</div><div class="reason-text">Your creativity and imagination inspire me.</div></div>
+    <div class="reason" onclick="openModal(9)"><div class="reason-number">9</div><div class="reason-text">You're honest and genuine, always true to yourself.</div></div>
+    <div class="reason" onclick="openModal(10)"><div class="reason-number">10</div><div class="reason-text">Simply being with you makes life beautiful.</div></div>
+  </div>
+
+  <div class="nav-buttons">
+    <a href="day5.html">⬅ Previous Day</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="day7.html">Next Day ➡</a>
+  </div>
+
+  <!-- Modal -->
+  <div id="reasonModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-header">
+        <div class="modal-number" id="modalNumber">1</div>
+        <div class="modal-title" id="modalTitle">Reason Title</div>
+      </div>
+      <div class="modal-emoji" id="modalEmoji">💖</div>
+      <div class="modal-body" id="modalBody">
+        Detailed explanation goes here...
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Forever & Always 💞
+  </footer>
+
+  <script>
+    const reasonDetails = {
+1: {
+    title: "You make me feel safe and loved",
+    emoji: "🛡️💕",
+    body: "Sabrina, whenever you're around I feel incredibly safe and loved, its like the nervousness and anxiety I had, all disppeared"
+  },
+  2: {
+    title: "Your smile brightens my darkest days",
+    emoji: "☀️😊",
+    body: "I know I've not seen you much, rather barely at all. Can't even keep asking you cause that's so rude :(. But the video.. I really really really cherish that so much. I love your smile, I really do."
+  },
+  3: {
+    title: "Your kindness amazes me",
+    emoji: "🌟💝",
+    body: "Your kindness towards me.. even when I act like a bitch, you're never obligated to do that.. but you do, you are kind to me always, you know what I am going through too and understand me."
+  },
+  4: {
+    title: "Your laugh is my favorite song",
+    emoji: "🎵😂",
+    body: "I could listen to your laugh forever. That little giggle the full-belly laugh when something is hilarious, your litte gremlin laugh, lmao. all of these things, they're stuck in my head. I love them. I wish to hear you laugh all the time even if it sounds insane."
+  },
+  5: {
+    title: "You inspire me to be better",
+    emoji: "🌱✨",
+    body: "Jiji, it'd been a while since I've actually wanted to grow and be better as a person, but you.. ever since you came into my life, I've tried more than I ever have, I want to get better I want to be worthy of you. "
+  },
+  6: {
+    title: "Your strength is incredible",
+    emoji: "💪🌈",
+    body: " You are so incredibly strong, you may think you are not, but you are.. stronger than me, I am glad you're taking steps to finally get better, though I do wish there were more changes, but you're doing amazing considering the things you've been through."
+  },
+  7: {
+    title: "You understand me like no one else",
+    emoji: "🧩💞",
+    body: "You just get me, Sabrina. You notice when I’m off before I even realize it, know exactly what to say, and understand all my quirks without judgment. You see the real me, my messiness and my heart, and love all of it. That kind of connection is something I never thought I’d find, but I found it with you."
+  },
+  8: {
+    title: "Your creativity amazes me",
+    emoji: "🎨🌟",
+    body: "Your imagination and creativity blow me away every day. The way you manage to create something incredible from nothing, all those drawings, they're amazing. You make the world feel more colorful and magical just by being in it."
+  },
+  9: {
+    title: "You’re genuine and true",
+    emoji: "🌻💎",
+    body: "I love that you’re always yourself, no pretenses. You've told me truths that you could've hid, you have constantly been honest to me, rarely lied to me. I wish you'd know much I appreciate that, even if the truth is harsh, I would rather learn it than the false things.."
+  },
+  10: {
+    title: "Simply being with you makes life beautiful",
+    emoji: "🌺💖",
+    body: "This is the simplest and most profound truth: just being with you turns ordinary days into something magical. Whether we’re talking for hours, sharing comfortable silence with songs, laughing at stupid things, or facing life’s challenges together. I treasure every second with you. You make everything brighter, Sabrina."
+  }
+};
+
+    function openModal(reasonNumber) {
+      const modal = document.getElementById('reasonModal');
+      const details = reasonDetails[reasonNumber];
+      
+      document.getElementById('modalNumber').textContent = reasonNumber;
+      document.getElementById('modalTitle').textContent = details.title;
+      document.getElementById('modalEmoji').textContent = details.emoji;
+      document.getElementById('modalBody').textContent = details.body;
+      
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('reasonModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('reasonModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97078d7b02a3470d',t:'MTc1NTQxNjczNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

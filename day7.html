@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Love Playlist - Songs That Remind Me of You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #fff0f6 50%, #ffeef5 100%);
+      color: #333;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating musical notes */
+    .floating-notes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .note {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.3);
+      font-size: 24px;
+      animation: floatNote 8s ease-in-out infinite;
+    }
+
+    .note:nth-child(1) { left: 15%; animation-delay: 0s; }
+    .note:nth-child(2) { left: 25%; animation-delay: 1.5s; }
+    .note:nth-child(3) { left: 35%; animation-delay: 3s; }
+    .note:nth-child(4) { left: 45%; animation-delay: 4.5s; }
+    .note:nth-child(5) { left: 55%; animation-delay: 6s; }
+    .note:nth-child(6) { left: 65%; animation-delay: 1s; }
+    .note:nth-child(7) { left: 75%; animation-delay: 2.5s; }
+    .note:nth-child(8) { left: 85%; animation-delay: 4s; }
+
+    @keyframes floatNote {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%, 90% { opacity: 1; }
+      50% { transform: translateY(-10vh) rotate(360deg); }
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      color: #ff4d6d;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.3);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .playlist-info {
+      max-width: 400px;
+      margin: 0 auto 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
+      text-align: center;
+    }
+
+    .playlist-title {
+      font-size: 1.1rem;
+      color: #ff4d6d;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .playlist-description {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .songs-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .song-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 248, 0.95));
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 12px 30px rgba(255, 77, 109, 0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .song-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 77, 109, 0.1) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.6s ease;
+    }
+
+    .song-card:hover::before {
+      transform: scale(1);
+    }
+
+    .song-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 77, 109, 0.3);
+      box-shadow: 0 20px 40px rgba(255, 77, 109, 0.25);
+    }
+
+    .song-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .song-number {
+      background: linear-gradient(135deg, #ff4d6d, #ff6b85);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-right: 15px;
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+    }
+
+    .song-info h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.3rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .song-info .artist {
+      margin: 0;
+      font-size: 1rem;
+      color: #ff4d6d;
+      font-weight: 500;
+    }
+
+    .song-explanation {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #555;
+      position: relative;
+      z-index: 1;
+      margin-top: 15px;
+    }
+
+    .spotify-link {
+      display: inline-flex;
+      align-items: center;
+      background: #1db954;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .spotify-link:hover {
+      background: #1ed760;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(29, 185, 84, 0.3);
+    }
+
+    .spotify-icon {
+      margin-right: 8px;
+      font-size: 1.1rem;
+    }
+
+    .playlist-button-container {
+      text-align: center;
+      margin: 50px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .playlist-button {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1db954, #1ed760);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      transition: all 0.4s ease;
+      box-shadow: 0 15px 35px rgba(29, 185, 84, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .playlist-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .playlist-button:hover::before {
+      left: 100%;
+    }
+
+    .playlist-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(29, 185, 84, 0.4);
+    }
+
+    .playlist-button .spotify-icon {
+      margin-right: 12px;
+      font-size: 1.4rem;
+    }
+
+    .song-card:nth-child(odd) {
+      animation: slideInLeft 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    .song-card:nth-child(even) {
+      animation: slideInRight 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(50px);
+    }
+
+    .song-card:nth-child(1) { animation-delay: 0.1s; }
+    .song-card:nth-child(2) { animation-delay: 0.2s; }
+    .song-card:nth-child(3) { animation-delay: 0.3s; }
+    .song-card:nth-child(4) { animation-delay: 0.4s; }
+    .song-card:nth-child(5) { animation-delay: 0.5s; }
+    .song-card:nth-child(6) { animation-delay: 0.6s; }
+    .song-card:nth-child(7) { animation-delay: 0.7s; }
+    .song-card:nth-child(8) { animation-delay: 0.8s; }
+    .song-card:nth-child(9) { animation-delay: 0.9s; }
+    .song-card:nth-child(10) { animation-delay: 1.0s; }
+
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 60px 0 80px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-buttons a {
+      background: linear-gradient(135deg, #ff4d6d, #ff6b85);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-buttons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-buttons a:hover::before {
+      left: 100%;
+    }
+
+    .nav-buttons a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #ff4d6d;
+      font-weight: 600;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer::before {
+      content: '🎵';
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .songs-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      header h1 {
+        font-size: 3rem;
+      }
+      
+      .song-card {
+        padding: 20px;
+      }
+      
+      .song-info h3 {
+        font-size: 1.2rem;
+      }
+      
+      .song-explanation {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-notes">
+    <div class="note">🎵</div>
+    <div class="note">🎶</div>
+    <div class="note">🎼</div>
+    <div class="note">🎵</div>
+    <div class="note">🎶</div>
+    <div class="note">🎼</div>
+    <div class="note">🎵</div>
+    <div class="note">🎶</div>
+  </div>
+
+  <header>
+    <h1>🎵 Our Love Playlist</h1>
+    <p>10 songs that tell our story ❤️</p>
+    
+    <div class="playlist-info">
+      <div class="playlist-title">Songs That Remind Me of You</div>
+      <div class="playlist-description">
+        Each song in this playlist holds a special place in my heart because it reminds me of you, us, or a beautiful moment we've shared together.
+      </div>
+    </div>
+  </header>
+
+  <div class="songs-container">
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">1</div>
+        <div class="song-info">
+          <h3>Constellations</h3>
+          <p class="artist">Keenan Te</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        Sabrina, being with you feels like a constellation; beautiful, vast, and worth every risk. I’ll always be here, holding our connection steady, no matter what.
+      </div>
+
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">2</div>
+        <div class="song-info">
+          <h3>Heavenmade</h3>
+          <p class="artist">Jhin</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+       Sabrina, being with you feels Heavenmade; every little moment, every laugh, every word with you makes my world brighter and perfect, just like us.
+      </div>
+
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">3</div>
+        <div class="song-info">
+          <h3>When I'm with you</h3>
+          <p class="artist">Vaultboy</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        Sabrina, just being with you makes everything feel lighter and real. You make ordinary moments feel meaningful, and I can’t imagine life without that.
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">4</div>
+        <div class="song-info">
+          <h3>A Thousand Years</h3>
+          <p class="artist">Christina Perri</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        This song captures the timeless feeling of love. It feels like I've been waiting for you my whole life, and now that I've found you, I want to love you for a thousand more years.
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">5</div>
+        <div class="song-info">
+          <h3>Carry you home</h3>
+          <p class="artist">Alex Warren</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        This song represents my commitment to you there's nothing I wouldn't do to make you happy and show you how much you mean to me. Through every storm, I'll be there to make you feel my love.
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">6</div>
+        <div class="song-info">
+          <h3>All we do is talk</h3>
+          <p class="artist">Lyle Kam</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        Sabrina, sometimes it feels like all we do is talk, but every word from you stays with me. Even in silence, I feel close to you, and I treasure every moment we share, no matter how small. And... I hope my feelings don't overwhelm you ever, I know I feel too much, but I am okay with anything you want, even if its just being friends.
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">7</div>
+        <div class="song-info">
+          <h3>Pretty</h3>
+          <p class="artist">JVKE</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+Sabrina, you are the star in my sky, the melody in my heart. Every moment with you feels like a beautiful song, and I cherish every note we share together.      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">8</div>
+        <div class="song-info">
+          <h3>Lucky</h3>
+          <p class="artist">Jason Mraz & Colbie Caillat</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+        We're both so lucky to have found each other. This sweet duet reminds me of how perfectly we complement each other and how grateful I am that we get to do life together.
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">9</div>
+        <div class="song-info">
+          <h3>Blue</h3>
+          <p class="artist">Yung kai</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+My Blue, Sabrina, I imagine every perfect moment with you quiet nights under the moonlight, laughing and dreaming together. Being with you makes my world brighter, like our own beautiful sky.      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-header">
+        <div class="song-number">10</div>
+        <div class="song-info">
+          <h3>Home</h3>
+          <p class="artist">Edward Sharpe & The Magnetic Zeros</p>
+        </div>
+      </div>
+      <div class="song-explanation">
+Being with you feels like home. No matter where we are, as long as you’re with me, everything feels right, bright, and full of life. You are my home. Heh, this song may sound a bit goofy, but for some reason its so nostalgic and fun.      </div>
+    </div>
+  </div>
+
+  <div class="playlist-button-container">
+    <a href="https://open.spotify.com/playlist/3XIM8EOCu80I3iZvk4xLab" class="playlist-button" target="_blank">
+      <span class="spotify-icon">🎧</span>
+      Listen to Full Playlist on Spotify
+    </a>
+  </div>
+
+  <div class="nav-buttons">
+    <a href="day6.html">⬅ Previous Day</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="next.html">Next Day ➡</a>
+  </div>
+
+  <footer>
+    Our Love Song Never Ends 💕
+  </footer>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9707ae06b4db5525',t:'MTc1NTQxODA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

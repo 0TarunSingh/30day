@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Day 4 — Flip Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --card-w: 720px;
+      --card-h: 920px;
+      --shadow: 0 18px 40px rgba(0,0,0,.25);
+      --pink: #ff4d6d;
+      --bg: #fff0f6;
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0; min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background: var(--bg);
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      color:#222;
+      padding: 24px 12px 96px;
+    }
+
+    .book{
+      position:relative;
+      width:var(--card-w);
+      height:var(--card-h);
+      perspective: 2400px;
+      user-select:none;
+    }
+    .sheet{
+      position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform .9s ease;
+      box-shadow: var(--shadow);
+      border-radius: 14px;
+    }
+    .sheet.flipped{ transform: rotateY(-180deg); }
+
+    .face{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:48px 56px;
+      background:#fff;
+      border-radius:14px;
+      backface-visibility: hidden;
+    }
+    .face.front{ box-shadow: inset -10px 0 24px rgba(0,0,0,.06); }
+    .face.back{
+      transform: rotateY(180deg);
+      box-shadow: inset 10px 0 24px rgba(0,0,0,.06);
+    }
+
+    h1,h2{ margin:0 0 10px; color: var(--pink); }
+    h1{ font-size: 2.1rem; }
+    h2{ font-size: 1.8rem; }
+    p{ font-size:1.18rem; line-height:1.75; margin:8px 0 0; text-align:center; }
+
+    .hint{
+      position:absolute; bottom:14px; left:0; right:0;
+      text-align:center; font-size:.95rem; color:#555; opacity:.8;
+      pointer-events:none;
+    }
+
+    .nav{
+      margin-top: 24px;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
+    }
+    .btn{
+      background: var(--pink); color:#fff; text-decoration:none;
+      padding:10px 18px; border-radius:10px; transition:.2s;
+      font-weight:600;
+    }
+    .btn:hover{ filter: brightness(.95); }
+
+    @media (max-width: 820px){
+      :root{ --card-w: 92vw; --card-h: 130vw; }
+      .face{ padding: 36px 28px; }
+      h1{ font-size:1.8rem; } h2{ font-size:1.55rem; }
+      p{ font-size:1.05rem; }
+    }
+
+    /* GIF styling */
+    .gif-page img{
+      max-width:80%;
+      border-radius:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book" id="book">
+    <!-- SHEET 1 (Cover / Page 2) -->
+    <div class="sheet" data-sheet="1">
+      <div class="face front gif-page">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnVmZzNrdHcwN2p5NnAyOTN4YWZxcHZjNDVjYXAwY3p0cTdxZGU1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OeACER9ZkiYVIe256l/giphy.gif" alt="Hug GIF">
+        <h1>🤗 A Hug for You</h1>
+        <p>Flip inside whenever you need warmth. 
+            I will give it all.
+        </p>
+        <div class="hint">tap on the sides of the card to flip left or right.</div>
+      </div>
+      <div class="face back gif-page">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmdmcmM0aXF1NWxzOGx5c3o2Nzh2Y3d2cXdtamhzYm5sNTNobmczMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HHismpViXYUMM/giphy.gif" alt="Cute GIF">
+      </div>
+    </div>
+
+    <!-- SHEET 2 (Page 3 / Page 4) -->
+    <div class="sheet" data-sheet="2">
+      <div class="face front">
+        <h2>✨ Another hug for my dear whom I fear. </h2>
+        <p>No matter the distance, you’re wrapped in my thoughts and care pretty stuff.
+            Not just the kind of hug that lasts for a moment but one that stays. one that'll wrap around you and remind you that I deeply love you. 
+            Even though I am not besides you, I want you to feel it, keeping you safe.
+        </p>
+      </div>
+      <div class="face back gif-page">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTBxNWhzdDg3ZWk3MHJwY2ZwdmdzYm16cWZ2cjY5ZzQzaWo0bDN6MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XbMpvgZewgY68B8jDk/giphy.gif" alt="Romantic GIF">
+      </div>
+    </div>
+
+    <!-- SHEET 3 (Page 5 / Page 6) -->
+    <div class="sheet" data-sheet="3">
+      <div class="face front">
+        <h2>🫶 This heart which races for you.</h2>
+        <p>See this heart? It's a reminder that every beat there is in me, I'm thinking of you. Every pulse, is my love, my care and my promise travelling to you. Even when we're apart, my heart is keeping pace with yours. It's here to tell you, that you're cherished, treasured, no matter what you are never alone. Let this heart remind you that my love for you is contant, unending and real.</p>
+      </div>
+      <div class="face back gif-page">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXB5b3JrdmZtY2UyeWxqajdqc2o1bXY0cmdpcTluaGtiNjA4eHR3dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iMJwjtL5GLxPYWMob3/giphy.gif" alt="Comfort GIF">
+      </div>
+    </div>
+
+    <!-- SHEET 4 (Page 7 / Page 8) -->
+    <div class="sheet" data-sheet="4">
+      <div class="face front">
+        <h2>🌼 Pinky promise</h2>
+        <p>The pinky promise here, is not just a gesture, it's my vow to you. A vow that I'll always be here through every joy and every struggle. My hands will never let go of yours, and the heart will never let you feel alone. It's a promise that I'll cherish you, protect you, and stand by you no matter what comes our way. Let this little promise remind you that my love for you is unshakeable, and meant to last forever.</p>
+      </div>
+      <div class="face back gif-page">
+        <img src="https://i.pinimg.com/originals/0e/6f/52/0e6f524f25fbc80c666d6541822e2522.gif" alt="Joy GIF">
+      </div>
+    </div>
+
+    <!-- SHEET 5 (Page 9 / Back Cover) -->
+    <div class="sheet" data-sheet="5">
+      <div class="face front">
+        <h2>❤️ Intertwined hands</h2>
+        <p>These hands, intertwined with yours. It's more than just a touch, its comfort, connection and trust. Let this gif remind you that no matter where life takes us, i'll always be by your side. walking with you, supporting and loving you. Together, we're stronger.. and together we're home. 
+            ~Volon
+        </p>
+      </div>
+      <div class="face back">
+        <h1>💖 The End</h1>
+        <p>And here we are at the end.. only for now. Every page, every hug, every heart, and every promise is just a small way of telling you how much you mean to me. Whenever you need warmth, comfort or care. remember this card.. and remember me ^^, all of me is always with you. Turn back anytime you want another hug, another reminder that you are more cherished than my words can ever say.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav">
+    <a class="btn" href="day4.html">⬅ Previous Day</a>
+    <a class="btn" href="index.html">🏠 Back</a>
+    <a class="btn" href="day6.html">Next Day ➡</a>
+  </div>
+
+  <script>
+    const book = document.getElementById('book');
+    const sheets = Array.from(document.querySelectorAll('.sheet'));
+    const N = sheets.length;
+    let turned = 0;
+
+    function restack(){
+      sheets.forEach((s, i)=>{
+        if (s.classList.contains('flipped')){
+          s.style.zIndex = (i + 1);
+        } else {
+          s.style.zIndex = (1000 - i);
+        }
+      });
+    }
+
+    function flipForward(){
+      if (turned >= N) return;
+      sheets[turned].classList.add('flipped');
+      turned++;
+      restack();
+    }
+    function flipBackward(){
+      if (turned <= 0) return;
+      turned--;
+      sheets[turned].classList.remove('flipped');
+      restack();
+    }
+
+    book.addEventListener('click', (e)=>{
+      const rect = book.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const ratio = x / rect.width;
+      if (ratio <= 0.40) {
+        flipBackward();
+      } else if (ratio >= 0.60) {
+        flipForward();
+      }
+    });
+
+    restack();
+  </script>
+</body>
+</html>
