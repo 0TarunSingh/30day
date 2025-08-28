@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Day 15 – Halfway, Even Without You Here</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8d5ff 30%, #ffc3d8 60%, #ffb3e6 100%);
+            background-size: 400% 400%;
+            animation: gentleShift 20s ease-in-out infinite;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gentleShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Floating sparkles */
+        .sparkle {
+            position: fixed;
+            color: rgba(255, 182, 193, 0.6);
+            font-size: 1rem;
+            pointer-events: none;
+            z-index: 1;
+            animation: sparkleFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes sparkleFloat {
+            0%, 100% { 
+                opacity: 0;
+                transform: translateY(0px) scale(0.5) rotate(0deg);
+            }
+            50% { 
+                opacity: 1;
+                transform: translateY(-40px) scale(1) rotate(180deg);
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 3.2rem;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #8b5a8c, #c44569, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .calendar-section {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .calendar-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #8b5a8c;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .calendar-day {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day.filled {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+            animation: heartGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .calendar-day.filled::after {
+            content: '💖';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.8rem;
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+        
+        .calendar-day.waiting {
+            background: rgba(255, 255, 255, 0.3);
+            color: #999;
+            border: 2px dashed rgba(139, 90, 140, 0.3);
+        }
+        
+        @keyframes heartGlow {
+            0% { box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4); }
+            100% { box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6); }
+        }
+        
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .card {
+            background: rgba(255, 248, 220, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255,182,193,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,182,193,0.1) 0%, transparent 50%);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 24px,
+                    rgba(139, 90, 140, 0.05) 25px
+                );
+            border-radius: 20px;
+            pointer-events: none;
+        }
+        
+        .intro-section h2 {
+            color: #8b5a8c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .intro-section p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .letter-section {
+            position: relative;
+        }
+        
+        .letter-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .letter-header h2 {
+            color: #8b5a8c;
+            font-size: 2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .beating-heart {
+            color: #ff69b4;
+            font-size: 2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .letter-content {
+            font-family: 'Kalam', cursive;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border-left: 4px solid #ff69b4;
+            position: relative;
+        }
+        
+        .letter-content::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 4rem;
+            color: #ff69b4;
+            opacity: 0.3;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .letter-content p {
+            margin-bottom: 25px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.3rem;
+            color: #8b5a8c;
+            font-weight: 600;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .quote-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+        }
+        
+        .quote-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .quote-section p {
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .gift-section h3 {
+            color: #8b5a8c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-items {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .gift-item {
+            background: rgba(255, 234, 167, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 4px solid #e17055;
+        }
+        
+        .gift-item h4 {
+            color: #2d3436;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-item p {
+            color: #636e72;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .clock-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .clock {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #8b5a8c;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .clock-hand {
+            position: absolute;
+            background: #8b5a8c;
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+        
+        .hour-hand {
+            width: 3px;
+            height: 30px;
+            top: 30px;
+            left: 50%;
+            margin-left: -1.5px;
+            animation: clockTick 12s linear infinite;
+        }
+        
+        .minute-hand {
+            width: 2px;
+            height: 40px;
+            top: 20px;
+            left: 50%;
+            margin-left: -1px;
+            animation: clockTick 1s linear infinite;
+        }
+        
+        .clock-center {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff69b4;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes clockTick {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .clock-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: #8b5a8c;
+            font-style: italic;
+            margin-top: 15px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            color: #8b5a8c;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-family: 'Kalam', cursive;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+            
+            .calendar-day {
+                width: 40px;
+                height: 40px;
+                font-size: 0.8rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌹 Day 15 - Halfway, Even Without You Here</h1>
+            <p class="subtitle">Half the month has gone, but my love remains constant</p>
+        </div>
+        
+        <div class="calendar-section">
+            <h3 class="calendar-title">💖 Our Journey So Far</h3>
+            <div class="calendar-grid">
+                <div class="calendar-day filled">1</div>
+                <div class="calendar-day filled">2</div>
+                <div class="calendar-day filled">3</div>
+                <div class="calendar-day filled">4</div>
+                <div class="calendar-day filled">5</div>
+                <div class="calendar-day filled">6</div>
+                <div class="calendar-day filled">7</div>
+                <div class="calendar-day filled">8</div>
+                <div class="calendar-day filled">9</div>
+                <div class="calendar-day filled">10</div>
+                <div class="calendar-day filled">11</div>
+                <div class="calendar-day filled">12</div>
+                <div class="calendar-day filled">13</div>
+                <div class="calendar-day filled">14</div>
+                <div class="calendar-day filled">15</div>
+                <div class="calendar-day waiting">16</div>
+                <div class="calendar-day waiting">17</div>
+                <div class="calendar-day waiting">18</div>
+                <div class="calendar-day waiting">19</div>
+                <div class="calendar-day waiting">20</div>
+                <div class="calendar-day waiting">21</div>
+                <div class="calendar-day waiting">22</div>
+                <div class="calendar-day waiting">23</div>
+                <div class="calendar-day waiting">24</div>
+                <div class="calendar-day waiting">25</div>
+                <div class="calendar-day waiting">26</div>
+                <div class="calendar-day waiting">27</div>
+                <div class="calendar-day waiting">28</div>
+                <div class="calendar-day waiting">29</div>
+                <div class="calendar-day waiting">30</div>
+            </div>
+        </div>
+        
+        <div class="card intro-section">
+            <h2>💌 Introduction</h2>
+            <p>"Half the month has gone, Jiji. And though these last few days felt quiet without you, my heart still found ways to speak to you. Even when you're busy, even when you're away, I still count my days with you because my love doesn't pause when you do."</p>
+        </div>
+        
+        <div class="card letter-section">
+            <div class="letter-header">
+                <h2>Letter to Jiji, from Volon</h2>
+                <div class="beating-heart">💖</div>
+            </div>
+            
+            <div class="letter-content">
+                <p>My Jiji,</p>
+                
+                <p>These past few weeks have felt strange. The messages were slower, the space felt heavier, and I caught myself missing you more than usual. I know you were busy, I know life pulled you away and I kept reminding myself that it's okay. Because even when you can't be here, I still hold you close.</p>
+                
+                <p>Day 15. Half the month. A mark on the calendar, but more importantly, a mark on my heart. It's proof that even with silence, distance, and waiting, my love for you keeps moving forward.</p>
+                
+                <p>I won't lie I wish I could have spent this halfway point with you. I wanted to share the laugh, the joy, the moment. But instead, I share this truth: I am still here, waiting and loving, even when the days feel quiet.</p>
+                
+                <p>Jiji, I hope when you read this, you know that these words don't fade with time. Whether it's day 15, day 20, or day 1000, my love is constant. And no matter how many times you're busy, or life steals you away, I'll be here, steady, halfway, all the way, always.</p>
+                
+                <div class="signature">
+                    Yours even in silence,<br>
+                    Volon
+                </div>
+            </div>
+        </div>
+        
+        <div class="card quote-section">
+            <h3>✨ Quote of the Day</h3>
+            <p>"Love doesn't keep time the way clocks do. Even when days pass in silence, my heart still counts you in every moment."</p>
+        </div>
+        
+        <div class="card gift-section">
+            <h3>🎁 Digital Gift for Day 15</h3>
+            <div class="gift-items">
+                <div class="gift-item">
+                    <h4>📅 Love Calendar</h4>
+                    <p>A calendar showing every day from 1–15 marked with glowing hearts, and 16–30 waiting to be filled proof that even when you weren't here for some days, I still kept counting for you.</p>
+                </div>
+                <div class="gift-item">
+                    <h4>💌 Message of Constancy</h4>
+                    <p>"Even when you're away, I still love you here. Even in silence, you're the loudest part of my heart."</p>
+                    <div class="clock-section">
+                        <div class="clock">
+                            <div class="clock-hand hour-hand"></div>
+                            <div class="clock-hand minute-hand"></div>
+                            <div class="clock-center"></div>
+                        </div>
+                        <div class="clock-text">Love doesn't keep time the way clocks do</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day14.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day16.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Create floating sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = Math.random() > 0.5 ? '✨' : '💫';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 4 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 8000);
+        }
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 3000);
+        
+        // Add gentle scroll animations
+        const cards = document.querySelectorAll('.card, .calendar-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+        
+        // Animate calendar days appearing
+        const calendarDays = document.querySelectorAll('.calendar-day.filled');
+        calendarDays.forEach((day, index) => {
+            day.style.animationDelay = (index * 0.1) + 's';
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97655d9e40d891dc',t:'MTc1NjQwMDQzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

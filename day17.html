@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Day 17 – A Pocket of Sunshine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600&family=Caveat:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff9c4 0%, #ffeb3b 20%, #ffd54f 40%, #fff176 60%, #fff9c4 100%);
+            background-size: 400% 400%;
+            animation: sunshineShift 12s ease-in-out infinite;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        body.extra-bright {
+            background: linear-gradient(135deg, #ffff8d 0%, #ffeb3b 20%, #ffc107 40%, #ffeb3b 60%, #ffff8d 100%);
+            filter: brightness(1.3);
+        }
+        
+        @keyframes sunshineShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Floating clouds */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .cloud {
+            position: absolute;
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: cloudDrift linear infinite;
+        }
+        
+        .cloud:nth-child(1) { top: 15%; animation-duration: 30s; animation-delay: 0s; }
+        .cloud:nth-child(2) { top: 25%; animation-duration: 35s; animation-delay: -8s; }
+        .cloud:nth-child(3) { top: 10%; animation-duration: 40s; animation-delay: -15s; }
+        .cloud:nth-child(4) { top: 30%; animation-duration: 32s; animation-delay: -22s; }
+        
+        @keyframes cloudDrift {
+            0% { transform: translateX(-150px); }
+            100% { transform: translateX(calc(100vw + 150px)); }
+        }
+        
+        /* Floating sparkles */
+        .sparkle {
+            position: fixed;
+            color: #ffc107;
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 2;
+            animation: sparkleJoy 6s ease-in-out infinite;
+        }
+        
+        @keyframes sparkleJoy {
+            0%, 100% { 
+                opacity: 0;
+                transform: translateY(0px) scale(0.5) rotate(0deg);
+            }
+            50% { 
+                opacity: 1;
+                transform: translateY(-40px) scale(1.2) rotate(180deg);
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .sun-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .sun {
+            display: inline-block;
+            font-size: 5rem;
+            color: #ff9800;
+            position: relative;
+            animation: sunPulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 152, 0, 0.6));
+        }
+        
+        @keyframes sunPulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(255, 152, 0, 0.6));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 30px rgba(255, 152, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 152, 0, 0.4));
+            }
+        }
+        
+        .sun-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+        }
+        
+        .ray {
+            position: absolute;
+            width: 3px;
+            height: 20px;
+            background: linear-gradient(to bottom, #ffc107, transparent);
+            border-radius: 2px;
+            animation: rayRotate 8s linear infinite;
+        }
+        
+        .ray:nth-child(1) { transform: rotate(0deg) translateY(-60px); }
+        .ray:nth-child(2) { transform: rotate(45deg) translateY(-60px); }
+        .ray:nth-child(3) { transform: rotate(90deg) translateY(-60px); }
+        .ray:nth-child(4) { transform: rotate(135deg) translateY(-60px); }
+        .ray:nth-child(5) { transform: rotate(180deg) translateY(-60px); }
+        .ray:nth-child(6) { transform: rotate(225deg) translateY(-60px); }
+        .ray:nth-child(7) { transform: rotate(270deg) translateY(-60px); }
+        .ray:nth-child(8) { transform: rotate(315deg) translateY(-60px); }
+        
+        @keyframes rayRotate {
+            0% { transform: rotate(var(--rotation)) translateY(-60px); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: rotate(calc(var(--rotation) + 360deg)) translateY(-60px); opacity: 1; }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-family: 'Caveat', cursive;
+            background: linear-gradient(135deg, #ff9800, #ffc107, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(255, 152, 0, 0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #e65100;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffc107, #ffeb3b, #fff176, #ffc107);
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .intro-section h2 {
+            color: #e65100;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .intro-section p {
+            color: #bf360c;
+            line-height: 1.7;
+            font-size: 1.2rem;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .letter-section {
+            position: relative;
+        }
+        
+        .letter-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .letter-header h2 {
+            color: #e65100;
+            font-size: 2.2rem;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .beating-heart {
+            color: #ff5722;
+            font-size: 2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .letter-content {
+            font-family: 'Kalam', cursive;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #3e2723;
+            text-align: left;
+            padding: 35px;
+            background: rgba(255, 248, 225, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border-left: 5px solid #ff9800;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255, 193, 7, 0.1);
+        }
+        
+        .letter-content::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 5rem;
+            color: #ffc107;
+            opacity: 0.4;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .letter-content p {
+            margin-bottom: 25px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #e65100;
+            font-weight: 600;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .quote-section {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.8), rgba(255, 193, 7, 0.8));
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+        }
+        
+        .quote-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .quote-section p {
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.6;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+        }
+        
+        .gift-section h3 {
+            color: #e65100;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .gift-items {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .gift-item {
+            background: rgba(255, 248, 225, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid #ff9800;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .gift-item h4 {
+            color: #e65100;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .gift-item p {
+            color: #5d4037;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .sunshine-button-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .sunshine-btn {
+            background: linear-gradient(135deg, #ffc107, #ffeb3b);
+            color: #e65100;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.4);
+            font-family: 'Caveat', cursive;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .sunshine-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.6);
+        }
+        
+        .sunshine-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .sun-doodle {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            border: 3px dashed #ffc107;
+        }
+        
+        .doodle-sun {
+            font-size: 4rem;
+            color: #ff9800;
+            margin-bottom: 15px;
+            animation: doodleBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes doodleBounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .heart-with-name {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+            animation: heartGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes heartGlow {
+            0% { box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3); }
+            100% { box-shadow: 0 8px 25px rgba(255, 87, 34, 0.5); }
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            color: #e65100;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(255, 193, 7, 0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+            border: 2px solid rgba(255, 193, 7, 0.4);
+            font-family: 'Kalam', cursive;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .card {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                padding: 25px;
+            }
+            
+            .sun {
+                font-size: 4rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
+    
+    <div class="container">
+        <div class="sun-section">
+            <div class="sun">
+                ☀️
+                <div class="sun-rays">
+                    <div class="ray" style="--rotation: 0deg;"></div>
+                    <div class="ray" style="--rotation: 45deg;"></div>
+                    <div class="ray" style="--rotation: 90deg;"></div>
+                    <div class="ray" style="--rotation: 135deg;"></div>
+                    <div class="ray" style="--rotation: 180deg;"></div>
+                    <div class="ray" style="--rotation: 225deg;"></div>
+                    <div class="ray" style="--rotation: 270deg;"></div>
+                    <div class="ray" style="--rotation: 315deg;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header">
+            <h1>🌹 Day 17 – A Pocket of Sunshine</h1>
+            <p class="subtitle">Today is about smiling and feeling light in your chest</p>
+        </div>
+        
+        <div class="card intro-section">
+            <h2>💌 Introduction</h2>
+            <p>"Today isn't about waiting. Today is about smiling, because even if you are away, Jiji, I still want you to feel light in your chest, like the world is giving you a little pocket of sunshine."</p>
+        </div>
+        
+        <div class="card letter-section">
+            <div class="letter-header">
+                <h2>Letter to Jiji, from Volon</h2>
+                <div class="beating-heart">💖</div>
+            </div>
+            
+            <div class="letter-content">
+                <p>My Jiji,</p>
+                
+                <p>I thought about what I miss most when you are not here. It isn't just your words, or your replies, or the way you tease me sometimes. It's the way you make everything brighter, without even trying. You have this magic, where you just exist, and suddenly the world feels softer, kinder, lighter.</p>
+                
+                <p>So today I don't want to write about waiting. I want to write about joy. I want to remind you of the silly things we've laughed about, the random little moments where you've made me grin like an idiot. Those moments are treasures to me, Jiji. They stay with me, even when you are away, and they remind me that love is not only about missing each other. It's about carrying the happiness we've built together and letting it warm us.</p>
+                
+                <p>If you are reading this right now, I hope you smile. Even if it's small, even if it's just for a second. Because your smile is my favorite thing in the whole world. I live for it.</p>
+                
+                <p>So here's my sunshine for you: I love you in every ordinary moment, and I love you in every extraordinary one too. You are my happiness, my Jiji, always.</p>
+                
+                <div class="signature">
+                    Always yours,<br>
+                    Volon
+                </div>
+            </div>
+        </div>
+        
+        <div class="card quote-section">
+            <h3>✨ Quote of the Day</h3>
+            <p>"You are my sunshine, Jiji, not because you make every day perfect, but because you make every day brighter just by being in it."</p>
+        </div>
+        
+        <div class="card gift-section">
+            <h3>🎁 Digital Gift for Day 17</h3>
+            <div class="gift-items">
+                <div class="gift-item">
+                    <h4>☀️ Interactive Sunshine Button</h4>
+                    <p>Click the button below to make the whole page glow brighter, like you just brought the light yourself!</p>
+                    <div class="sunshine-button-section">
+                        <button class="sunshine-btn" onclick="addSunshine()">✨ Bring More Sunshine! ✨</button>
+                    </div>
+                </div>
+                <div class="gift-item">
+                    <h4>🎨 Doodle Sun with Love</h4>
+                    <p>My little sun that my jiji can bounce.</p>
+                    <div class="sun-doodle">
+                        <div class="doodle-sun">☀️</div>
+                        <div class="heart-with-name">💖 Jiji 💖</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day16.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day18.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Create floating sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = Math.random() > 0.5 ? '✨' : '🌟';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 6000);
+        }
+        
+        // Add sunshine effect
+        function addSunshine() {
+            const body = document.body;
+            const button = document.querySelector('.sunshine-btn');
+            
+            // Add extra bright class
+            body.classList.add('extra-bright');
+            button.textContent = '🌞 So Bright! 🌞';
+            button.style.transform = 'scale(1.1)';
+            
+            // Create extra sparkles
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createSparkle(), i * 100);
+            }
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                body.classList.remove('extra-bright');
+                button.textContent = '✨ Bring More Sunshine! ✨';
+                button.style.transform = 'scale(1)';
+            }, 3000);
+        }
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+        
+        // Add gentle scroll animations
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+        
+        // Add extra sunshine on page load
+        setTimeout(() => {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createSparkle(), i * 200);
+            }
+        }, 1000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97656f2b96d159e8',t:'MTc1NjQwMTE1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

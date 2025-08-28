@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Sabrina's Love Report Card - Day 12</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '🌸✨💖';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .report-content {
+            padding: 40px;
+        }
+        
+        .intro {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .intro h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .intro p {
+            color: #34495e;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .grades-section {
+            margin-bottom: 40px;
+        }
+        
+        .grades-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .grade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .grade-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .grade-subject {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .grade-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .grade-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .quote-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .quote-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .quote-section p {
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .interactive-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .interactive-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .grade-back-form {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .form-group {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .rating-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .rating-btn {
+            padding: 10px 20px;
+            border: 2px solid #e74c3c;
+            background: white;
+            color: #e74c3c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .rating-btn:hover, .rating-btn.selected {
+            background: #e74c3c;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .closing-note {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .closing-note h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .closing-note p {
+            color: #34495e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .hearts {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        
+        .result-section {
+            display: none;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .nav-btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .report-content {
+                padding: 20px;
+            }
+            
+            .grade-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .rating-options {
+                justify-content: center;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌸 Day 12 – The Love Report Card</h1>
+            <p>Sabrina's Official Academic Record of Awesomeness</p>
+        </div>
+        
+        <div class="report-content">
+            <div class="intro">
+                <h2>📑 Introduction</h2>
+                <p>Today isn't just another day in our journey - it's a little checkpoint. By now, you've made it almost halfway, and I want to celebrate you in the most 'Sabrina way' possible: with your very own Report Card of Love.</p>
+            </div>
+            
+            <div class="grades-section">
+                <h2 class="grades-title">📊 Sabrina's Official Grades</h2>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Cuteness 💖</div>
+                        <div class="grade-description">You manage to be adorable even when you're tired, upset, or just existing</div>
+                    </div>
+                    <div class="grade-value">A+</div>
+                </div>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Kindness 🌸</div>
+                        <div class="grade-description">You give so much to people, even when you don't realize it</div>
+                    </div>
+                    <div class="grade-value">A+</div>
+                </div>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Patience (with me 😅) ⭐</div>
+                        <div class="grade-description">You handle me with more love than I deserve</div>
+                    </div>
+                    <div class="grade-value">A+</div>
+                </div>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Humor 😂</div>
+                        <div class="grade-description">You're funnier than you give yourself credit for</div>
+                    </div>
+                    <div class="grade-value">A++</div>
+                </div>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Strength ⚡</div>
+                        <div class="grade-description">You've proven how powerful you are every single day</div>
+                    </div>
+                    <div class="grade-value">A+++</div>
+                </div>
+                
+                <div class="grade-item" onclick="showGradeDetail(this)">
+                    <div>
+                        <div class="grade-subject">Being My Forever Person ♾️</div>
+                        <div class="grade-description">No one could ever replace you, not even in the tiniest way</div>
+                    </div>
+                    <div class="grade-value">A+++ ∞</div>
+                </div>
+            </div>
+            
+            <div class="quote-section">
+                <h3>✨ Quote of the Day</h3>
+                <p>"The best things in life aren't just grades, trophies, or victories. The best thing in my life is you - and you'll always pass with flying colors."</p>
+            </div>
+            
+            <div class="interactive-section">
+                <h2 class="interactive-title">🎮 Now It's Your Turn!</h2>
+                <p style="text-align: center; margin-bottom: 20px; color: #7f8c8d;">Grade me back, Sabrina! I'm ready for my report card 😅</p>
+                
+                <div class="grade-back-form">
+                    <div class="form-group">
+                        <label>How cute am I? 🥺</label>
+                        <div class="rating-options">
+                            <button class="rating-btn" onclick="selectRating(this, 'cuteness')">Too much</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'cuteness')">Adorable</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'cuteness')">Meh</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'cuteness')">Potato</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How annoying am I? 😅</label>
+                        <div class="rating-options">
+                            <button class="rating-btn" onclick="selectRating(this, 'annoying')">Perfectly annoying</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'annoying')">Lovably annoying</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'annoying')">Not annoying enough</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'annoying')">Angel baby</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How much do I love you? 💕</label>
+                        <div class="rating-options">
+                            <button class="rating-btn" onclick="selectRating(this, 'love')">Beyond words</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'love')">Infinity</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'love')">More than pizza</button>
+                            <button class="rating-btn" onclick="selectRating(this, 'love')">Universe-breaking amount</button>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="submitGrades()">Submit My Grades! 📝</button>
+                </div>
+                
+                <div class="result-section" id="resultSection">
+                    <h3>🎉 Your Grades Are In!</h3>
+                    <div class="hearts">💖💖💖</div>
+                    <p id="resultText"></p>
+                </div>
+            </div>
+            
+            <div class="closing-note">
+                <h3>💌 Closing Note for Day 12</h3>
+                <p>"So here's your official record, Sabrina: you're not just passing, you're excelling at life, love, and being you. And I'm the lucky idiot who gets to call you mine. No school, no exam, no grade in the world can measure what you mean to me."</p>
+                <div class="hearts">💖✨🌸✨💖</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day11.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day13.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        let selectedRatings = {};
+        
+        function showGradeDetail(element) {
+            element.style.transform = 'scale(1.02)';
+            element.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+            
+            setTimeout(() => {
+                element.style.transform = 'translateY(-5px)';
+                element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+            }, 200);
+        }
+        
+        function selectRating(button, category) {
+            // Remove selected class from all buttons in this category
+            const categoryButtons = button.parentElement.querySelectorAll('.rating-btn');
+            categoryButtons.forEach(btn => btn.classList.remove('selected'));
+            
+            // Add selected class to clicked button
+            button.classList.add('selected');
+            
+            // Store the selection
+            selectedRatings[category] = button.textContent;
+        }
+        
+        function submitGrades() {
+            const categories = ['cuteness', 'annoying', 'love'];
+            const missingCategories = categories.filter(cat => !selectedRatings[cat]);
+            
+            if (missingCategories.length > 0) {
+                alert('Please answer all questions before submitting! 🥺');
+                return;
+            }
+            
+            // Generate personalized result
+            let resultText = `Thank you for grading me, Sabrina! 🥰<br><br>`;
+            resultText += `<strong>My Report Card:</strong><br>`;
+            resultText += `Cuteness: ${selectedRatings.cuteness} ✨<br>`;
+            resultText += `Annoyance Level: ${selectedRatings.annoying} 😅<br>`;
+            resultText += `Love for You: ${selectedRatings.love} 💕<br><br>`;
+            
+            if (selectedRatings.love === 'Universe-breaking amount') {
+                resultText += `I see you chose "Universe-breaking amount" for my love - you're absolutely right! I love you so much that scientists are concerned about the space-time continuum! 🌌💖`;
+            } else if (selectedRatings.love === 'More than pizza') {
+                resultText += `More than pizza?! That's saying A LOT! But yes, you're definitely more important than any food (even though pizza is pretty amazing) 🍕💖`;
+            } else {
+                resultText += `No matter what grades you gave me, just know that my love for you will always be an A+++ infinity! 💖∞`;
+            }
+            
+            document.getElementById('resultText').innerHTML = resultText;
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Add some sparkle effects
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.fontSize = '20px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            sparkle.style.animation = 'sparkleFloat 3s ease-out forwards';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+        
+        // Add CSS for sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0px) rotate(0deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976532c4054c8ae1',t:'MTc1NjM5ODY4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

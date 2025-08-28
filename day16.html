@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Day 16 – Waiting with the Light On</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            color: #f0f0f0;
+        }
+        
+        /* Twinkling stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            color: #fff;
+            font-size: 8px;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        .star:nth-child(odd) {
+            animation-duration: 2s;
+            animation-delay: 1s;
+        }
+        
+        .star:nth-child(even) {
+            animation-duration: 4s;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Floating fireflies */
+        .firefly {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffd700;
+            pointer-events: none;
+            z-index: 2;
+            animation: firefly 8s ease-in-out infinite;
+        }
+        
+        @keyframes firefly {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: translateY(0px) translateX(0px);
+            }
+            25% { 
+                opacity: 1;
+                transform: translateY(-30px) translateX(20px);
+            }
+            50% { 
+                opacity: 0.7;
+                transform: translateY(-10px) translateX(-15px);
+            }
+            75% { 
+                opacity: 1;
+                transform: translateY(-40px) translateX(10px);
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 3.2rem;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #fff59d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .lantern-section {
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .lantern {
+            display: inline-block;
+            font-size: 4rem;
+            color: #ffd700;
+            filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 40px #ffd700);
+            animation: lanternSway 4s ease-in-out infinite, lanternGlow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        @keyframes lanternSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+        
+        @keyframes lanternGlow {
+            0% { 
+                filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 40px #ffd700);
+            }
+            100% { 
+                filter: drop-shadow(0 0 30px #ffd700) drop-shadow(0 0 60px #ffd700) drop-shadow(0 0 80px rgba(255, 215, 0, 0.3));
+            }
+        }
+        
+        .lantern-light {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 300px;
+            background: radial-gradient(ellipse at top, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 50%, transparent 100%);
+            pointer-events: none;
+            animation: lightFlicker 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes lightFlicker {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .intro-section h2 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .intro-section p {
+            color: #ddd;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .letter-section {
+            position: relative;
+        }
+        
+        .letter-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .letter-header h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .beating-heart {
+            color: #ff69b4;
+            font-size: 2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .letter-content {
+            font-family: 'Kalam', cursive;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #f0f0f0;
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border-left: 4px solid #ffd700;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .letter-content::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 4rem;
+            color: #ffd700;
+            opacity: 0.5;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .letter-content p {
+            margin-bottom: 25px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.3rem;
+            color: #ffd700;
+            font-weight: 600;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .quote-section {
+            background: rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f0f0f0;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .quote-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+            color: #ffd700;
+        }
+        
+        .quote-section p {
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+            color: #fff;
+        }
+        
+        .gift-section h3 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-items {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .gift-item {
+            background: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 4px solid #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .gift-item h4 {
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-item p {
+            color: #ddd;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .virtual-note {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .note-button {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            font-family: 'Kalam', cursive;
+        }
+        
+        .note-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+        
+        .hidden-messages {
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .hidden-messages.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .message {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #ffd700;
+            border-left: 3px solid #ffd700;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+        
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            color: #ffd700;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-family: 'Kalam', cursive;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .lantern {
+                font-size: 3rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌹 Day 16 – Waiting with the Light On</h1>
+            <p class="subtitle">No matter how long you are away, I keep the light on for you</p>
+        </div>
+        
+        <div class="lantern-section">
+            <div class="lantern">🏮</div>
+            <div class="lantern-light"></div>
+        </div>
+        
+        <div class="card intro-section">
+            <h2>💌 Introduction</h2>
+            <p>"Another day without your voice, another day of quiet. But Jiji, I still keep the light on for you, because no matter how long you are away, I will always want you to find your way back to me."</p>
+        </div>
+        
+        <div class="card letter-section">
+            <div class="letter-header">
+                <h2>Letter to Jiji, from Volon</h2>
+                <div class="beating-heart">💖</div>
+            </div>
+            
+            <div class="letter-content">
+                <p>My Jiji,</p>
+                
+                <p>Day 16. It feels longer because I still have not had you back yet. I wake up checking, I fall asleep wondering. My heart keeps reaching for you, even when my hands cannot.</p>
+                
+                <p>I miss the sound of you, the way even a short reply makes my whole chest feel lighter. These days without you remind me of how much space you take up in my world. Without you, everything feels quieter, slower, emptier.</p>
+                
+                <p>But even in this silence, my love does not stop. I still write to you. I still wait for you. I still carry you everywhere in my mind. And I will keep waiting, because you are worth every pause, every moment of missing, every empty space that only you can fill.</p>
+                
+                <p>Jiji, I hope when you see this, you know that I never let go. Not in silence, not in distance, not in absence. You are the person I will keep my light on for, no matter how long the night lasts.</p>
+                
+                <div class="signature">
+                    Yours, waiting but unwavering,<br>
+                    Volon
+                </div>
+            </div>
+        </div>
+        
+        <div class="card quote-section">
+            <h3>✨ Quote of the Day</h3>
+            <p>"Some people wait for tomorrow. I wait for you, every day, every night, until you are back again."</p>
+        </div>
+        
+        <div class="card gift-section">
+            <h3>🎁 Digital Gift for Day 16</h3>
+            <div class="gift-items">
+                <div class="gift-item">
+                    <h4>🏮 Glowing Lantern</h4>
+                    <p>A softly glowing lantern that sways gently in the night breeze, symbolizing the light I keep on for you, always waiting for your return.</p>
+                </div>
+                <div class="gift-item">
+                    <h4>💌 Virtual Love Notes</h4>
+                    <p>Hidden messages of love that appear when you need them most. Click the button below to reveal them.</p>
+                    <div class="virtual-note">
+                        <button class="note-button" onclick="showMessages()">Open Love Notes</button>
+                        <div class="hidden-messages" id="hiddenMessages">
+                            <div class="message">I still love you ✨</div>
+                            <div class="message">I still wait 🌙</div>
+                            <div class="message">I still believe in us 💖</div>
+                            <div class="message">You are worth every moment of waiting 🌟</div>
+                            <div class="message">My heart holds you close, even from afar 💕</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day15.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day17.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const starSymbols = ['✨', '⭐', '🌟', '💫', '·'];
+            
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Create floating fireflies
+        function createFirefly() {
+            const firefly = document.createElement('div');
+            firefly.className = 'firefly';
+            firefly.style.left = Math.random() * 100 + '%';
+            firefly.style.top = Math.random() * 100 + '%';
+            firefly.style.animationDelay = Math.random() * 4 + 's';
+            firefly.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.body.appendChild(firefly);
+            
+            setTimeout(() => {
+                firefly.remove();
+            }, 10000);
+        }
+        
+        // Show hidden messages
+        function showMessages() {
+            const messages = document.getElementById('hiddenMessages');
+            const button = document.querySelector('.note-button');
+            
+            if (messages.classList.contains('show')) {
+                messages.classList.remove('show');
+                button.textContent = 'Open Love Notes';
+            } else {
+                messages.classList.add('show');
+                button.textContent = 'Close Love Notes';
+            }
+        }
+        
+        // Initialize stars
+        createStars();
+        
+        // Create fireflies periodically
+        setInterval(createFirefly, 3000);
+        
+        // Add gentle scroll animations
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976567e0c6088e92',t:'MTc1NjQwMDg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

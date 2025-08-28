@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Day 14 – Our Little Escape</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8d5ff 0%, #ffc3d8 30%, #ffb3e6 60%, #e8d5ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease-in-out infinite;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Floating clouds */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .cloud {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 3rem;
+            animation: drift linear infinite;
+        }
+        
+        .cloud:nth-child(1) { top: 10%; animation-duration: 25s; animation-delay: 0s; }
+        .cloud:nth-child(2) { top: 20%; animation-duration: 30s; animation-delay: -5s; }
+        .cloud:nth-child(3) { top: 30%; animation-duration: 35s; animation-delay: -10s; }
+        .cloud:nth-child(4) { top: 15%; animation-duration: 28s; animation-delay: -15s; }
+        .cloud:nth-child(5) { top: 25%; animation-duration: 32s; animation-delay: -20s; }
+        
+        @keyframes drift {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+        
+        /* Paper airplane animation */
+        .paper-airplane {
+            position: fixed;
+            top: 15%;
+            left: -100px;
+            font-size: 2rem;
+            z-index: 3;
+            animation: flyAcross 20s ease-in-out infinite;
+        }
+        
+        @keyframes flyAcross {
+            0% { 
+                transform: translateX(-100px) translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(5deg);
+                opacity: 0;
+            }
+        }
+        
+        .airplane-text {
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #8b5a8c;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* Floating sparkles */
+        .sparkle {
+            position: fixed;
+            color: rgba(255, 182, 193, 0.8);
+            font-size: 1rem;
+            pointer-events: none;
+            z-index: 1;
+            animation: sparkleFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes sparkleFloat {
+            0%, 100% { 
+                opacity: 0;
+                transform: translateY(0px) scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: translateY(-30px) scale(1);
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #8b5a8c, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .intro-section h2 {
+            color: #8b5a8c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .intro-section p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .letter-section {
+            position: relative;
+        }
+        
+        .letter-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .letter-header h2 {
+            color: #8b5a8c;
+            font-size: 2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .beating-heart {
+            color: #ff69b4;
+            font-size: 2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .letter-content {
+            font-family: 'Kalam', cursive;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border-left: 4px solid #ff69b4;
+            position: relative;
+        }
+        
+        .letter-content::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 4rem;
+            color: #ff69b4;
+            opacity: 0.3;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .letter-content p {
+            margin-bottom: 25px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.3rem;
+            color: #8b5a8c;
+            font-weight: 600;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .quote-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+        }
+        
+        .quote-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .quote-section p {
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .gift-section h3 {
+            color: #8b5a8c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-items {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .gift-item {
+            background: rgba(255, 234, 167, 0.6);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 4px solid #e17055;
+        }
+        
+        .gift-item h4 {
+            color: #2d3436;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .gift-item p {
+            color: #636e72;
+            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+        }
+        
+        .animated-sky {
+            text-align: center;
+            margin: 30px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sky-clouds {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: gentleSway 4s ease-in-out infinite;
+        }
+        
+        @keyframes gentleSway {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(10px); }
+        }
+        
+        .sky-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #2d3436;
+            font-style: italic;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            color: #8b5a8c;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-family: 'Kalam', cursive;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+            
+            .cloud {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
+    
+    <div class="paper-airplane">
+        ✈️
+        <div class="airplane-text">For Jiji ♡</div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌹 Day 14 – Our Little Escape</h1>
+            <p class="subtitle">A peaceful place where it's just you and me</p>
+        </div>
+        
+        <div class="card intro-section">
+            <h2>💌 Introduction</h2>
+            <p>"Every day with you feels like its own little world. Today, I want to take us somewhere softer - a place where it's just you and me, free from all the noise. Let this page be our little escape."</p>
+        </div>
+        
+        <div class="card letter-section">
+            <div class="letter-header">
+                <h2>Letter to Jiji, from Volon</h2>
+                <div class="beating-heart">💖</div>
+            </div>
+            
+            <div class="letter-content">
+                <p>My Sabrina, my Jiji,</p>
+                
+                <p>The world can be loud. Too many voices, too many expectations, too many moments where you're forced to carry more than anyone should. But then, there's you and me - and suddenly, it feels like the rest of it fades away.</p>
+                
+                <p>If I could build a world just for us, it would be quiet, safe, and full of softness. No alarms, no hospital walls, no weight of yesterday or tomorrow. Just a little escape where you can breathe, where I can watch the way your eyes light up when you laugh, and where nothing hurts you.</p>
+                
+                <p>I think of us lying in a field, surrounded by the kind of silence that feels warm, not lonely. You'd show me shapes in the clouds, and I'd pretend I could see them but truthfully, I'd just be watching you. Because you're the only shape I'd never get tired of tracing with my eyes.</p>
+                
+                <p>Jiji, you are my peace. You're the calm in my storm. The proof that even in the middle of everything hard, love can still be soft. And I want you to know, I'll always choose that softness with you. No matter how hard life tries to be, I'll always make sure our love is the gentlest part of your day.</p>
+                
+                <div class="signature">
+                    Always, always yours,<br>
+                    Volon
+                </div>
+            </div>
+        </div>
+        
+        <div class="card quote-section">
+            <h3>✨ Quote of the Day</h3>
+            <p>"The world feels too loud, Jiji but your love is the quiet that saves me."</p>
+        </div>
+        
+        <div class="card gift-section">
+            <h3>🎁 Digital Gift for Day 14</h3>
+            <div class="gift-items">
+                <div class="gift-item">
+                    <h4>☁️ Peaceful Sky</h4>
+                    <p>A gentle animated sky where soft clouds drift peacefully, just like the quiet moments we share together.</p>
+                    <div class="animated-sky">
+                        <div class="sky-clouds">☁️ ☁️ ☁️</div>
+                        <div class="sky-text">Our little piece of heaven, drifting softly together</div>
+                    </div>
+                </div>
+                <div class="gift-item">
+                    <h4>✈️ Love Letter Flight</h4>
+                    <p>A paper airplane carrying your name "Jiji," symbolizing how my love for you travels across any distance to reach your heart.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day13.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day15.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Create floating sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 6000);
+        }
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+        
+        // Add gentle scroll animations
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+        
+        // Add extra paper airplanes occasionally
+        function createExtraAirplane() {
+            const airplane = document.createElement('div');
+            airplane.style.position = 'fixed';
+            airplane.style.top = Math.random() * 30 + 10 + '%';
+            airplane.style.left = '-100px';
+            airplane.style.fontSize = '1.5rem';
+            airplane.style.zIndex = '2';
+            airplane.innerHTML = '✈️';
+            airplane.style.animation = 'flyAcross 25s ease-in-out forwards';
+            document.body.appendChild(airplane);
+            
+            setTimeout(() => {
+                airplane.remove();
+            }, 25000);
+        }
+        
+        // Create extra airplanes occasionally
+        setInterval(createExtraAirplane, 15000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97654f6dc60d5994',t:'MTc1NjM5OTg1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

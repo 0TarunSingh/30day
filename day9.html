@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabrina's 15-Word Mystery Puzzle ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: gentle-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentle-glow {
+            from { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+            to { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.4); }
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .hints-column {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .hints-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffeb3b;
+        }
+
+        .hint-item {
+            margin-bottom: 12px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #ffeb3b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .hint-number {
+            font-weight: bold;
+            color: #ffeb3b;
+            margin-right: 8px;
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        .puzzles-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            align-content: start;
+        }
+
+        .puzzle-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .puzzle-container.solved {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4caf50;
+            animation: sparkle 2s ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
+            75% { transform: scale(1.05); }
+        }
+
+        .puzzle-number {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffeb3b;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .word-shape {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            min-height: 60px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .letter-box {
+            width: 35px;
+            height: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .letter-box.correct {
+            background: #4caf50;
+            border-color: #4caf50;
+            animation: bounce 0.6s ease;
+        }
+
+        .letter-box.wrong-position {
+            background: #ff9800;
+            border-color: #ff9800;
+            animation: shake 0.6s ease;
+        }
+
+        .letter-box.not-in-word {
+            background: #757575;
+            border-color: #757575;
+        }
+
+        .letter-box.revealed {
+            background: #2196f3;
+            border-color: #2196f3;
+            animation: pulse 0.8s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            80% { transform: translateY(-5px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Shape variations */
+        .shape-rectangle .letter-box { border-radius: 4px; }
+        .shape-diamond .letter-box { transform: rotate(45deg); border-radius: 0; }
+        .shape-diamond .letter-box span { transform: rotate(-45deg); }
+        .shape-heart .letter-box { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+        .shape-star .letter-box { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); border-radius: 0; }
+        .shape-circle .letter-box { border-radius: 50%; }
+        .shape-hexagon .letter-box { clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%); border-radius: 0; }
+
+        .input-section {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .guess-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            text-transform: uppercase;
+        }
+
+        .guess-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .guess-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reveal-btn {
+            background: rgba(33, 150, 243, 0.3);
+            border-color: rgba(33, 150, 243, 0.5);
+        }
+
+        .success-message {
+            text-align: center;
+            color: #4caf50;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fade-in-up 0.5s ease forwards;
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fade-in 0.5s ease;
+        }
+
+        .modal-box {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 500px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: celebration 1s ease;
+        }
+
+        @keyframes celebration {
+            0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: #ffeb3b;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-message {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: white;
+            font-style: italic;
+        }
+
+        .modal-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            margin: 0 10px;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .navigation {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .game-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hints-column {
+                position: static;
+                order: 1;
+            }
+            
+            .puzzles-column {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                order: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .puzzle-container {
+                padding: 15px;
+            }
+
+            .letter-box {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .modal-box {
+                padding: 30px 25px;
+                margin: 15px;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+
+            .modal-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Sabrina's 15-Word Mystery Puzzle ✨</h1>
+
+    <div class="game-container">
+        <div class="hints-column">
+            <h2 class="hints-title">💝 Clues for My Love 💝</h2>
+            <div id="hintsContainer"></div>
+        </div>
+
+        <div class="puzzles-column" id="puzzlesContainer"></div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-title">🎉 Amazing, Jiji! Here's a funny little poem for a reward. 🎉</div>
+            <div class="modal-message">  An aussie girl who dreamt of the k-pop fame,<br>
+  prolly plotting a worldwide fan club in her name.<br>
+  now instead of the stage you got me as your fan<br>
+  cheering too loudly, embarrassing man.<br><br>
+  she has got the charm, the sass and cheer<br>
+  the kind of star i'm glad she's near<br>
+  so here's the reward, my shining mate,<br>
+  the world's best plot twist, my perfect fate.💝✨</div>
+            <button class="modal-btn" id="closeModalBtn">Continue</button>
+        </div>
+    </div>
+
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day8.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day10.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Word puzzles with hints
+        const puzzles = [
+            {word: "HEART", hint: "The place where all my love for you lives"},
+            {word: "SMILE", hint: "What you do that lights up my entire world"},
+            {word: "DREAM", hint: "What you are - my sweetest one come true"},
+            {word: "ANGEL", hint: "What you are to me, sent from above"},
+            {word: "MAGIC", hint: "What happens every time I see you"},
+            {word: "SHINE", hint: "What you do brighter than any star"},
+            {word: "GRACE", hint: "How you move through life so beautifully"},
+            {word: "BLISS", hint: "What I feel when I'm with you"},
+            {word: "SWEET", hint: "How your voice sounds to my ears"},
+            {word: "LIGHT", hint: "What you bring into my darkest days"},
+            {word: "PEACE", hint: "What I find in your loving embrace"},
+            {word: "JOY", hint: "What fills my heart when you laugh"},
+            {word: "HOPE", hint: "What you give me for our future together"},
+            {word: "TRUST", hint: "What we share, deep and unbreakable"},
+            {word: "LOVE", hint: "The word that describes everything I feel for you"}
+        ];
+
+        // Shape types for visual variety
+        const shapes = ['rectangle', 'diamond', 'heart', 'star', 'circle', 'hexagon'];
+
+        // Sweet success messages
+        const successMessages = [
+            "Sabrina, you shine like this word ✨ I love you 💖",
+            "Perfect, my love! You're as brilliant as you are beautiful 💕",
+            "Amazing, Sabrina! Your mind sparkles like diamonds ✨💎",
+            "You got it, sweetheart! You make everything look easy 💖",
+            "Brilliant as always, my darling! You're incredible 🌟💕",
+            "Yes, my love! You're smarter than you know 💫❤️",
+            "Perfect, beautiful! You amaze me every day ✨💖"
+        ];
+
+        // Game state
+        let solvedCount = 0;
+        let gameState = puzzles.map(() => ({
+            solved: false,
+            revealedLetters: [],
+            currentGuess: ''
+        }));
+
+        // Initialize game
+        function initGame() {
+            createHints();
+            createPuzzles();
+        }
+
+        // Create hints column
+        function createHints() {
+            const container = document.getElementById('hintsContainer');
+            puzzles.forEach((puzzle, index) => {
+                const hintDiv = document.createElement('div');
+                hintDiv.className = 'hint-item';
+                hintDiv.innerHTML = `
+                    <span class="hint-number">${index + 1}.</span>
+                    ${puzzle.hint}
+                `;
+                container.appendChild(hintDiv);
+            });
+        }
+
+        // Create puzzle containers
+        function createPuzzles() {
+            const container = document.getElementById('puzzlesContainer');
+            puzzles.forEach((puzzle, index) => {
+                const puzzleDiv = document.createElement('div');
+                puzzleDiv.className = 'puzzle-container';
+                puzzleDiv.innerHTML = createPuzzleHTML(puzzle, index);
+                container.appendChild(puzzleDiv);
+            });
+
+            // Add event listeners
+            addEventListeners();
+        }
+
+        // Create HTML for individual puzzle
+        function createPuzzleHTML(puzzle, index) {
+            const shape = shapes[index % shapes.length];
+            const letterBoxes = puzzle.word.split('').map((_, i) => 
+                `<div class="letter-box" data-puzzle="${index}" data-position="${i}">
+                    <span></span>
+                </div>`
+            ).join('');
+
+            return `
+                <div class="puzzle-number">Puzzle ${index + 1}</div>
+                <div class="word-shape shape-${shape}">
+                    ${letterBoxes}
+                </div>
+                <div class="input-section">
+                    <input type="text" class="guess-input" placeholder="Your guess..." 
+                           maxlength="${puzzle.word.length}" data-puzzle="${index}">
+                    <button class="btn" onclick="makeGuess(${index})">Guess</button>
+                    <button class="btn reveal-btn" onclick="revealLetter(${index})">Reveal Letter</button>
+                </div>
+                <div class="success-message" id="success-${index}"></div>
+            `;
+        }
+
+        // Add event listeners
+        function addEventListeners() {
+            document.querySelectorAll('.guess-input').forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const puzzleIndex = parseInt(this.dataset.puzzle);
+                        makeGuess(puzzleIndex);
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+                });
+            });
+        }
+
+        // Make a guess
+        function makeGuess(puzzleIndex) {
+            if (gameState[puzzleIndex].solved) return;
+
+            const input = document.querySelector(`input[data-puzzle="${puzzleIndex}"]`);
+            const guess = input.value.toUpperCase().trim();
+            const targetWord = puzzles[puzzleIndex].word;
+
+            if (guess.length !== targetWord.length) {
+                alert(`Please enter a ${targetWord.length}-letter word!`);
+                return;
+            }
+
+            if (!/^[A-Z]+$/.test(guess)) {
+                alert('Please enter only letters!');
+                return;
+            }
+
+            updatePuzzleDisplay(puzzleIndex, guess, targetWord);
+            input.value = '';
+
+            if (guess === targetWord) {
+                solvePuzzle(puzzleIndex);
+            }
+        }
+
+        // Update puzzle display with color feedback
+        function updatePuzzleDisplay(puzzleIndex, guess, targetWord) {
+            const letterBoxes = document.querySelectorAll(`[data-puzzle="${puzzleIndex}"]`);
+            
+            // Create letter frequency map
+            const letterCount = {};
+            for (let letter of targetWord) {
+                letterCount[letter] = (letterCount[letter] || 0) + 1;
+            }
+
+            // First pass: mark correct positions
+            const results = new Array(targetWord.length).fill('not-in-word');
+            for (let i = 0; i < targetWord.length; i++) {
+                if (guess[i] === targetWord[i]) {
+                    results[i] = 'correct';
+                    letterCount[guess[i]]--;
+                }
+            }
+
+            // Second pass: mark wrong positions
+            for (let i = 0; i < targetWord.length; i++) {
+                if (results[i] === 'not-in-word' && letterCount[guess[i]] > 0) {
+                    results[i] = 'wrong-position';
+                    letterCount[guess[i]]--;
+                }
+            }
+
+            // Apply results with animation
+            for (let i = 0; i < targetWord.length; i++) {
+                const box = letterBoxes[i];
+                const span = box.querySelector('span');
+                span.textContent = guess[i];
+                
+                // Remove previous classes
+                box.classList.remove('correct', 'wrong-position', 'not-in-word');
+                
+                setTimeout(() => {
+                    box.classList.add(results[i]);
+                }, i * 100);
+            }
+        }
+
+        // Reveal a letter
+        function revealLetter(puzzleIndex) {
+            if (gameState[puzzleIndex].solved) return;
+
+            const targetWord = puzzles[puzzleIndex].word;
+            const revealedLetters = gameState[puzzleIndex].revealedLetters;
+            
+            // Find unrevealed positions
+            const unrevealedPositions = [];
+            for (let i = 0; i < targetWord.length; i++) {
+                if (!revealedLetters.includes(i)) {
+                    unrevealedPositions.push(i);
+                }
+            }
+
+            if (unrevealedPositions.length === 0) return;
+
+            // Reveal random unrevealed letter
+            const randomIndex = Math.floor(Math.random() * unrevealedPositions.length);
+            const positionToReveal = unrevealedPositions[randomIndex];
+            
+            revealedLetters.push(positionToReveal);
+
+            const letterBox = document.querySelector(`[data-puzzle="${puzzleIndex}"][data-position="${positionToReveal}"]`);
+            const span = letterBox.querySelector('span');
+            
+            span.textContent = targetWord[positionToReveal];
+            letterBox.classList.remove('correct', 'wrong-position', 'not-in-word');
+            letterBox.classList.add('revealed');
+
+            // Check if word is complete
+            if (revealedLetters.length === targetWord.length) {
+                solvePuzzle(puzzleIndex);
+            }
+        }
+
+        // Solve puzzle
+        function solvePuzzle(puzzleIndex) {
+            gameState[puzzleIndex].solved = true;
+            solvedCount++;
+
+            const container = document.querySelector('.puzzle-container:nth-child(' + (puzzleIndex + 1) + ')');
+            container.classList.add('solved');
+
+            // Show success message
+            const successDiv = document.getElementById(`success-${puzzleIndex}`);
+            const randomMessage = successMessages[Math.floor(Math.random() * successMessages.length)];
+            successDiv.textContent = randomMessage;
+            successDiv.style.opacity = '1';
+
+            // Disable inputs
+            const input = document.querySelector(`input[data-puzzle="${puzzleIndex}"]`);
+            const buttons = container.querySelectorAll('.btn');
+            input.disabled = true;
+            buttons.forEach(btn => btn.disabled = true);
+
+            // Check if all puzzles solved
+            if (solvedCount === puzzles.length) {
+                setTimeout(() => {
+                    showCompletionModal();
+                }, 1500);
+            }
+        }
+
+        // Show completion modal
+        function showCompletionModal() {
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        // Event listeners
+        document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('modalOverlay').style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        // Initialize game
+        initGame();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9730149684b059b8',t:'MTc1NTg0MTY5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

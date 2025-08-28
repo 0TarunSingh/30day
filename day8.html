@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Starry Sky</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0c0c2e 0%, #1a1a3e 30%, #2d1b69 70%, #4a2c85 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: white;
+        }
+
+        .instruction {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #e6e6fa;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(230, 230, 250, 0.5);
+            animation: gentle-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentle-glow {
+            from { text-shadow: 0 0 10px rgba(230, 230, 250, 0.5); }
+            to { text-shadow: 0 0 20px rgba(230, 230, 250, 0.8); }
+        }
+
+        .star {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .star:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
+
+        .star.large {
+            width: 12px;
+            height: 12px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+
+        .star.twinkle {
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .message-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            animation: fade-in 0.3s ease;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #2d1b69, #4a2c85);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: slide-up 0.4s ease;
+        }
+
+        @keyframes slide-up {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .message-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #e6e6fa;
+            font-style: italic;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .instruction {
+                font-size: 1rem;
+                top: 20px;
+                padding: 0 20px;
+            }
+
+            .message-box {
+                padding: 30px 25px;
+                margin: 15px;
+            }
+
+            .message-text {
+                font-size: 1.1rem;
+            }
+
+            .navigation {
+                bottom: 20px;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="instruction" role="banner" aria-label="Instructions">
+        ✦ Click the stars to reveal a message, p.s there are a lot. ✦
+    </div>
+
+    <div class="message-overlay" id="messageOverlay" role="dialog" aria-modal="true" aria-labelledby="messageText">
+        <div class="message-box">
+            <div class="message-text" id="messageText"></div>
+            <button class="close-btn" id="closeBtn" aria-label="Close message">Close</button>
+        </div>
+    </div>
+
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day7.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day9.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Sweet messages array
+const messages = [
+  "Sabrina, you are braver than you believe, stronger than you seem, and more loved than you know. ✨",
+  "Every star in the sky is a reminder that light can shine even in the darkest places. 🌟",
+  "Your dreams are valid, your heart is pure, and your future is bright. 💫",
+  "Like stars, we shine brightest when surrounded by darkness. Keep glowing, Sabrina! ⭐",
+  "You carry within you the strength of a thousand stars. Never forget your power. ✨",
+  "The universe conspired to create someone as wonderful as you. 🌙",
+  "Your kindness creates ripples of light that reach farther than you know. 💝",
+  "Just like constellations, you are perfectly placed in this moment of time. ⭐",
+  "Sabrina, you are my favorite star in the sky. 🌌",
+  "No distance can dim the warmth you bring to my world. 🌠",
+  "You are the wish I’d make on every falling star. 💫",
+  "Your laugh shines brighter than the Milky Way. 🌙",
+  "When nights feel dark, remembering you makes them beautiful. ⭐",
+  "Sabrina, you are my constant star, always guiding me home. 🌌",
+  "Even galaxies envy the sparkle in your eyes. ✨",
+  "You make the darkest nights feel safe. 💝",
+  "No matter where you are, you shine just like the stars. 🌠",
+  "You don’t just light up my world, Sabrina—you light up entire skies. 🌙",
+  "You’re proof that the universe creates miracles. 💫",
+  "Every star is a love letter written for you. 🌟",
+  "I’d cross galaxies just to see your smile. 🌌",
+  "Sabrina, your heart is my brightest constellation. ✨",
+  "Stars fade, but my love for you never will. 💝",
+  "The night is softer because it holds the thought of you. 🌠",
+  "You make the universe feel smaller, because I found everything in you. 💫",
+  "You are the starlight I never knew I needed. ⭐",
+  "The heavens painted stars, but you’re their masterpiece. 🌙",
+  "Your soul shines brighter than the North Star. ✨",
+  "If hope were a constellation, it would be named after you. 🌌",
+  "The stars tell me stories, but none compare to the story of us. 💝",
+  "Even infinity feels short when I think of how much I love you. 🌟",
+  "Your presence is like moonlight gentle, soothing, and constant. 🌙",
+  "The stars are jealous, because my eyes search for you, not them. 💫",
+  "You’re not just part of my sky you are my whole sky. ⭐",
+  "Sabrina, you’re proof that love can be eternal like the stars. 🌌",
+  "I love you more than words, more than galaxies, more than forever. 💝",
+  "No universe, no distance, no time can change how much I love you. 🌠",
+  "You’re the brightest part of every day and every night. ✨",
+  "My love for you is infinite like the stars above us. 🌙",
+  "Sabrina, you are my world, my sky, my forever. 💫"
+];
+
+
+        let usedMessages = [];
+
+        // Create stars
+        function createStars() {
+            const starCount = window.innerWidth < 768 ? 25 : 40;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random positioning
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = (Math.random() * 80 + 10) + '%'; // Avoid top and bottom areas
+                
+                // Random size variations
+                if (Math.random() > 0.7) {
+                    star.classList.add('large');
+                }
+                
+                // Random twinkling
+                if (Math.random() > 0.5) {
+                    star.classList.add('twinkle');
+                    star.style.animationDelay = Math.random() * 2 + 's';
+                }
+                
+                // Click event
+                star.addEventListener('click', showMessage);
+                star.setAttribute('aria-label', 'Clickable star');
+                star.setAttribute('role', 'button');
+                star.setAttribute('tabindex', '0');
+                
+                // Keyboard accessibility
+                star.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showMessage();
+                    }
+                });
+                
+                document.body.appendChild(star);
+            }
+        }
+
+        // Show message function
+        function showMessage() {
+            // Get a random message that hasn't been used recently
+            let availableMessages = messages.filter(msg => !usedMessages.includes(msg));
+            
+            if (availableMessages.length === 0) {
+                // Reset if all messages have been used
+                usedMessages = [];
+                availableMessages = messages;
+            }
+            
+            const randomMessage = availableMessages[Math.floor(Math.random() * availableMessages.length)];
+            usedMessages.push(randomMessage);
+            
+            // Keep only last 4 used messages to allow some repetition
+            if (usedMessages.length > 4) {
+                usedMessages.shift();
+            }
+            
+            document.getElementById('messageText').textContent = randomMessage;
+            document.getElementById('messageOverlay').style.display = 'flex';
+            
+            // Focus management for accessibility
+            document.getElementById('closeBtn').focus();
+        }
+
+        // Close message function
+        function closeMessage() {
+            document.getElementById('messageOverlay').style.display = 'none';
+        }
+
+        // Event listeners
+        document.getElementById('closeBtn').addEventListener('click', closeMessage);
+        document.getElementById('messageOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMessage();
+            }
+        });
+
+        // Keyboard accessibility for overlay
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('messageOverlay').style.display === 'flex') {
+                closeMessage();
+            }
+        });
+
+        // Initialize stars when page loads
+        createStars();
+
+        // Recreate stars on window resize for responsiveness
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Remove existing stars
+                document.querySelectorAll('.star').forEach(star => star.remove());
+                // Create new stars for new screen size
+                createStars();
+            }, 250);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972fe459e20a5a1d',t:'MTc1NTgzOTcyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

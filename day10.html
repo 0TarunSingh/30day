@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💥 Compliment Bomb for Sabrina 💥</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kalam', cursive;
+            background: linear-gradient(135deg, #FFE5E5 0%, #E5D4FF 50%, #D4FFE5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating decorations */
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            color: #FF69B4;
+            font-size: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .sparkle {
+            color: #FFD700;
+            font-size: 1.2rem;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star {
+            color: #9370DB;
+            font-size: 1.3rem;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #FF1493;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+            animation: gentle-bounce 2s ease-in-out infinite;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #8A2BE2;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .compliments-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .compliment {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.4rem;
+            color: #4A4A4A;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: pop-in 0.8s ease forwards;
+            overflow: hidden;
+        }
+
+        .compliment::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes pop-in {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .compliment:nth-child(even) {
+            background: rgba(255, 240, 245, 0.9);
+            border-color: rgba(255, 182, 193, 0.5);
+        }
+
+        .compliment:nth-child(odd) {
+            background: rgba(240, 248, 255, 0.9);
+            border-color: rgba(173, 216, 230, 0.5);
+        }
+
+        .more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            font-family: 'Kalam', cursive;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .more-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.4);
+        }
+
+        .more-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .more-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .more-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .final-compliment {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF69B4);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            font-size: 1.6rem;
+            color: white;
+            font-weight: 700;
+            margin: 50px 0;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: final-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes final-glow {
+            0%, 100% { 
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6);
+                transform: scale(1.02);
+            }
+        }
+
+        .final-compliment::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FFD700, #FF69B4, #9370DB, #00CED1);
+            border-radius: 25px;
+            z-index: -1;
+            animation: rainbow-border 4s linear infinite;
+        }
+
+        @keyframes rainbow-border {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .navigation {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            color: #8A2BE2;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Kalam', cursive;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.2);
+        }
+
+        /* Particle effects */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: particle-float 3s ease-out forwards;
+        }
+
+        @keyframes particle-float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .compliment {
+                font-size: 1.2rem;
+                padding: 15px 20px;
+            }
+            
+            .final-compliment {
+                font-size: 1.3rem;
+                padding: 30px 20px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorations -->
+    <div class="floating-decoration heart" style="top: 10%; left: 5%; animation-delay: 0s;">💖</div>
+    <div class="floating-decoration sparkle" style="top: 20%; right: 10%; animation-delay: 1s;">✨</div>
+    <div class="floating-decoration star" style="top: 15%; left: 80%; animation-delay: 2s;">⭐</div>
+    <div class="floating-decoration heart" style="top: 60%; left: 10%; animation-delay: 3s;">💕</div>
+    <div class="floating-decoration sparkle" style="top: 70%; right: 15%; animation-delay: 4s;">🌟</div>
+    <div class="floating-decoration star" style="top: 80%; left: 70%; animation-delay: 5s;">💫</div>
+    <div class="floating-decoration heart" style="top: 40%; right: 5%; animation-delay: 2.5s;">💝</div>
+    <div class="floating-decoration sparkle" style="top: 50%; left: 15%; animation-delay: 1.5s;">✨</div>
+
+    <div class="container">
+        <h1 class="title">💥 Compliment Bomb for Sabrina 💥</h1>
+        <p class="subtitle">Brace yourself… a million nice things are about to hit you!</p>
+
+        <div class="compliments-container" id="complimentsContainer">
+            <!-- Compliments will be added here -->
+        </div>
+
+        <button class="more-btn" id="moreBtn">More Compliments Please! 🎉</button>
+
+        <div class="final-compliment">
+            Sabrina, you're my ultimate star, my favorite mate, and the best plot twist in my life. 💖🌸✨
+        </div>
+    </div>
+
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day9.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day11.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        const compliments = [
+            "You're cuter than a koala in pajamas. 🐨💤",
+            "Your smile has more power than Wi-Fi. 📶💖",
+            "If K-Pop had an Aussie queen, it'd be you. 👑🎤",
+            "You could outshine the Sydney Opera House at sunset. 🌇🎶",
+            "Your laugh deserves its own Grammy. 🏆😂",
+            "Even Vegemite would taste sweet if you made it. 🍞😉",
+            "You're funnier than a kookaburra on TikTok. 🐦🤣",
+            "You're brighter than my phone at 3 AM. 📱✨",
+            "If happiness were a sport, you'd hold the world record. 🥇🌸",
+            "Honestly, Sabrina > bubble tea. 🧋💖",
+            "You make Mondays feel like weekends. 🎉🌷",
+            "You're the type of star NASA would try to study. 🌌🚀",
+            "You're proof the universe has excellent taste. 🌟💝"
+        ];
+
+        const bonusCompliments = [
+            "You're more addictive than Tim Tams. 🍪💕",
+            "Your energy could power the entire Gold Coast. ⚡🏖️",
+            "You're sweeter than fairy bread at a birthday party. 🧚‍♀️🎂",
+            "If cute was a currency, you'd be a billionaire. 💰😍",
+            "You're more refreshing than a cold drink on a 40°C day. 🥤☀️",
+            "Your smile is better than a free holiday from classes. 🤗🅿️",
+            "You're more precious than finding a four-leaf clover. 🍀💎",
+            "Your voice is smoother than a flat white. ☕✨",
+            "You're more magical than Christmas morning. 🎄🎁",
+            "You light up rooms like the Harbour Bridge on New Year's. 🌉🎆"
+        ];
+
+        let currentComplimentIndex = 0;
+        let bonusIndex = 0;
+        let animationDelay = 0;
+
+        function createParticle(x, y) {
+            const particles = ['💖', '✨', '🌟', '💕', '💫', '🎉'];
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.color = ['#FF69B4', '#FFD700', '#9370DB', '#00CED1'][Math.floor(Math.random() * 4)];
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+        function addCompliment(text, delay = 0) {
+            setTimeout(() => {
+                const complimentDiv = document.createElement('div');
+                complimentDiv.className = 'compliment';
+                complimentDiv.textContent = text;
+                complimentDiv.style.animationDelay = '0s';
+                
+                document.getElementById('complimentsContainer').appendChild(complimentDiv);
+                
+                // Create particles around the compliment
+                setTimeout(() => {
+                    const rect = complimentDiv.getBoundingClientRect();
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createParticle(
+                                rect.left + Math.random() * rect.width,
+                                rect.top + Math.random() * rect.height
+                            );
+                        }, i * 100);
+                    }
+                }, 400);
+                
+            }, delay);
+        }
+
+        function showInitialCompliments() {
+            compliments.forEach((compliment, index) => {
+                addCompliment(compliment, index * 800);
+            });
+        }
+
+        function addMoreCompliments() {
+            const btn = document.getElementById('moreBtn');
+            
+            // Button click effect
+            const rect = btn.getBoundingClientRect();
+            for (let i = 0; i < 8; i++) {
+                createParticle(
+                    rect.left + Math.random() * rect.width,
+                    rect.top + Math.random() * rect.height
+                );
+            }
+            
+            // Add 3 random bonus compliments
+            for (let i = 0; i < 3; i++) {
+                if (bonusIndex < bonusCompliments.length) {
+                    addCompliment(bonusCompliments[bonusIndex], i * 600);
+                    bonusIndex++;
+                } else {
+                    // If we've used all bonus compliments, add random ones from the original list
+                    const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+                    addCompliment(randomCompliment + " (Still true! 💖)", i * 600);
+                }
+            }
+            
+            // Disable button temporarily
+            btn.disabled = true;
+            btn.textContent = "More love incoming... 💕";
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = "More Compliments Please! 🎉";
+            }, 2000);
+        }
+
+        // Event listeners
+        document.getElementById('moreBtn').addEventListener('click', addMoreCompliments);
+
+        // Add click particles anywhere on the page
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.more-btn')) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        // Start the compliment show
+        setTimeout(showInitialCompliments, 500);
+
+        // Add random floating particles periodically
+        setInterval(() => {
+            createParticle(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight
+            );
+        }, 3000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97310f4304301bc2',t:'MTc1NTg1MTk2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

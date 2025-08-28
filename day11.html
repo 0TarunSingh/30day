@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabrina's Sultry Seduction Adventure 🔥</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFE5F1 0%, #E8D5FF 30%, #FFE5E5 60%, #F0E6FF 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #4A4A4A;
+        }
+
+        /* Music Player Styles */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 280px;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #FF69B4, #8B4B8C);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .song-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .song-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #8B4B8C;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .song-artist {
+            font-size: 0.8rem;
+            color: #B8860B;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            background: #DDA0DD;
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #FF69B4;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-icon {
+            color: #8B4B8C;
+            font-size: 0.9rem;
+        }
+
+        /* Animated background elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            color: #FF69B4;
+            font-size: 1.2rem;
+            animation: float-heart 8s ease-in-out infinite;
+        }
+
+        .star {
+            color: #FFD700;
+            font-size: 1rem;
+            animation: twinkle-star 4s ease-in-out infinite;
+        }
+
+        .candle {
+            color: #FFA500;
+            font-size: 1.5rem;
+            animation: flicker 3s ease-in-out infinite;
+        }
+
+        @keyframes float-heart {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-15px) rotate(90deg); opacity: 1; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+            75% { transform: translateY(-15px) rotate(270deg); opacity: 1; }
+        }
+
+        @keyframes twinkle-star {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            25% { opacity: 1; transform: scale(1.1); }
+            50% { opacity: 0.9; transform: scale(0.95); }
+            75% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #8B4B8C;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(139, 75, 140, 0.3);
+            animation: gentle-glow 3s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #B8860B;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        @keyframes gentle-glow {
+            from { text-shadow: 0 0 20px rgba(139, 75, 140, 0.3); }
+            to { text-shadow: 0 0 30px rgba(139, 75, 140, 0.6); }
+        }
+
+        .story-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .story-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #5D4E75;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 1s ease forwards;
+        }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .choices-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            animation: fade-in-up 1s ease 0.5s forwards;
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, #FFB6C1, #DDA0DD);
+            border: none;
+            border-radius: 20px;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(221, 160, 221, 0.3);
+            text-align: left;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(221, 160, 221, 0.4);
+            background: linear-gradient(135deg, #FF91A4, #DA70D6);
+        }
+
+        .choice-btn:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .choice-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .choice-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .choice-letter {
+            font-weight: 600;
+            color: #FFD700;
+            margin-right: 10px;
+        }
+
+        .ending-container {
+            background: linear-gradient(135deg, #FFE4E1, #F0E6FF);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.3);
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: celebration 1.5s ease;
+        }
+
+        @keyframes celebration {
+            0% { transform: scale(0.9) rotate(-2deg); opacity: 0; }
+            50% { transform: scale(1.05) rotate(1deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .ending-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #8B4B8C;
+            margin-bottom: 20px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(139, 75, 140, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(139, 75, 140, 0.8); }
+        }
+
+        .ending-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #5D4E75;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(45deg, #FF69B4, #8B4B8C);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+            margin: 10px;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+        }
+
+        .navigation {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(221, 160, 221, 0.5);
+            color: #8B4B8C;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(221, 160, 221, 0.3);
+        }
+
+        /* Particle effects */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.2rem;
+            animation: particle-float 2s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes particle-float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) rotate(360deg) scale(0.5);
+            }
+        }
+
+        .blush-effect {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.6), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: blush-fade 1.5s ease-out forwards;
+        }
+
+        @keyframes blush-fade {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+                margin-top: 80px;
+            }
+            
+            .story-container {
+                padding: 25px;
+            }
+            
+            .story-text {
+                font-size: 1.1rem;
+            }
+            
+            .choice-btn {
+                font-size: 1rem;
+                padding: 15px 20px;
+            }
+            
+            .ending-title {
+                font-size: 2rem;
+            }
+            
+            .ending-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶️</button>
+        <div class="song-info">
+            <div class="song-title" id="songTitle">River flows into you</div>
+            <div class="song-artist" id="songArtist">Finna work</div>
+        </div>
+        <div class="volume-control">
+            <span class="volume-icon">🔊</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30" onchange="setVolume(this.value)">
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="river.mp3" type="audio/mpeg">
+        <source src="your-song.wav" type="audio/wav">
+        <source src="your-song.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Floating background elements -->
+    <div class="floating-element heart" style="top: 10%; left: 5%; animation-delay: 0s;">💖</div>
+    <div class="floating-element star" style="top: 15%; right: 10%; animation-delay: 1s;">✨</div>
+    <div class="floating-element candle" style="top: 20%; left: 80%; animation-delay: 2s;">🕯️</div>
+    <div class="floating-element heart" style="top: 60%; left: 10%; animation-delay: 3s;">💕</div>
+    <div class="floating-element star" style="top: 70%; right: 15%; animation-delay: 4s;">⭐</div>
+    <div class="floating-element candle" style="top: 80%; left: 70%; animation-delay: 5s;">🕯️</div>
+    <div class="floating-element heart" style="top: 40%; right: 5%; animation-delay: 2.5s;">💝</div>
+    <div class="floating-element star" style="top: 50%; left: 15%; animation-delay: 1.5s;">🌟</div>
+
+    <div class="container">
+        <h1 class="title">Sabrina & Volon's Sultry Adventure</h1>
+        <p class="subtitle">Choose your own steamy, passionate journey together... 🔥✨</p>
+
+        <div class="story-container" id="storyContainer">
+            <div class="story-text" id="storyText">
+                It's a cozy night in. You, Sabrina, are wrapped in a warm blanket on the couch. The room is dimly lit by flickering candles, soft music plays, and there's a playful energy in the air. Tonight, you get to decide what adventure unfolds... 🕯️💕
+            </div>
+            <div class="choices-container" id="choicesContainer">
+                <!-- Choices will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <nav class="navigation" role="navigation" aria-label="Day navigation">
+        <a href="day10.html" class="nav-btn" aria-label="Go to previous day">Previous Day</a>
+        <a href="index.html" class="nav-btn" aria-label="Go to home page">Home</a>
+        <a href="day12.html" class="nav-btn" aria-label="Go to next day">Next Day</a>
+    </nav>
+
+    <script>
+        // Music Player Variables
+        let audioElement = document.getElementById('backgroundMusic');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            const playBtn = document.getElementById('playBtn');
+            
+            if (!isPlaying) {
+                audioElement.play().then(() => {
+                    playBtn.textContent = '⏸️';
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Audio play failed:", error);
+                    // Create sparkle effect even if audio fails
+                    createParticle(window.innerWidth / 2, 100, 'sparkle');
+                });
+            } else {
+                audioElement.pause();
+                playBtn.textContent = '▶️';
+                isPlaying = false;
+            }
+        }
+
+        function setVolume(value) {
+            audioElement.volume = value / 100;
+        }
+
+        const storyData = {
+            start: {
+                text: "It's a sultry night in. You, Sabrina, are wrapped in silk against the couch, candlelight dancing across your skin. Volon sits beside you, the air thick with desire between you both. The storm outside creates the perfect excuse to stay close, while soft jazz music sets the mood for seduction. You can feel the electricity crackling between you as Volon's eyes drink you in. His cologne mingles with the scent of vanilla candles, creating an intoxicating atmosphere. Tonight, you decide how this passionate evening with Volon unfolds... 🔥💋 PS, I've added a few secret ones that are outrageous lmao.",
+                choices: [
+                    { text: "Pull him close for intimate reading by candlelight 📚🔥", next: "read" },
+                    { text: "Challenge him to a seductive game of truth or dare 😈", next: "game" },
+                    { text: "Seduce him with slow, sensual dancing 💃🔥", next: "dance" },
+                    { text: "Suggest a steamy massage session 💆‍♀️🔥", next: "massage" },
+                    { text: "Lead him to the bedroom for wine and whispers 🍷🔥", next: "bedroom" },
+                    { text: "Suggest a hot bubble bath together 🛁💋", next: "bath" }
+                ]
+            },
+            read: {
+                text: "You pull Volon down beside you, selecting a book of passionate poetry. The candlelight flickers across the pages as you settle against his chest, feeling his heartbeat quicken. You begin reading aloud, your voice sultry and low, each word dripping with intention. Volon's arms wrap around you, his fingers tracing lazy patterns on your silk-covered skin. The book becomes secondary as the heat between your bodies builds with each whispered verse. Every page turn is an excuse to shift closer, to let your lips brush his jaw, to feel his breath catch... 📖🔥",
+                choices: [
+                    { text: "Read him the most passionate poem while looking into his eyes 💋", next: "read_poetry" },
+                    { text: "Let the book fall as you turn to face him completely 😈", next: "read_turn" },
+                    { text: "Guide his hand to turn the pages with you 🔥", next: "read_guide" },
+                    { text: "Whisper that you'd rather write your own story together 💕", next: "read_write" }
+                ]
+            },
+            massage: {
+                text: "You suggest a massage, your eyes sparkling with mischief as you retrieve scented oils from the bedroom. The vanilla and jasmine scents fill the air as you dim the lights even further. You ask Volon to lie down, your hands already warming the oil between your palms. As you begin working on his shoulders, every touch is deliberate, sensual, designed to drive him wild. Your silk robe slips slightly as you lean over him, and you can feel his muscles tense under your skilled touch... 💆‍♀️🔥",
+                choices: [
+                    { text: "Focus on his neck and shoulders with teasing touches 💋", next: "massage_shoulders" },
+                    { text: "Let your robe slip a little more as you work 😈", next: "massage_tease" },
+                    { text: "Whisper about how tense he feels under your hands 🔥", next: "massage_whisper" },
+                    { text: "Suggest he return the favor afterward 💕", next: "massage_return" }
+                ]
+            },
+            massage_shoulders: {
+                text: "You focus on Volon's neck and shoulders, your fingers finding every knot of tension and working it away with deliberate, teasing strokes. You lean close, your breath warm against his skin as you work. Each touch lingers longer than necessary, each caress designed to drive him wild with anticipation. His soft groans of pleasure encourage you to continue your sensual massage, your hands exploring the strong muscles of his back...",
+                choices: [
+                    { text: "Move lower and massage his entire back 🔥", next: "massage_full_back" },
+                    { text: "Ask him to turn over so you can work his chest 💋", next: "massage_chest" },
+                    { text: "Use your whole body to massage him 😈", next: "massage_body" }
+                ]
+            },
+            massage_tease: {
+                text: "You let your silk robe slip further as you work, the fabric pooling around your waist as you straddle him to get better access to his shoulders. You can feel his breathing change as more of your skin is revealed in the candlelight, the massage becoming increasingly intimate with each passing moment. Your bare skin brushes against his back as you lean forward to work on his neck...",
+                choices: [
+                    { text: "Let the robe fall completely 🔥", next: "massage_naked" },
+                    { text: "Grind against him while you massage 💋", next: "massage_grind" },
+                    { text: "Whisper dirty things in his ear 😈", next: "massage_dirty_talk" }
+                ]
+            },
+            massage_whisper: {
+                text: "You lean down to whisper in Volon's ear about how tense his muscles are, how much he needs your touch to relax. Your voice is husky with desire as you describe exactly how you plan to work out every knot, every bit of tension, with your skilled hands. The intimacy of your words makes him shiver as your breath tickles his ear...",
+                choices: [
+                    { text: "Tell him exactly what you want to do to him 🔥", next: "massage_explicit" },
+                    { text: "Ask him where he wants you to touch him most 💋", next: "massage_request" },
+                    { text: "Describe how wet the massage is making you 😈", next: "massage_confession" }
+                ]
+            },
+            massage_return: {
+                text: "You suggest that after you're done relaxing him, it would only be fair if he returned the favor. The thought of Volon's hands on your skin, working away your own tension, sends shivers through you as you continue your ministrations. You can feel his muscles tense with anticipation at the thought of touching you the same way...",
+                choices: [
+                    { text: "Switch positions immediately 🔥", next: "massage_switch" },
+                    { text: "Finish him first, then demand your turn 💋", next: "massage_finish_first" },
+                    { text: "Suggest you massage each other simultaneously 😈", next: "massage_mutual" }
+                ]
+            },
+            
+            game: {
+                text: "You suggest a game of truth or dare to Volon, your eyes sparkling with dangerous mischief. You pour two glasses of wine, the liquid catching the candlelight like liquid fire. 'Let's make this interesting,' you purr, setting rules that ensure every question gets more personal, every dare more intimate. The first few rounds are playful, but as the wine flows and inhibitions lower, the game transforms into something much more seductive. Each challenge becomes a reason to touch, to tease, to build the unbearable tension between you and Volon... 🎯🔥",
+                choices: [
+                    { text: "Ask him what he's been fantasizing about tonight 😏", next: "game_fantasy" },
+                    { text: "Dare him to massage your feet while you sip wine 🔥", next: "game_feet" },
+                    { text: "Truth: confess your naughtiest thought about him 💋", next: "game_confess" },
+                    { text: "Dare him to feed you strawberries blindfolded 🍓", next: "game_strawberry" }
+                ]
+            },
+            game_fantasy: {
+                text: "Volon's eyes darken as you ask about his fantasies, the wine making him bold enough to confess thoughts that make your pulse race. His voice drops to a husky whisper as he describes scenarios involving you, candlelight, and very little clothing. The game has become deliciously dangerous as he reveals desires that match your own...",
+                choices: [
+                    { text: "Tell him you want to make his fantasy real 🔥", next: "fantasy_real" },
+                    { text: "Confess an even dirtier fantasy of your own 💋", next: "fantasy_confession" },
+                    { text: "Dare him to act out part of his fantasy 😈", next: "fantasy_dare" }
+                ]
+            },
+            fantasy_confession: {
+    text: "You lean in, your lips brushing Volon's ear as you confess a fantasy even dirtier than the one he's just shared. His breath hitches, eyes darkening with desire as he listens to every provocative detail. The tension between you thickens, each revelation fueling the electric charge in the room. You can feel his hands itching to respond, the game now a dangerous dance of desire and imagination... 😈💋🔥",
+    choices: [
+        { text: "Ask him to make your fantasy reality 💕", next: "fantasy_confession_reality_ending" },
+        { text: "Tease him with hints, letting him guess 😏", next: "fantasy_confession_tease_ending" },
+        { text: "Start acting out the fantasy immediately 🔥", next: "fantasy_confession_action_ending" }
+    ]
+},
+
+fantasy_dare: {
+    text: "You dare Volon to act out a part of his fantasy right here, watching as a wicked grin spreads across his face. He moves closer, his actions slow and deliberate, teasing and testing your limits. Each touch and movement makes your pulse race, the wine and candlelight amplifying every sensation. The game has escalated into something dangerously intoxicating, where every moment teeters on the edge of fantasy and reality... 😈💋🔥",
+    choices: [
+        { text: "Encourage him to go further 💕", next: "fantasy_dare_deepen_ending" },
+        { text: "Join in, taking control 😏", next: "fantasy_dare_takeover_ending" },
+        { text: "Let him lead the experience naturally 🔥", next: "fantasy_dare_follow_ending" }
+    ]
+}
+,
+            game_feet: {
+                text: "Volon kneels before you as you recline on the couch, wine glass in hand. His strong hands work on your feet, but the massage quickly becomes something more sensual as his touches travel higher, his eyes never leaving yours. The power dynamic shifts as desire takes control of the innocent foot massage...",
+                choices: [
+                    { text: "Guide his hands higher up your legs 🔥", next: "feet_higher" },
+                    { text: "Switch and massage him with your feet 💋", next: "feet_switch" },
+                    { text: "Pull him up for a passionate kiss 😈", next: "feet_kiss" }
+                ]
+            },
+            feet_higher: {
+    text: "You slowly guide Volon's hands up your legs, letting your fingers trace over his as he explores. The warmth of his touch makes your skin tingle, and the playful glances you exchange spark a fire that neither of you can ignore. The massage has transformed into a teasing dance of desire, each movement drawing you closer to a shared fevered heat.",
+    choices: [
+        { text: "Encourage him to explore even further 🔥", next: "feet_higher_deeper" },
+        { text: "Whisper what you want him to do 😈", next: "feet_higher_whisper" },
+        { text: "Pull him onto the couch for full closeness 💋", next: "feet_higher_cuddle" }
+    ]
+},
+
+feet_switch: {
+    text: "You shift positions, placing Volon's feet in your hands. Slowly, deliberately, you massage and tease him, feeling the subtle shivers of pleasure under your touch. His eyes darken with a mixture of surprise and desire, and a playful smirk spreads across his face as the power dynamic subtly reverses.",
+    choices: [
+        { text: "Tease him more aggressively 😈", next: "feet_switch_tease" },
+        { text: "Press closer and kiss him 💋", next: "feet_switch_kiss" },
+        { text: "Challenge him to do the same to you 🔥", next: "feet_switch_challenge" }
+    ]
+},
+
+feet_kiss: {
+    text: "You pull Volon up from the floor and press your lips to his. The kiss starts slow and teasing but quickly deepens, igniting a fire that pulses through both of you. Hands explore, bodies press closer, and the sensual tension from before flows seamlessly into a moment of passionate intimacy.",
+    choices: [
+        { text: "Deepen the kiss and explore further 🔥", next: "feet_kiss_deep" },
+        { text: "Break the kiss and whisper a naughty idea 😈", next: "feet_kiss_whisper" },
+        { text: "Press him onto the couch and take control 💋", next: "feet_kiss_control" }
+    ]
+}
+,
+            game_confess: {
+                text: "You confess your naughtiest thoughts about Volon, watching his reaction as you describe in detail what you've been imagining. The wine has loosened your tongue, and you hold nothing back, painting vivid pictures with your words that make the air between you electric with possibility...",
+                choices: [
+                    { text: "Ask him to help make your confession reality 🔥", next: "confession_reality" },
+                    { text: "Dare him to confess something even naughtier 💋", next: "confession_dare" },
+                    { text: "Start acting out your confession immediately 😈", next: "confession_action" }
+                ]
+            },
+            confession_reality: {
+    text: "You lean closer, your lips brushing his ear as you whisper exactly what you want him to do. Volon’s eyes darken with desire, and he begins to bring your confession to life, following every word and gesture you described. Each touch, kiss, and caress matches the fantasy you just shared, your bodies moving together in perfect, intoxicating rhythm. The wine and anticipation fuel your passion as reality merges seamlessly with your most daring imagination... 😈🔥💋",
+    choices: [
+        { text: "Surrender completely to the experience 💕", next: "surrendered_fantasy_ending" },
+        { text: "Guide him more explicitly 😈", next: "master_of_desire_ending" },
+        { text: "Let the moment take over naturally 🔥", next: "wild_immersion_ending" }
+    ]
+}
+
+,
+            game_strawberry: {
+                text: "You blindfold Volon with your silk scarf, then slowly feed him strawberries, letting the juice drip down his chin. But you don't stop there - you lean in to lick away every drop, your tongue tracing paths on his skin that make him groan with desire. The game has become pure seduction...",
+                choices: [
+                    { text: "Continue the blindfolded feeding game 🔥", next: "strawberry_continue" },
+                    { text: "Let him feed you while still blindfolded 💋", next: "strawberry_reverse" },
+                    { text: "Remove the blindfold and kiss him deeply 😈", next: "strawberry_kiss" }
+                ]
+            },
+            dance: {
+                text: "You select the most sensual song from your playlist - something slow, hypnotic, with a beat that matches a racing heartbeat. Rising gracefully, you extend your hand to Volon with a sultry smile. The living room becomes your private dance floor as you pull him close, your silk robe flowing around you both like liquid moonlight. Your bodies find their rhythm immediately, moving as one entity. Every sway of your hips is deliberate, every brush of skin electric. The candlelight casts dancing shadows on the walls, mirroring your movements as the music wraps around you both like a spell... 🎵🔥",
+                choices: [
+                    { text: "Turn around and dance with your back against him 💋", next: "dance_behind" },
+                    { text: "Sing the sultry lyrics directly into his ear 😈", next: "dance_sing" },
+                    { text: "Let him dip you low and hold you there 🔥", next: "dance_dip" },
+                    { text: "Guide his hands to explore while you move together 💕", next: "dance_explore" }
+                ]
+            },
+            dance_behind: {
+                text: "You turn around and press your back against Volon's chest, grinding against him as you dance. Your silk robe rides up as you move, and you can feel his hands on your hips, guiding your movements. The music pulses through both your bodies as you dance together, your movements becoming increasingly sensual and intimate...",
+                choices: [
+                    { text: "Let your robe slip off completely while dancing 🔥", next: "naked_dance_ending" },
+                    { text: "Turn back around and kiss him passionately 💋", next: "dance_kiss_ending" },
+                    { text: "Guide him to the bedroom while still dancing 😈", next: "dance_bedroom_ending" }
+                ]
+            },
+            dance_sing: {
+                text: "You lean close to Volon's ear and begin singing the sultry lyrics of the song, your voice husky with desire. Your breath tickles his ear as you sing about passion and longing, your words making him shiver with anticipation. The intimate serenade makes the dance even more erotic as you move together...",
+                choices: [
+                    { text: "Whisper even dirtier lyrics in his ear 🔥", next: "dirty_lyrics_ending" },
+                    { text: "Let him sing back to you while you dance 💋", next: "duet_dance_ending" },
+                    { text: "Stop singing and start kissing his neck 😈", next: "neck_kiss_ending" }
+                ]
+            },
+            dance_dip: {
+                text: "Volon dips you low, your hair cascading toward the floor as he holds you in the romantic pose. The candlelight flickers across your face as you gaze into his eyes, the sexual tension reaching a breaking point. He holds you there, suspended in the moment, before slowly pulling you back up against his body...",
+                choices: [
+                    { text: "Kiss him deeply while still in the dip 🔥", next: "dip_kiss_ending" },
+                    { text: "Let him carry you to the couch from the dip 💋", next: "dip_carry_ending" },
+                    { text: "Wrap your legs around him as he lifts you 😈", next: "dip_wrap_ending" }
+                ]
+            },
+            dance_explore: {
+                text: "You guide Volon's hands to explore your body while you continue dancing, showing him exactly where you want to be touched. His hands roam over your curves as you move together, the dance becoming a form of vertical foreplay. Every touch sends electricity through your body as you grind against him...",
+                choices: [
+                    { text: "Let him explore under your robe while dancing 🔥", next: "explore_dance_ending" },
+                    { text: "Return the favor and explore his body too 💋", next: "mutual_explore_ending" },
+                    { text: "Stop dancing and focus entirely on touching 😈", next: "touching_focus_ending" }
+                ]
+            },
+            strawberry_skin: {
+    title: "Juicy Temptation 🍓🔥",
+    text: "You let the strawberry juice drip onto your skin, and Volon eagerly licks it away, his warm tongue sending shivers down your spine. Every taste and touch heightens the sensual tension, the sweet and salty mix driving you both wild as you explore each other in delicious anticipation. 🍓💋🔥",
+    choices: [
+        { text: "Give in to the sweet ecstasy 😈", next: "strawberry_skin_final" },
+        { text: "Take control and tease him more 🔥", next: "strawberry_tease_final" },
+        { text: "Slow, sensual strawberry exploration 💕", next: "strawberry_sensual_final" }
+    ]
+},
+
+glass_tease: {
+    title: "Champagne Chill 🥂❄️",
+    text: "You run the cold champagne glass across Volon's heated skin, teasing him with every frosty touch. He shivers and gasps, craving more as you glide the chilled glass over sensitive spots. The contrast between cold glass and warm skin turns the moment into an intoxicating game of pleasure and anticipation. 🥂💋🔥",
+    choices: [
+        { text: "Push him to the edge with more teasing 😈", next: "glass_tease_final" },
+        { text: "Melt the tension with warm kisses 💋", next: "glass_kiss_final" },
+        { text: "Combine ice with hands-on exploration 🔥", next: "glass_explore_final" }
+    ]
+},
+            bedroom: {
+                text: "You take Volon's hand and lead him to the bedroom, the silk of your robe whispering against your skin with each step. The bedroom is already prepared - rose petals scattered across silk sheets, champagne chilling in an ice bucket, and soft lighting that makes everything look like a dream. You pour two glasses of champagne, the bubbles catching the light as you hand one to Volon. The bed looks inviting, but you're in no rush. Tonight is about savoring every moment, every touch, every whispered word of desire... 🍾🔥",
+                choices: [
+                    { text: "Feed him champagne-soaked strawberries on the bed 🍓💋", next: "bedroom_strawberries" },
+                    { text: "Challenge him to undress you using only his teeth 😈", next: "bedroom_undress" },
+                    { text: "Blindfold him and tease him with ice cubes 🧊🔥", next: "bedroom_ice" },
+                    { text: "Straddle him and whisper your deepest fantasies 💕", next: "bedroom_fantasies" }
+                ]
+            },
+            bath: {
+                text: "You lead Volon to the luxurious bathroom where you've already drawn a hot bubble bath. The tub is surrounded by candles, their flames reflecting off the water's surface. Essential oils fill the air with intoxicating scents of ylang-ylang and sandalwood. You slowly untie your silk robe, letting it pool at your feet as you step into the warm water. The bubbles cling to your skin as you beckon Volon to join you. The water is the perfect temperature, and there's plenty of room for both of you to get very, very close... 🛁💋",
+                choices: [
+                    { text: "Wash his back with slow, sensual movements 💆‍♀️", next: "bath_wash" },
+                    { text: "Play with the bubbles while sitting between his legs 😈", next: "bath_bubbles" },
+                    { text: "Let him wash your hair while you lean back against him 🔥", next: "bath_hair" },
+                    { text: "Suggest underwater exploration games 💕", next: "bath_explore" }
+                ]
+            },
+            massage_full_back: {
+                text: "Your hands travel lower, working every muscle in Volon's back with slow, deliberate strokes. The oil makes your hands glide smoothly over his skin as you explore every inch of his muscular back. You can feel him relaxing under your touch, but also sense the growing tension of desire building between you...",
+                choices: [
+                    { text: "Make love to him right there on the massage table 🔥", next: "massage_table_ending" },
+                    { text: "Oil up your entire body and slide against him 💋", next: "oil_slide_ending" },
+                    { text: "Turn this into a full body worship session 😈", next: "body_worship_ending" }
+                ]
+            },
+            touching_focus_ending: {
+                text: "You stop dancing completely and focus entirely on touching each other, your hands exploring every inch of each other's bodies. The music still plays but you're no longer moving to it, too focused on the incredible sensations you're creating with your hands. The touching becomes increasingly intimate as you discover all of each other's sensitive spots, your exploration leading to the most intense physical connection of your lives. Your hands roam everywhere, mapping each other's bodies with desperate hunger. Every touch sends electricity through your skin as you lose yourselves in pure tactile pleasure. The room fills with soft gasps and moans as your touching becomes more and more intimate, building to an explosive climax of pure sensation. 🔥💕💋",
+                title: "Pure Touch 🔥💕"
+            },
+            massage_chest: {
+                text: "Volon turns over, his eyes dark with desire as you begin working on his chest. Your oiled hands explore the contours of his muscles, your touch becoming increasingly intimate as you work lower and lower...",
+                choices: [
+                    { text: "Focus on his most sensitive areas 🔥", next: "sensitive_massage_ending" },
+                    { text: "Straddle him while you massage 💋", next: "straddle_massage_ending" },
+                    { text: "Use your mouth instead of just your hands 😈", next: "mouth_massage_ending" }
+                ]
+            },
+            massage_naked: {
+                text: "Your silk robe falls to the floor, leaving you completely naked as you continue the massage. Your bare skin against his creates an incredible sensation as you work, the oil making everything slippery and sensual...",
+                choices: [
+                    { text: "Use your entire naked body to massage him 🔥", next: "naked_massage_ending" },
+                    { text: "Let him massage your naked body too 💋", next: "mutual_naked_ending" },
+                    { text: "Make passionate love covered in massage oil 😈", next: "oily_passion_ending" }
+                ]
+            },
+            fantasy_real: {
+                text: "You tell Volon you want to make his fantasy reality, and his eyes light up with desire and surprise. He describes in detail what he wants to do to you, and you find yourself getting incredibly turned on by his words...",
+                choices: [
+                    { text: "Act out his fantasy immediately 🔥", next: "fantasy_fulfillment_ending" },
+                    { text: "Add your own twist to his fantasy 💋", next: "fantasy_twist_ending" },
+                    { text: "Make it even dirtier than he imagined 😈", next: "fantasy_extreme_ending" }
+                ]
+            },
+            feet_higher: {
+                text: "You guide Volon's hands higher up your legs, past your calves, past your knees, until he's massaging your thighs. His touch becomes more intimate as he works higher, and you can see the desire burning in his eyes...",
+                choices: [
+                    { text: "Let him explore even higher 🔥", next: "intimate_exploration_ending" },
+                    { text: "Switch positions and explore him the same way 💋", next: "mutual_exploration_ending" },
+                    { text: "Pull him on top of you right there 😈", next: "couch_passion_ending" }
+                ]
+            },
+            strawberry_continue: {
+                text: "You continue the blindfolded feeding game, using strawberries, whipped cream, and chocolate to create a sensual feast on Volon's body. He can't see what's coming next, which makes every sensation more intense...",
+                choices: [
+                    { text: "Turn his body into your dessert table 🔥", next: "dessert_body_ending" },
+                    { text: "Let him do the same to your body 💋", next: "mutual_dessert_ending" },
+                    { text: "Feed each other in the most intimate ways 😈", next: "intimate_feeding_ending" }
+                ]
+            },
+            bedroom_ice: {
+                text: "You blindfold Volon with silk and begin teasing his body with ice cubes, watching him gasp and arch as the cold ice contrasts with his heated skin. You trace patterns with the ice, following up with your warm tongue...",
+                choices: [
+                    { text: "Use ice and heat all over his body 🔥", next: "ice_heat_ending" },
+                    { text: "Let him return the ice torture 💋", next: "mutual_ice_ending" },
+                    { text: "Melt ice cubes with your body heat 😈", next: "melting_ice_ending" }
+                ]
+            },
+            bath_hair: {
+                text: "You lean back against Volon's chest as he gently washes your hair, his fingers massaging your scalp in the most relaxing way. But the intimate position and his gentle touch soon turn into something much more passionate...",
+                choices: [
+                    { text: "Turn around and make love in the bubbles 🔥", next: "bubble_love_ending" },
+                    { text: "Let him wash your entire body 💋", next: "body_wash_ending" },
+                    { text: "Wash each other from head to toe 😈", next: "mutual_wash_ending" }
+                ]
+            },
+            read_turn: {
+                text: "You let the book fall to the floor as you turn to face Volon completely, your eyes locked on his. The poetry is forgotten as you straddle him on the couch, your silk robe falling open to reveal more of your skin. The candlelight flickers across your face as you lean in close, your lips almost touching his...",
+                choices: [
+                    { text: "Kiss him with all the passion from the poems 🔥", next: "passionate_kiss_ending" },
+                    { text: "Whisper your own poetry against his lips 💋", next: "whispered_poetry_ending" },
+                    { text: "Let actions speak louder than words 😈", next: "actions_speak_ending" }
+                ]
+            },bedroom_undress: {
+    text: "Volon accepts your wicked dare with a dark, hungry smile. His lips and teeth trace your body as fabric falls away piece by piece, every playful tug sparking deeper heat. You can feel his restraint—every movement designed to tease, to test how long you can take it before breaking. But now the question is, what comes next? 😈🔥",
+    choices: [
+        { text: "Demand he worship every inch of your bare skin 💋", next: "undress_worship" },
+        { text: "Push him down and take control after he strips you 😈", next: "undress_dominate" },
+        { text: "Let him pin you and claim you immediately 🔥", next: "undress_claim" }
+    ]
+}
+,
+            read_guide: {
+                text: "You take Volon's hand and guide it to help you turn the pages, but the innocent gesture becomes incredibly intimate as your fingers intertwine. Each page turn becomes an excuse for your hands to touch, to caress, to explore. The book becomes secondary as you focus on the electricity between your touching hands...",
+                choices: [
+                    { text: "Guide his hands to other places 🔥", next: "guided_touch_ending" },
+                    { text: "Let him take control of where his hands go 💋", next: "his_control_ending" },
+                    { text: "Use both your hands to explore him 😈", next: "hand_exploration_ending" }
+                ]
+            },
+            read_write: {
+                text: "You whisper to Volon that you'd rather write your own story together, your voice husky with promise. You suggest that instead of reading about passion, you should create your own tale of desire. The book is forgotten as you begin to 'write' your story with touches, kisses, and whispered words...",
+                choices: [
+                    { text: "Start writing your story with your bodies 🔥", next: "body_story_ending" },
+                    { text: "Write a story with kisses and touches 💋", next: "kiss_story_ending" },
+                    { text: "Create the most passionate story ever told 😈", next: "passionate_story_ending" }
+                ]
+            },
+            massage_body: {
+                text: "You use your entire body to massage Volon, sliding your silk-covered form against his back and shoulders. The sensation of your body moving against his creates incredible friction and heat as you work out his tension with your whole being. Every curve of your body becomes a massage tool...",
+                choices: [
+                    { text: "Remove your robe and use your naked body 🔥", next: "naked_body_massage_ending" },
+                    { text: "Let him return the full-body massage 💋", next: "mutual_body_massage_ending" },
+                    { text: "Turn the massage into lovemaking 😈", next: "massage_lovemaking_ending" }
+                ]
+            },
+            massage_grind: {
+                text: "You begin grinding against Volon while you massage his shoulders, your movements becoming increasingly sensual and rhythmic. The massage becomes secondary to the incredible friction you're creating as you move against him. Your grinding becomes more intense as you feel his response to your movements...",
+                choices: [
+                    { text: "Grind harder and more intensely 🔥", next: "intense_grinding_ending" },
+                    { text: "Let him turn over so you can grind face to face 💋", next: "face_to_face_grinding_ending" },
+                    { text: "Take the grinding to its natural conclusion 😈", next: "grinding_climax_ending" }
+                ]
+            },
+            massage_dirty_talk: {
+                text: "You lean down and whisper the dirtiest things in Volon's ear while you massage him, describing exactly what you want to do to his body. Your words make him groan with desire as you continue your sensual massage, your dirty talk making every touch more intense...",
+                choices: [
+                    { text: "Make your dirty talk even more explicit 🔥", next: "explicit_talk_ending" },
+                    { text: "Act out everything you're whispering 💋", next: "act_out_whispers_ending" },
+                    { text: "Let him whisper dirty things back to you 😈", next: "mutual_dirty_talk_ending" }
+                ]
+            },
+            massage_explicit: {
+                text: "You tell Volon in explicit detail exactly what you want to do to his body, your voice husky with desire as you describe every intimate act you're imagining. Your words are so arousing that he can barely lie still as you continue the massage...",
+                choices: [
+                    { text: "Start doing everything you just described 🔥", next: "fulfill_explicit_ending" },
+                    { text: "Ask him what he wants to do to you 💋", next: "his_explicit_ending" },
+                    { text: "Make your descriptions even more detailed 😈", next: "detailed_explicit_ending" }
+                ]
+            },
+            massage_request: {
+                text: "You ask Volon where he wants you to touch him most, your voice sultry and inviting. His answer makes you smile wickedly as you move your hands exactly where he's requested, your touch becoming more intimate and focused...",
+                choices: [
+                    { text: "Give him exactly what he asked for 🔥", next: "fulfill_request_ending" },
+                    { text: "Tease him by almost giving him what he wants 💋", next: "teasing_touch_ending" },
+                    { text: "Ask him to be even more specific 😈", next: "specific_request_ending" }
+                ]
+            },
+            massage_confession: {
+                text: "You confess to Volon how wet the massage is making you, your voice breathless with arousal. Your confession makes him tense with desire as you continue working on his body, your own arousal making every touch more intense...",
+                choices: [
+                    { text: "Show him exactly how wet you are 🔥", next: "show_arousal_ending" },
+                    { text: "Let him help with your arousal 💋", next: "help_arousal_ending" },
+                    { text: "Continue confessing your desires 😈", next: "confession_continues_ending" }
+                ]
+            },
+            massage_switch: {
+                text: "You immediately switch positions with Volon, now lying down as he prepares to massage you with the same sensual intensity. His hands are warm and strong as he begins working on your body, returning every intimate touch you gave him...",
+                choices: [
+                    { text: "Let him massage you exactly like you did him 🔥", next: "reciprocal_massage_ending" },
+                    { text: "Guide him to your most sensitive areas 💋", next: "sensitive_massage_ending" },
+                    { text: "Turn it into mutual massage 😈", next: "simultaneous_massage_ending" }
+                ]
+            },
+            massage_finish_first: {
+                text: "You decide to finish Volon's massage completely before demanding your turn, your hands working every inch of his body until he's completely relaxed and aroused. By the time you're done with him, you're both desperate for him to return the favor...",
+                choices: [
+                    { text: "Demand he massage you even better 🔥", next: "demanding_massage_ending" },
+                    { text: "Let him surprise you with his technique 💋", next: "surprise_massage_ending" },
+                    { text: "Skip your massage and move to other activities 😈", next: "skip_massage_ending" }
+                ]
+            },
+            massage_mutual: {
+                text: "You suggest that you massage each other simultaneously, your hands working on each other's bodies at the same time. The mutual massage becomes incredibly intimate as you both give and receive pleasure simultaneously...",
+                choices: [
+                    { text: "Focus on massaging each other's most intimate areas 🔥", next: "intimate_mutual_ending" },
+                    { text: "Turn the mutual massage into mutual pleasure 💋", next: "mutual_pleasure_ending" },
+                    { text: "See who can drive the other crazier 😈", next: "massage_competition_ending" }
+                ]
+            },
+            confession_dare: {
+    text: "You dare Volon to confess something even naughtier, watching his eyes darken with anticipation. The wine and candlelight make the challenge feel like a dangerous game of temptation, every word between you charged with electricity...",
+    choices: [
+        { text: "Encourage him to get bolder 🔥", next: "bold_confession_ending" },
+        { text: "Whisper a secret fantasy of your own 💋", next: "own_confession_ending" },
+        { text: "Start acting out a fantasy immediately 😈", next: "fantasy_action_ending" }
+    ]
+},
+
+confession_action: {
+    text: "You don’t wait for words and begin acting out your confession right there, your touches making your intentions crystal clear. The heat between you and Volon rises as your whispered thoughts turn into tangible, irresistible actions...",
+    choices: [
+        { text: "Pull him close for a deep, passionate kiss 🔥", next: "confession_kiss_ending" },
+        { text: "Guide his hands to where you’ve been dreaming of 💋", next: "confession_touch_ending" },
+        { text: "Let your bodies speak louder than your words 😈", next: "confession_body_ending" }
+    ]
+},
+
+strawberry_reverse: {
+    text: "You blindfold Volon and take the lead, feeding yourself strawberries while he watches. The playful reversal makes the game even more sensual, your moans and laughter mixing as he anticipates every sweet, wet bite...",
+    choices: [
+        { text: "Tease him slowly with each bite 🔥", next: "strawberry_tease_ending" },
+        { text: "Feed each other with rising passion 💋", next: "mutual_strawberry_ending" },
+        { text: "Pull him in for a strawberry-covered kiss 😈", next: "strawberry_kiss_ending" }
+    ]
+},
+
+strawberry_kiss: {
+    text: "You remove the blindfold and lean in, capturing Volon’s lips in a deep, juicy kiss, tasting the sweet strawberries together. Every kiss is laced with playful passion, leaving both of you flushed and craving more...",
+    choices: [
+        { text: "Continue kissing and exploring 🔥", next: "strawberry_explore_ending" },
+        { text: "Pull him onto the bed for more intimacy 💋", next: "strawberry_bed_ending" },
+        { text: "Use strawberries as a sensual tease 😈", next: "strawberry_play_ending" }
+    ]
+},
+
+            // Extended story branches
+            bath_wash: {
+    title: "Sensual Back Massage 💆‍♀️",
+    text: "You take the sponge in your hands and start to wash his back with slow, deliberate strokes. The water glistens on his skin as your fingers trace every curve, sending shivers down his spine. He leans closer, whispering in your ear as your touches become more intimate. The steam, the scent of oils, and the gentle pressure of your hands build an irresistible tension between you, bringing you both to a heated, passionate crescendo...",
+    choices: [
+        { text: "Lean in for a steamy embrace 🔥", next: "bath_wash_ending" }
+    ]
+},
+
+bath_explore: {
+    text: "You flash Volon a mischievous grin before slipping beneath the surface, the warm water closing over you. The bubbles part as you trace playful patterns along his body underwater. When you resurface, droplets run down your face as you whisper that there are countless games two people can play in a bath this deep... 💦🔥",
+    choices: [
+        { text: "Tease him with underwater kisses 😘", next: "ending_kisses" },
+        { text: "Challenge him to hold his breath with you ⏱️", next: "ending_breath" },
+        { text: "Surprise him with a sudden underwater tug 😏", next: "ending_tug" },
+        { text: "Pull him closer for a steamy embrace under the bubbles 💋", next: "ending_embrace" }
+    ]
+}
+
+,
+read_poetry: {
+    text: "You find the most passionate poem in the collection, your voice dropping to a whisper as you recite verses about desire and longing. Your eyes never leave Volon's as you speak of burning passion and tender touches. Each word seems to ignite something deeper between you, and by the final stanza, the air is so charged with electricity that you can barely breathe. The book slips from your hands as Volon pulls you closer, his lips finding yours in a kiss that tastes of wine and promises...",
+    choices: [
+        { text: "Let him carry you to the fireplace rug 🔥", next: "fireplace_passion_ending" },
+        { text: "Pull him down onto the couch for deeper kisses 💋", next: "couch_makeout_ending" },
+        { text: "Suggest moving to somewhere more private 😈", next: "private_retreat_ending" }
+    ]
+},
+            bedroom_strawberries: {
+                text: "You dip a ripe strawberry into the champagne, the bubbles clinging to the red fruit like tiny diamonds. Volon lies back against the silk pillows as you straddle him, bringing the champagne-soaked berry to his lips. He bites into it slowly, the juice running down his chin, and you lean down to lick it away with your tongue. The combination of sweet fruit, effervescent champagne, and the taste of his skin is intoxicating. You feed each other strawberries, each bite becoming more sensual than the last...",
+                choices: [
+                    { text: "Drizzle champagne on his chest and lick it off 🍾💋", next: "champagne_body" },
+                    { text: "Let strawberry juice drip onto your skin for him to taste 🍓😈", next: "strawberry_skin" },
+                    { text: "Use the cold champagne glass to tease his skin 🥂🔥", next: "glass_tease" }
+                ]
+            },
+            bedroom_fantasies:{
+                text: "You and Volon are alone in the bedroom, the lights dimmed and the atmosphere charged with desire. You can explore a variety of fantasies tonight. What will you do first?",
+        choices: [
+            { text: "Give Volon a sensual massage", next: "massage_table_ending" },
+            { text: "Slide around together with oil", next: "oil_slide_ending" },
+            { text: "Act out Volon's deepest fantasy", next: "fantasy_fulfillment_ending" },
+            { text: "Explore each other's bodies intimately", next: "intimate_exploration_ending" },
+            { text: "Turn dessert into a playful experience", next: "dessert_body_ending" },
+            { text: "Play with temperature – ice and fire", next: "ice_heat_ending" }
+        ]
+
+            },
+            bath_bubbles: {
+                text: "You settle between Volon's legs in the warm, sudsy water, your back against his chest. The bubbles create a perfect cover as you play with them, letting them slip through your fingers and cascade over both your bodies. You can feel his heartbeat against your back as you lean into him, the warm water making every touch more sensitive. You scoop up handfuls of bubbles, blowing them into the air and watching them float around the candlelit bathroom like tiny, iridescent dreams...",
+                choices: [
+                    { text: "Turn around to face him in the bubbles 💋", next: "bath_face_to_face" },
+                    { text: "Let him explore under the bubble cover 😈", next: "bath_underwater_ending" },
+                    { text: "Create bubble art on each other's bodies 🔥", next: "bubble_art_ending" }
+                ]
+            },
+            // More extended branches leading to unique endings
+            fireplace_passion: {
+                text: "Volon sweeps you up in his arms, carrying you to the plush rug in front of the crackling fireplace. The flames cast dancing shadows across your entwined bodies as he lays you down gently. The warmth from the fire mingles with the heat between you, creating an atmosphere of pure passion. Your silk robe falls open as he kisses you deeply, his hands exploring every curve while the firelight plays across your skin...",
+                choices: [
+                    { text: "Let the fire warm your bodies as you make love 🔥", next: "fireplace_ending" },
+                    { text: "Feed each other wine by the flames 🍷", next: "wine_fire_ending" },
+                    { text: "Dance naked in the firelight 💃", next: "fire_dance_ending" }
+                ]
+            },
+            champagne_body: {
+                text: "You pour the cold champagne slowly across Volon's chest, watching as the bubbles fizz against his warm skin. He gasps at the sensation as you lean down to follow the trail with your tongue, tasting the champagne mixed with the salt of his skin. The contrast between the cold liquid and your warm mouth drives him wild as you explore every inch of his torso, the champagne making everything taste like celebration and desire...",
+                choices: [
+                    { text: "Continue your champagne exploration lower 😈", next: "champagne_exploration_ending" },
+                    { text: "Let him return the favor on your body 🍾💋", next: "mutual_champagne_ending" },
+                    { text: "Share the champagne mouth to mouth 🥂", next: "champagne_kiss_ending" }
+                ]
+            },
+            bath_face_to_face: {
+                text: "You turn around in the warm water to face Volon, bubbles clinging to both your bodies like a second skin. The candlelight flickers across the water's surface as you straddle him, your faces inches apart. The warm water makes every touch electric as you run your hands through his wet hair, pulling him closer for a deep, passionate kiss. The bubbles pop softly around you as the water sloshes gently with your movements...",
+                choices: [
+                    { text: "Make love in the warm, sudsy water 🛁🔥", next: "bath_love_ending" },
+                    { text: "Play sensual water games together 💦", next: "water_games_ending" },
+                    { text: "Dry each other off and continue in bed 🏩", next: "bed_transition_ending" }
+                ]
+            },
+            bath_underwater: {
+    text: "You let Volon explore beneath the frothy bubble cover, feeling his hands and warmth in ways that make your breath hitch. The bubbles rise and pop around you, floating like tiny stars, while the water muffles every whisper. The world outside seems to disappear, leaving only you two in your own intimate universe.",
+    choices: [
+        { text: "Pull him closer for a submerged embrace 😘", next: "underwater_embrace" },
+        { text: "Playfully splash bubbles at him 💦", next: "underwater_play" }
+    ]
+},
+
+bubble_art: {
+    text: "You scoop up handfuls of bubbles and press them onto each other's bodies, decorating skin with soft, shimmering patterns. You trace little hearts, stars, and silly shapes while laughing, enjoying the tactile sensation and the way the bubbles slide and burst against your warmth. The candlelight makes every bubble sparkle like magic.",
+    choices: [
+        { text: "Turn it into a playful bubble painting contest 🎨", next: "bubble_art_contest" },
+        { text: "Admire the art together and kiss softly 💋", next: "bubble_art_kiss" }
+    ]
+},
+confession_dare: {
+    text: "You lean closer, your voice husky as you dare Volon to act out a fantasy you've both hinted at. His eyes darken with desire, and the tension between you snaps like a live wire. Every subtle touch and whispered command sets your pulse racing... 🔥💋",
+    choices: [
+        { text: "Guide him to pleasure you slowly 😈", next: "confession_dare_pleasure_ending" },
+        { text: "Let him take control and explore you 🔥", next: "confession_dare_control_ending" },
+        { text: "Whisper what you want him to do next 💋", next: "confession_dare_whisper_ending" }
+    ]
+},
+
+confession_action: {
+    text: "Without hesitation, you begin to act out your confession, letting your hands and lips express the desire in your words. Volon matches your intensity, his touch exploring every curve and sensitive spot, building an electric connection between your bodies... 🔥💋",
+    choices: [
+        { text: "Pull him closer and kiss deeply 😈", next: "confession_action_kiss_ending" },
+        { text: "Guide him to where you want more 🔥", next: "confession_action_guided_ending" },
+        { text: "Let your bodies speak completely 💋", next: "confession_action_body_ending" }
+    ]
+},
+
+strawberry_reverse: {
+    text: "You gently lift the blindfold and let Volon feed you, the strawberry dripping across your lips. You taste it slowly, moaning softly as the sweet juice mixes with your desire. Each bite brings teasing touches and lingering kisses that make your heart race... 🔥💋",
+    choices: [
+        { text: "Pull him close and kiss deeply 😈", next: "strawberry_reverse_kiss_ending" },
+        { text: "Guide his hands to explore you 🔥", next: "strawberry_reverse_touch_ending" },
+        { text: "Take control and tease him back 💋", next: "strawberry_reverse_tease_ending" }
+    ]
+},
+
+strawberry_kiss: {
+    text: "The blindfold comes off and your lips meet his in a deep, lingering kiss. Strawberry juice and warmth mix as your tongues explore, your hands roaming freely over each other's bodies. The kiss ignites a hunger that neither of you can resist... 🔥💋",
+    choices: [
+        { text: "Press your body fully against him 😈", next: "strawberry_kiss_body_ending" },
+        { text: "Explore his lips and neck with kisses 🔥", next: "strawberry_kiss_neck_ending" },
+        { text: "Pull him down to the bed for more 💋", next: "strawberry_kiss_bed_ending" }
+    ]
+}
+
+        };
+        //endings
+
+        const endings = {
+bath_underwater_ending: {
+    title: "Hidden Pleasures 😈",
+    text: "You let him explore under the bubble cover, hands brushing and hearts pounding. The thrill of hidden touches makes the moment unforgettable, and soon the warmth of the water carries you both into a shared, intimate bliss...",
+    choices: [
+        { text: "Surrender to the moment 😈", next: "underwater_ending" }
+    ]
+},
+
+bubble_art_ending: {
+    title: "Sensual Bubble Art 💖",
+    text: "Laughing, you both create intricate bubble designs on each other’s skin. Each playful stroke becomes more sensual, and soon the water, bubbles, and candlelight wrap you both into a tender, passionate ending...",
+    choices: [
+        { text: "Let it all flow 🔥", next: "bubble_art_final_ending" }
+    ]
+},
+confession_dare_pleasure_ending: {
+    title: "Guided Desire 🔥💋",
+    text: "You guide Volon's hands and lips over your body, feeling every stroke, every kiss ignite a fire between you. He teases your most sensitive areas, and you shiver under his touch, moaning as he brings you closer and closer to the edge. Your bodies move together in rhythm, surrendering to the raw, electric pleasure. 😈🔥💋"
+},
+
+confession_dare_control_ending: {
+    title: "Taken by Passion 🔥💋",
+    text: "Volon takes full control, his hands exploring every curve and sensitive spot. He teases you with soft kisses along your neck and chest, dipping lower with deliberate, fiery intent. Your breaths grow ragged as he brings you to new heights of arousal, every touch setting your body ablaze with desire. 😈🔥💋"
+},
+
+confession_dare_whisper_ending: {
+    title: "Whispered Temptation 🔥💋",
+    text: "You whisper exactly what you want him to do, and he obeys, tracing your wishes with his lips and hands. Soft gasps and moans fill the air as your bodies press together, your skin gliding against his with a hot, erotic rhythm. Each whispered command pulls you deeper into shared ecstasy. 😈🔥💋"
+},
+
+confession_action_kiss_ending: {
+    title: "Hungry Lips 🔥💋",
+    text: "You pull Volon close, your lips meeting in a fierce, heated kiss. Tongues dance together as your hands roam freely over each other's bodies, fingers exploring and teasing sensitive spots. The kiss becomes a consuming fire, leaving you both breathless and craving more intimate connection. 😈🔥💋"
+},
+
+confession_action_guided_ending: {
+    title: "Directed Pleasure 🔥💋",
+    text: "Your hands guide him where you ache to be touched, eliciting soft groans and urgent responses. Every touch, every kiss is perfectly timed to your desire, making your bodies move in unison. The intensity escalates until the pleasure is almost unbearable, and you surrender completely to the sensual rhythm. 😈🔥💋"
+},
+
+confession_action_body_ending: {
+    title: "Bodies in Ecstasy 🔥💋",
+    text: "Your bodies entwine completely, hands and lips exploring every inch. You grind and press together, gasping and moaning as desire overtakes reason. Each movement is a dance of pure erotic pleasure, and you reach heights of shared ecstasy that leave you trembling and spent in each other's arms. 😈🔥💋"
+},
+
+strawberry_reverse_kiss_ending: {
+    title: "Juicy Kiss 🔥💋",
+    text: "The strawberry juice on your lips mixes with his as you kiss deeply, tongues entwining in a dance of sweet and hot desire. Your hands roam over his chest and neck, pulling him closer as your bodies press together. Every taste and touch sends shivers down your spine, igniting your hunger for more. 😈🔥💋"
+},
+
+strawberry_reverse_touch_ending: {
+    title: "Exploratory Ecstasy 🔥💋",
+    text: "You guide his hands over your body, exploring and teasing each curve. He responds eagerly, tracing every sensitive spot, and you moan softly with each intimate stroke. The strawberry game turns into full-body arousal, your skin and lips glistening with juice and desire. 😈🔥💋"
+},
+
+strawberry_reverse_tease_ending: {
+    title: "Playful Seduction 🔥💋",
+    text: "You take control, teasing Volon back with soft bites, lingering kisses, and sultry touches. Your hands explore his chest and thighs while your lips trail over his neck and collarbone, making him shiver with need. The playful teasing escalates into hot, passionate ecstasy as you both surrender to the moment. 😈🔥💋"
+},
+
+strawberry_kiss_body_ending: {
+    title: "Pressed Together 🔥💋",
+    text: "Your bodies press fully together as the kiss deepens, lips and tongues exploring urgently. Hands roam over every curve, teasing, caressing, and igniting raw desire. Your moans mingle as your bodies grind together, each movement escalating the pleasure until it feels impossibly intense. 😈🔥💋"
+},
+
+strawberry_kiss_neck_ending: {
+    title: "Neck Nibbles 🔥💋",
+    text: "You trail kisses down his neck and chest, nibbling and licking in all the right places. Your hands follow, exploring and teasing his most sensitive spots. The combination of soft lips, biting, and roaming hands drives him wild as your bodies move together in perfect, erotic harmony. 😈🔥💋"
+},
+    feet_higher_deeper: {
+        title: "Deep Erotic Surrender 🔥💞",
+        text: "Volon’s hands roam with bold precision, guided by your sultry cues, groping your bare thighs and breasts as shivers cascade through your naked body. The room pulses with heat, your slick skin grinding against his as he thrusts deep into your core, then anally, each stroke a fiery surge. Moans echo, hearts pounding as you surrender to relentless sex, collapsing in a drenched, trembling heap of raw ecstasy. 😈🔥"
+    },
+
+    feet_higher_whisper: {
+        title: "Whispered Erotic Frenzy 💋✨",
+        text: "Your hot breath teases his ear with filthy whispers of desire, Volon’s eyes blazing as his hands grope your naked breasts and ass with fierce intent. Guided by your words, he thrusts into you with savage heat, penetrating deeply as your bodies grind in a sweaty rhythm. The line between fantasy and reality dissolves in a haze of moans and raw sex, leaving you both gasping and spent. 🔥💖"
+    },
+
+    feet_higher_cuddle: {
+        title: "Steamy Cuddle Fuck 💕🔥",
+        text: "You pull Volon onto the couch, naked bodies entwined, his hands groping your breasts as you grind against him. Every curve pressed tight sends waves of heat, his thick arousal thrusting deep into your core. Soft moans mix with sloppy kisses, the rhythm of sex slowing time itself, culminating in a sweaty, shuddering climax that leaves you both melted together. 💋💫"
+    },
+
+    feet_switch_tease: {
+        title: "Playful Foot Erotic Tease 😈🔥",
+        text: "Your bare feet tease Volon’s naked body, toes tracing his thighs and arousal with wicked intent, his groans fueling your lust. The playful energy turns feral as you straddle him, groping your own breasts while guiding his length into you. Each thrust is a pulse of heat, your bodies grinding in a steamy rhythm that erupts into a trembling, sweat-soaked climax. 💋✨"
+    },
+
+    feet_switch_kiss: {
+        title: "Fiery Foot-Kissed Fuck 💋🔥",
+        text: "You press closer, lips crashing into Volon’s in a sloppy, tongue-heavy kiss, your hands groping his bare chest and ass. The foot massage’s sensuality fuels the heat as he thrusts deep into you, penetrating with relentless desire. Moans and groans blend in a storm of sex, leaving you both drenched in sweat and collapsing in orgasmic bliss. 💕🔥"
+    },
+
+    feet_switch_challenge: {
+        title: "Erotic Foot Challenge Frenzy 😈💞",
+        text: "You dare Volon to match your tease, his grin wicked as his hands grope your naked breasts and thighs with fierce intensity. The playful flip turns primal, his thrusts penetrating your core, then anally, each stroke a fiery jolt. Sweat and laughter mix with moans, your bodies grinding in a steamy rhythm that ends in a trembling, lust-fueled climax. 🔥💫"
+    },
+
+    feet_kiss_deep: {
+        title: "Relentless Erotic Kiss 😈🔥",
+        text: "The kiss turns feral, lips and tongues battling as your hands grope Volon’s bare ass and chest. Naked bodies grind, his thrusts plunging deep into your core with savage heat, each stroke a pulse of raw desire. Moans echo as you surrender to relentless sex, the room fading in a haze of sweat and orgasmic intensity that leaves you both shattered. 💋💖"
+    },
+
+    feet_kiss_whisper: {
+        title: "Whispered Erotic Heat 💋✨",
+        text: "Breaking the kiss, your lips graze Volon’s ear with a filthy suggestion, his eyes flaring as he gropes your naked breasts and ass. Guided by your whispers, he thrusts into you, penetrating deeply, then anally, each stroke a fiery surge. The teasing dance erupts into a steamy rhythm of sex, leaving you both drenched and trembling in orgasmic bliss. 🔥💞"
+    },
+
+    feet_kiss_control: {
+        title: "Dominant Erotic Control 💋🔥",
+        text: "You pin Volon to the couch, your naked body commanding his with fierce confidence. Hands grope his chest as you guide his thick arousal into you, riding him with deliberate heat. Lips clash in sloppy kisses, each thrust a pulse of pleasure as you take him to a sweaty, shuddering climax, leaving you both utterly fucked out and sated. 💕🔥"
+    }
+,
+strawberry_kiss_bed_ending: {
+    title: "Strawberry Bed Passion 🔥💋",
+    text: "You pull Volon down onto the bed, your bodies pressed together as you kiss passionately. Strawberry juice and saliva mix as your hands roam over every inch of skin, teasing, caressing, and igniting raw desire. The combination of taste, touch, and movement sends both of you spiraling into intense, shared ecstasy. 😈🔥💋"
+}
+,
+fireplace_passion_ending: {
+    title: "Inferno of Desire 🔥💋",
+    text: "Volon sweeps you onto the rug before the roaring fireplace, his body pressing against yours with unrelenting heat. His hands roam greedily, exploring every curve, every inch of bare skin, while his lips claim yours with desperate, hungry kisses. The crackling fire mirrors your moans as your bodies writhe together, every touch and gasp pushing you both closer to a mind-blowing, dripping climax that leaves you trembling and gasping in each other's arms. 🔥💋💦"
+},
+
+couch_makeout_ending: {
+    title: "Ravished on the Couch 🛋️🔥",
+    text: "You straddle Volon on the couch, your lips locked in a feverish, open-mouthed kiss as his hands knead and tease every sensitive spot. Your moans mingle with his deep groans, every movement sending sparks of pleasure through your bodies. The couch becomes a storm of lust — clothes discarded, skin sliding against skin — until both of you explode together in an overwhelming, fiery crescendo, utterly lost in each other. 🛋️🔥💋💦"
+},
+
+private_retreat_ending: {
+    title: "Hidden Temptation 😈🔥",
+    text: "You drag Volon into a secluded room, locking the door behind you, and immediately your hands and lips devour each other. Clothes fall away as you press together, teasing, biting, and exploring with insatiable hunger. Every kiss and touch sends shivers through your bodies, building a relentless tension that explodes into a searing, dripping climax, leaving you both shaking, breathless, and insatiably satisfied. 😈🔥💦"
+},
+
+            fulfill_request_ending: {
+    title: "Ultimate Pleasure 🔥💦",
+    text: "You obey Volon's every instruction, your hands and fingers kneading, stroking, and teasing his most sensitive areas exactly how he craves. His body trembles under your touch, his moans growing louder and more desperate as you explore every inch of him. The massage melts into an erotic dance of lust, your bodies slick with desire as you push him to the edge again and again until he shudders and collapses, completely spent and panting in your arms. 🔥💦💋"
+},
+
+teasing_touch_ending: {
+    title: "Intense Tease 😈🔥",
+    text: "You trail your hands over his desired spots, brushing and circling without fully satisfying him, making Volon groan and writhe under your teasing. Every tantalizing touch sends waves of desperate need through him, his hands clutching you as his body begs for more. You play this erotic game of denial, heightening the tension until neither of you can resist, and the final release explodes with raw, scorching intensity. 😈🔥💋"
+},
+
+specific_request_ending: {
+    title: "Explicit Lust Unleashed 💋🔥",
+    text: "You whisper for him to describe exactly how he wants to be touched, your voice dripping with lust. As he confesses every intimate desire, your hands, mouth, and body follow his commands with precision, leaving him gasping and trembling. The massage turns into an uncontrollable storm of erotic pleasure, your movements pushing him to the brink repeatedly until both of you erupt together, slick, panting, and utterly consumed by passion. 💋🔥💦"
+},
+
+            show_arousal_ending: {
+    title: "Unstoppable Lust 🔥💦",
+    text: "You grind against Volon, letting him feel just how dripping wet you are. His hands roam over your body, teasing and kneading every curve as you gasp and moan against his touch. The massage becomes pure, unrestrained ecstasy, your bodies slick and moving together in a frenzy of need. Every stroke, every shiver, drives you both closer to a shattering climax that leaves you trembling and spent. 🔥💦💋"
+},
+
+help_arousal_ending: {
+    title: "Intimate Surrender 💕🔥",
+    text: "You guide Volon's hands over your aching, sensitive body, letting him explore every slick, hot inch. His lips trail along your neck and shoulders while his hands tease your most intimate places, making you arch and whimper uncontrollably. The massage melts into a torrent of pleasure as you both give in to raw, carnal desire, bodies slick with oil and lust. 💕🔥💦"
+},
+
+confession_continues_ending: {
+    title: "Lustful Confession 😈🔥",
+    text: "You whisper your deepest, filthiest desires into Volon's ear, each word making him harder and hungrier. He responds by pressing you into the table, his hands and mouth worshipping your soaked body while you moan and writhe under his touch. Your confession turns into a full-blown erotic ritual, your gasps and cries mixing as you both ride waves of unrelenting pleasure until you collapse together, spent and panting. 😈🔥💦"
+},
+
+            massage_table_ending: {
+                title: "Oiled Ecstasy 💆‍♀️🔥",
+                text: "The massage table becomes your altar of passion as you and Volon make love with oil-slicked bodies. Every movement is smooth and sensual, your skin sliding against his in the most incredible way. The scented oils heighten every sensation as you move together, your bodies glistening in the candlelight. The massage has become the most erotic experience of your life as you explore each other with oil-covered hands and bodies. Your climax is intense and prolonged, your oil-slicked bodies moving in perfect harmony until you both collapse in satisfied exhaustion. 💆‍♀️💋🔥"
+            },
+            oil_slide_ending: {
+                title: "Slippery Seduction 🛢️💋",
+                text: "You douse your naked body in hot massage oil, your slick tits and ass sliding against Volon’s ripped, bare muscles in a filthy, wet grind of pure lust. Your oil-soaked curves rub against his throbbing cock, your hands clawing his chiseled ass as he rams his thick length deep into your dripping pussy, each thrust a slick, savage surge. The oil turns every touch into a mind-blowing jolt, your screams echoing as Volon flips you, fucking your ass with relentless, slippery heat. Your sweat-drenched bodies glide in primal, perfect rhythm, every caress a fiery explosion, driving you both to a shuddering, cum-soaked climax that leaves you quivering in Volon’s arms, lost in a haze of raw, slippery ecstasy. 💋🔥"
+            },
+            fantasy_fulfillment_ending: {
+                title: "Fantasy Made Real 🌟🔥",
+                text: "You act out Volon's deepest fantasy exactly as he described it, and the reality is even better than his imagination. Every detail he confessed becomes reality as you fulfill his desires completely. The wine has made you both bold and uninhibited as you explore his fantasy together. The experience is so intense and perfect that it exceeds even his wildest dreams. You both discover that reality can be even better than fantasy when shared with the right person. 🌟💋🔥"
+            },
+            intimate_exploration_ending: {
+                title: "Intimate Discovery 🔍💋",
+                text: "Volon's hands explore your most intimate areas as you guide him exactly where you want to be touched. The foot massage has evolved into something much more personal and intense as he discovers all your sensitive spots. Your wine glasses are forgotten as you lose yourselves in intimate exploration, each touch bringing waves of pleasure. The couch becomes your playground as you explore each other with increasing passion and intensity. 🔍🔥💕"
+            },
+            dessert_body_ending: {
+                title: "Sweet Body Feast 🍓🔥",
+                text: "Volon's blindfolded body becomes your dessert table as you cover him with strawberries, whipped cream, and chocolate, then slowly eat it all off his skin. He gasps and moans as you feast on the sweet treats covering his body, your tongue finding every drop of sweetness. The blindfold makes every sensation more intense as he never knows where you'll taste him next. You turn his body into the most delicious meal you've ever had, and he returns the favor afterward. 🍓💋😈"
+            },
+            ice_heat_ending: {
+                title: "Fire and Ice 🧊🔥",
+                text: "You torture Volon with alternating ice and heat, using ice cubes to make him gasp and your warm mouth to make him moan. The contrast between cold and hot drives him absolutely wild as you explore his blindfolded body. You trace patterns with ice cubes, then follow the same paths with your heated tongue, creating sensations he's never experienced before. The temperature play becomes an art form as you discover new ways to drive each other crazy with pleasure. 🧊💋🔥"
+            },
+            bubble_love_ending: {
+                title: "Sudsy Passion 🛁💋",
+                text: "You turn around in Volon's arms and make passionate love in the warm, bubble-filled water. The bubbles provide the perfect slippery coating as you move together, creating waves that splash gently over the edges of the tub. The warm water makes every touch more sensitive as you explore each other in your sudsy sanctuary. Your lovemaking creates ripples and waves in the bathwater as you lose yourselves in aquatic passion. 🛁🔥✨"
+            },
+            fireplace_ending: {
+                title: "Firelight Passion 🔥💋",
+                text: "The fireplace crackles and pops as you and Volon make passionate love on the soft rug. The flames cast dancing shadows across your intertwined bodies, creating a primal, intimate atmosphere that makes every touch feel electric. The warmth from the fire mingles with the heat of your passion as you move together in perfect rhythm. Volon's hands explore every curve of your body while you arch beneath him, the firelight making your skin glow like burnished gold. The storm outside is forgotten as you create your own heat, your moans mixing with the sound of crackling wood. Hours pass like minutes as you lose yourselves in each other, the fire slowly dying down to glowing embers that mirror the satisfied warmth in your hearts. You fall asleep in each other's arms on the rug, covered only by a soft blanket and the dying firelight. 🔥✨💕"
+            },
+            champagne_exploration_ending: {
+                title: "Champagne Seduction 🍾😈",
+                text: "Your champagne exploration becomes increasingly bold and intimate as you use the cold, fizzy liquid to tease and pleasure Volon in ways that drive him absolutely wild. The contrast between the cold champagne and your warm mouth creates sensations that make him gasp and moan with pleasure. You take your time, savoring every reaction, every shiver, every breathless plea for more. The expensive champagne becomes your tool of seduction as you discover new ways to use it that neither of you had ever imagined. The bubbles tickle and tease as you explore his most sensitive areas, your tongue following trails of champagne across his heated skin. By the time the bottle is empty, you're both intoxicated - not just from the alcohol, but from the intense pleasure you've given each other. The silk sheets are damp with champagne and desire as you finally come together in explosive passion. 🍾🔥💋"
+            },
+            bath_love_ending: {
+                title: "Sudsy Sanctuary 🛁💕",
+                text: "The warm, bubble-filled water becomes your private ocean of pleasure as you and Volon make love with slow, sensual movements. The water supports your bodies as you move together, creating gentle waves that lap at the edges of the tub. Bubbles cling to your skin like tiny pearls as you ride him slowly, your hands gripping the edges of the tub for leverage. The candles flicker around you, their light reflecting off the water and creating a magical, dreamlike atmosphere. Every movement sends ripples through the water and waves of pleasure through your bodies. The warm water makes every touch more sensitive, every caress more intense. You lose track of time in your sudsy sanctuary, the outside world completely forgotten as you focus only on the incredible sensations you're creating together. When you finally climax together, your cries echo off the bathroom tiles, mixing with the gentle splash of water. You stay entwined in the cooling water, sharing soft kisses and gentle touches. 🛁🔥✨"
+            },
+            wine_fire_ending: {
+                title: "Intoxicating Flames 🍷🔥",
+                text: "You and Volon feed each other wine by the firelight, the rich red liquid staining your lips as you share intimate kisses between sips. The wine makes you both bold and playful as you drizzle it across each other's bodies, licking it off with slow, deliberate strokes of your tongues. The firelight dances across your wine-slicked skin as you explore each other with increasing passion. The combination of alcohol and desire makes every touch feel magnified, every sensation more intense. You make love with wild abandon on the rug, the wine making you both uninhibited and passionate. The empty wine bottle lies forgotten beside you as you lose yourselves in each other, your bodies moving together in perfect harmony. The fire crackles and pops, providing the perfect soundtrack to your lovemaking. You taste wine and passion on each other's lips as you kiss deeply, your bodies intertwined in the flickering firelight. The night becomes a blur of wine, fire, and incredible pleasure that leaves you both completely satisfied and deeply connected. 🍷💋🔥"
+            },
+            fire_dance_ending: {
+                title: "Naked Fire Dance 💃🔥",
+                text: "You stand up in front of the fireplace, completely naked, and begin to dance for Volon in the flickering firelight. Your body moves with fluid grace as the flames cast dancing shadows across your skin, making you look like a goddess of fire and desire. Volon watches with hungry eyes as you sway and move, your hands tracing your own curves in the most seductive dance he's ever seen. The heat from the fire warms your skin as you dance closer and closer to him, your movements becoming more provocative with each passing moment. Finally, you straddle him as he sits mesmerized, continuing your dance on his lap as he runs his hands over your moving body. Your dance becomes a dance of love as you move together, the firelight making everything look magical and primal. You make passionate love while still moving to your own internal rhythm, creating a dance of desire that neither of you will ever forget. The fire burns low as you finally collapse together, exhausted and completely satisfied. 💃🔥💋"
+            },
+            mutual_champagne_ending: {
+                title: "Champagne Exchange 🥂💋",
+                text: "Volon takes the champagne bottle from you with a wicked grin, and now it's your turn to experience the incredible sensation of cold champagne against heated skin. He pours it slowly across your breasts, watching as you gasp and arch at the sensation. His mouth follows the trail of bubbles, his tongue warm against your champagne-cooled skin. You take turns with the bottle, each of you finding new and creative ways to use the champagne to drive the other wild with desire. The expensive sheets become soaked with champagne and your combined passion as you explore each other's bodies with increasing intensity. The bubbles tickle and tease as you both discover that champagne tastes even better when licked from each other's skin. Your lovemaking becomes a celebration in every sense of the word, with champagne, passion, and pure pleasure combining into an unforgettable night. You fall asleep sticky with champagne and completely satisfied, the empty bottle a testament to your creative passion. 🍾🔥✨"
+            },
+            surrendered_fantasy_ending: {
+title: "Surrendered Erotic Ecstasy 💕🔥",
+text: "You surrender completely, baring your body and soul to Volon as he ravishes you with every filthy desire you've whispered. His hands grope your naked breasts, fingers pinching your nipples as he thrusts deep inside you, penetrating with relentless heat. Lips devour in sloppy, tongue-heavy kisses, your moans echoing as your slick bodies grind in primal rhythm. The room reeks of sweat and sex, time dissolving as he takes you anally, pushing you to a shuddering climax. You collapse into his arms, drenched, trembling, and utterly fucked out, lost in a haze of raw pleasure. 😈💖✨"
+},
+master_of_desire_ending: {
+title: "Master of Erotic Command 😈💋",
+text: "You seize control, your sultry commands driving Volon wild as you straddle him, naked and dripping with lust. Your hands grope his chest while you guide his thick arousal into you, each thrust a deliberate pulse of heat. Lips clash in wet, demanding kisses, your fingers teasing your own breasts as you ride him hard. The air crackles with your dominance, every moan and shudder amplifying the steamy intensity until you both explode in a sweaty, gasping climax, collapsing in a tangle of fulfilled desire. 🔥💖💫"
+},
+wild_immersion_ending: {
+title: "Untamed Erotic Frenzy 🔥💋",
+text: "Instinct takes over, your naked bodies crashing together as Volon matches your feral hunger. No words, just raw need—hands groping your breasts and ass, his thrusts plunging deep into your core and then anally, each stroke a fiery jolt. Lips and teeth ravish your neck, your moans a primal symphony as you grind in a slick, sweaty rhythm. The night drowns in a torrent of sex, every thrust and caress pushing you to a trembling, sweat-soaked climax, collapsing together in a heap of untamed, heart-pounding bliss. 💕😈✨"
+},
+            champagne_kiss_ending: {
+                title: "Effervescent Kiss 🥂💋",
+                text: "You take a mouthful of champagne and pull Volon into a deep kiss, sharing the bubbling liquid between your mouths. The champagne fizzes and pops on your tongues as you kiss passionately, the sensation unlike anything either of you has ever experienced. You continue this champagne kissing game, each kiss becoming more intense and passionate than the last. The bubbles create a tingling sensation that spreads from your mouths throughout your entire bodies. Soon you're making love with champagne-flavored kisses, the effervescent liquid adding a magical quality to every touch and caress. Your bodies move together in perfect harmony as you continue to share champagne kisses, the bubbles making every sensation more intense. The combination of alcohol, bubbles, and pure passion creates an experience that transcends the physical, becoming something almost spiritual in its intensity. You climax together with champagne still fizzing on your tongues, your cries of pleasure mixing with the sound of popping bubbles. 🥂🔥💫"
+            },
+            water_games_ending: {
+                title: "Aquatic Pleasure 💦🔥",
+                text: "Your playful water games in the bathtub become increasingly sensual and creative as you discover all the ways that warm water can enhance pleasure. You use the gentle pressure of the faucet to create new sensations, taking turns pleasuring each other with the warm stream of water. The bubbles provide the perfect cover for your underwater explorations as you discover that making love in water creates entirely new sensations. The buoyancy of the water allows you to try positions that would be impossible on dry land, and you take full advantage of this aquatic playground. Your bodies slide against each other effortlessly in the slippery, sudsy water as you make passionate love. The warm water makes every touch more sensitive, every caress more intense. You create waves that splash gently over the edges of the tub as your passion builds to incredible heights. The bathroom fills with steam and the sounds of your pleasure as you lose yourselves in aquatic ecstasy. 💦💋🔥"
+            },
+            bed_transition_ending: {
+                title: "Silk Sheet Seduction 🏩💋",
+                text: "You and Volon dry each other off with fluffy towels, the process becoming an extended form of foreplay as you take your time caressing every inch of each other's bodies. Still damp and glowing from the bath, you move to the bedroom where silk sheets await. The contrast between your warm, slightly damp skin and the cool silk creates an incredible sensation as you slide between the sheets together. The silk feels like liquid against your skin as you make love with slow, sensual movements. Every touch is magnified by the smooth fabric beneath you as you explore each other with renewed passion. The silk sheets become twisted and tangled around your bodies as your lovemaking becomes more intense. You use the slippery fabric to enhance your pleasure, letting it slide across your skin as you move together in perfect rhythm. The combination of silk, skin, and pure desire creates an experience of luxury and passion that leaves you both breathless and completely satisfied. 🏩🔥✨"
+            },
+            naked_dance_ending: {
+                title: "Nude Seduction Dance 💃🔥",
+                text: "Your silk robe falls to the floor as you continue dancing, now completely naked in the candlelight. Volon's eyes drink in every curve of your body as you move with fluid grace, your skin glowing in the flickering light. The dance becomes even more erotic as you have nothing to hide behind, every movement showcasing your beauty. You dance closer and closer to him, your naked body brushing against his clothed form, driving him wild with desire. The music pulses through your naked form as you give him the most seductive dance of his life. 💃💋🔥"
+            },
+            
+undress_worship: {
+title: "Filthy Body Worship Fuck 💋🔥",
+text: "Stripped bare, you order Volon to worship your naked body. His lips and tongue devour every inch—sucking your neck, lapping at your tits, and teasing your thighs—his hands groping with feral hunger. Each wet kiss and bite fuels a molten ache, your slick pussy trembling as he buries his face between your legs, tongue-fucking you to a shuddering edge. The worship turns primal as he rams his thick cock deep into you, fucking you with relentless lust, your screams echoing in a sweat-soaked, cum-drenched climax. 😈💞"
+},
+undress_dominate: {
+title: "Savage Dominant Fuck 😈🔥",
+text: "As the last scrap of clothing hits the floor, you shove Volon onto the bed, your naked body straddling his chiseled frame. Your hands claw his chest, groping his pecs as you grind your dripping pussy against his throbbing cock, taking control with a ruthless rhythm. His groans stoke your fire as you ride him hard, tits bouncing, fucking him into submission with greedy, savage thrusts until you both explode in a sweaty, trembling climax. 💋💫"
+},
+undress_claim: {
+title: "Primal Raw Claim 🔥💞",
+text: "Volon pins you the instant you’re naked, his strong hands gripping your thighs as his lips crash into yours in a sloppy, tongue-heavy frenzy. Groans mix with wet kisses as his hard body presses you into the sheets, skin scorching against skin. He thrusts his thick cock deep into your dripping pussy, then flips you for a brutal anal fuck, claiming you with raw, relentless intensity. Your moans fill the room, bodies slick with sweat, as he pounds you into a shuddering, cum-soaked oblivion. 💕🔥"
+}
+,
+            dance_kiss_ending: {
+                title: "Dancing Passion 💋🎵",
+                text: "You turn back around and pull Volon into a deep, passionate kiss while still swaying to the music. Your bodies continue moving together as you kiss, the dance and the passion becoming one fluid motion. His hands roam your body as you kiss and dance, the combination of movement and intimacy creating an incredibly erotic experience. You make love while still moving to the rhythm, your bodies finding a perfect harmony between the music and your passion. 💋🔥🎵"
+            },
+            dance_bedroom_ending: {
+                title: "Dancing to Bed 🏩💃",
+                text: "Still dancing together, you guide Volon toward the bedroom, your bodies never breaking contact as you move. The dance continues as you make your way through the house, each step building more anticipation. By the time you reach the bedroom, you're both breathless with desire. You continue dancing beside the bed before finally falling onto the silk sheets together, your passion exploding as the dance transforms into lovemaking. 🏩💃🔥"
+            },
+            dirty_lyrics_ending: {
+                title: "Whispered Desires 🎤🔥",
+                text: "You whisper the dirtiest, most seductive lyrics in Volon's ear, describing exactly what you want to do to him. Your voice is husky with desire as you paint vivid pictures with your words, making him shiver with anticipation. The whispered lyrics become a form of verbal foreplay as you continue dancing, each word making him harder and more desperate for you. Your dirty serenade drives him to the edge of control. 🎤💋😈"
+            },
+            duet_dance_ending: {
+                title: "Passionate Duet 🎵💕",
+                text: "Volon begins singing back to you, his deep voice harmonizing with yours as you dance together. The duet becomes incredibly intimate as you sing to each other about desire and passion, your voices blending as perfectly as your bodies. The musical foreplay builds to a crescendo as you both lose yourselves in the song and the dance, your voices becoming breathless with desire as passion takes over. 🎵💋🔥"
+            },
+            neck_kiss_ending: {
+                title: "Neck Worship 💋🔥",
+                text: "You stop singing and begin kissing and nibbling Volon's neck, finding all his sensitive spots with your lips and tongue. He groans with pleasure as you worship his neck, your kisses becoming more passionate and demanding. The dancing stops as you focus entirely on his neck, driving him wild with your mouth. Your neck kisses become so intense that he can barely stand, his knees weak from the incredible sensations you're creating. 💋🔥✨"
+            },
+            dip_kiss_ending: {
+                title: "Romantic Dip Kiss 💋🌹",
+                text: "While still held in the romantic dip, you pull Volon down for the most passionate kiss of your life. The position makes the kiss even more intense as you're completely at his mercy, held suspended in his strong arms. The kiss is deep and desperate, full of all the passion that's been building between you. When he finally pulls you upright, you're both breathless and ready to take things much further. 💋🔥🌹"
+            },
+            dip_carry_ending: {
+                title: "Swept Away 💪💋",
+                text: "From the dip position, Volon sweeps you up in his arms and carries you to the couch, your bodies never breaking contact. You feel like a princess being carried by her prince as he lays you down gently on the soft cushions. The romantic gesture makes your heart race as he covers your body with his, the dance forgotten as passion takes over completely. 💪💋🔥"
+            },
+            dip_wrap_ending: {
+                title: "Wrapped in Passion 🔥💕",
+                text: "As Volon lifts you from the dip, you wrap your legs around his waist, pulling him closer. The position is incredibly intimate as you're pressed against him, your bodies fitting together perfectly. He carries you like this, your legs wrapped around him, to the nearest surface where you can continue your passionate encounter. The dance has evolved into something much more physical and intense. 🔥💕💋"
+            },
+            explore_dance_ending: {
+                title: "Dancing Exploration 🔥💃",
+                text: "Volon's hands explore under your silk robe while you continue dancing, his touch making you gasp and moan as you move together. The combination of dancing and intimate touching creates an incredibly erotic experience as you grind against his exploring hands. Your dance becomes a form of standing foreplay as he discovers all your sensitive spots while you move to the music. 🔥💃💋"
+            },
+            mutual_explore_ending: {
+                title: "Mutual Discovery 💋🔥",
+                text: "You return the favor, exploring Volon's body while you both continue dancing. Your hands roam over his muscles as he touches you, creating a dance of mutual exploration and desire. Both of you are touching and being touched while moving to the music, the sensations overwhelming as you discover each other's bodies through dance. The mutual exploration becomes so intense that you can barely keep dancing. 💋🔥✨"
+            },
+            touching_focus_ending: {
+                title: "Pure Touch 🔥💕",
+                text: "You stop dancing completely and focus entirely on touching each other, your hands exploring every inch of each other's bodies. The music still plays but you're no longer moving to it, too focused on the incredible sensations you're creating with your hands. The touching becomes increasingly intimate as you discover all of each other's sensitive spots, your exploration leading to the most intense physical connection. 🔥💕💋"
+            },
+            passionate_kiss_ending: {
+                title: "Poetry in Motion 💋📚",
+                text: "You kiss Volon with all the passion and intensity from the romantic poems you were reading. The kiss is deep and meaningful, filled with all the desire and longing that the poetry described. Your lips move together like verses of the most beautiful poem ever written, each kiss a new stanza of passion. 💋📚🔥"
+            },
+            whispered_poetry_ending: {
+                title: "Spoken Desire 🎭💋",
+                text: "You whisper your own improvised poetry against Volon's lips, creating verses about his beauty and your desire for him. Your words are like silk against his skin as you speak of passion and longing, your poetry becoming more intimate and erotic with each whispered line. 🎭💋🔥"
+            },
+            actions_speak_ending: {
+                title: "Beyond Words 🔥💕",
+                text: "You decide that actions speak louder than words and show Volon your passion through touch and movement instead of poetry. Your bodies become the verses, your touches the rhymes, as you create the most beautiful physical poem together. 🔥💕💋"
+            },
+            guided_touch_ending: {
+                title: "Guided Pleasure 👐🔥",
+                text: "You guide Volon's hands to all the places you want to be touched, showing him exactly how to pleasure you. His hands follow your guidance perfectly as you teach him the map of your desire, each guided touch bringing waves of incredible pleasure. 👐🔥💋"
+            },
+            fantasy_confession_reality_ending: {
+    title: "Fantasy Realized 😈🔥",
+    text: "You guide Volon into making your most daring fantasy real. Every whispered instruction, every heated touch matches your imagination perfectly. Candlelight dances across your skin as reality and fantasy blur, and the room becomes a playground for your deepest desires. Each moment is more intoxicating than the last, leaving you both breathless and craving more."
+},
+
+fantasy_confession_tease_ending: {
+    title: "Teasing Desire 💋✨",
+    text: "You tease Volon with tantalizing hints of your fantasy, letting him fill in the gaps with his imagination. Each playful glance, each subtle touch intensifies the tension between you. The air hums with anticipation as you both savor the delicious torment of what might come next, leaving you gasping for more before a single act is even completed."
+},
+
+fantasy_confession_action_ending: {
+    title: "Immediate Indulgence 🔥💞",
+    text: "Unable to wait, you start acting out your fantasy with Volon instantly. The room fills with your gasps and laughter as you explore each other's bodies with reckless abandon. Each touch, kiss, and movement pushes you closer to the edge, making your shared desire explode into a night neither of you will ever forget."
+},
+
+fantasy_dare_deepen_ending: {
+    title: "Deepened Temptation 💕😈",
+    text: "You encourage Volon to go further with his fantasy, watching his confidence grow as he teases and explores. The playful dare escalates into something dangerously seductive, with each movement more daring than the last. Your bodies move together in perfect rhythm, the night alive with the thrill of temptation fully unleashed."
+},
+
+fantasy_dare_takeover_ending: {
+    title: "Control Taken 💋🔥",
+    text: "You take control of the fantasy, guiding Volon as he responds to your every instruction. The power dynamic shifts deliciously, blending dominance and desire in perfect harmony. Every gasp, moan, and whispered name fuels the intensity, creating an unforgettable experience of passion and surrender that leaves you both spent and satisfied."
+},
+
+fantasy_dare_follow_ending: {
+    title: "Letting Go 🔥💞",
+    text: "You let Volon lead the experience naturally, surrendering to his fantasy without hesitation. The trust and anticipation heighten every sensation, making every touch feel electric. Your bodies move together seamlessly, lost in the pleasure of letting go and allowing desire to guide the night to a breathtaking conclusion."
+}
+,
+            his_control_ending: {
+                title: "His Command 💪💋",
+                text: "You let Volon take complete control of where his hands go, surrendering to his touch as he explores your body exactly how he wants to. His confident hands roam everywhere, discovering all your secret sensitive spots as you melt under his commanding touch. 💪💋🔥"
+            },
+            hand_exploration_ending: {
+                title: "Four Hands 👐💕",
+                text: "You use both your hands to explore every inch of Volon's body while he does the same to you. Four hands roam and caress as you discover each other through touch alone, your exploration becoming increasingly intimate and passionate. 👐💕🔥"
+            },
+            body_story_ending: {
+                title: "Physical Narrative 📖🔥",
+                text: "You and Volon write your story using your bodies as the pages, each touch and caress a new chapter in your tale of passion. Your physical story becomes the most erotic novel ever written, with plot twists and climaxes that leave you both breathless. 📖🔥💋"
+            },
+            kiss_story_ending: {
+                title: "Kissed Chronicles 💋📚",
+                text: "You write your story entirely with kisses and touches, each kiss a new sentence in your tale of desire. Your lips and hands become the authors of the most passionate story ever told, written on each other's skin with love and lust. 💋📚🔥"
+            },
+            passionate_story_ending: {
+                title: "Epic Romance 🌟💋",
+                text: "Together you create the most passionate story ever told, with your bodies as the characters and your desires as the plot. The story you write together is so intense and erotic that it surpasses any romance novel ever written. 🌟💋🔥"
+            },
+            naked_body_massage_ending: {
+                title: "Skin on Skin 🔥💆‍♀️",
+                text: "You remove your robe completely and use your naked body to massage Volon, your skin sliding against his in the most sensual massage possible. Every curve of your naked form works to pleasure and relax him as you create the ultimate full-body experience. 🔥💆‍♀️💋"
+            },
+            mutual_body_massage_ending: {
+                title: "Body to Body 💕🔥",
+                text: "Volon returns the full-body massage, using his entire naked form to work on your body just as you did to him. Your naked bodies slide against each other in perfect harmony as you both give and receive the most sensual massage imaginable. 💕🔥💋"
+            },
+            massage_lovemaking_ending: {
+                title: "Massage Passion 💆‍♀️🔥",
+                text: "The full-body massage naturally evolves into passionate lovemaking as your bodies move together in perfect rhythm. The massage oil makes everything slippery and sensual as you transition from massage to the most incredible physical connection. 💆‍♀️🔥💋"
+            },
+            intense_grinding_ending: {
+                title: "Grinding Heat 🔥💃",
+                text: "Your grinding becomes more intense and rhythmic as you move against Volon with increasing passion. The friction and heat build to incredible levels as you grind harder and faster, both of you lost in the intense physical sensations you're creating. 🔥💃💋"
+            },
+            face_to_face_grinding_ending: {
+                title: "Eye Contact Passion 👀🔥",
+                text: "Volon turns over so you can grind against him face to face, your eyes locked as you move together. The intimate eye contact makes the grinding even more intense as you watch each other's reactions to the incredible sensations you're creating. 👀🔥💋"
+            },
+            grinding_climax_ending: {
+                title: "Grinding Crescendo 🌊🔥",
+                text: "You take the grinding to its natural and explosive conclusion, both of you reaching incredible heights of pleasure through the intense friction and movement. The grinding builds to a crescendo that leaves you both completely satisfied and breathless. 🌊🔥💋"
+            },
+            body_worship_ending: {
+                title: "Divine Worship 🙏🔥",
+                text: "You turn the massage into a full body worship session, treating Volon's body like a temple as you kiss, lick, and caress every inch of his skin. Your mouth and hands work together to worship him completely, making him feel like a god under your devoted attention. Every muscle, every curve, every sensitive spot receives your passionate worship until he's trembling with pleasure. 🙏🔥💋"
+            },
+            straddle_massage_ending: {
+                title: "Straddled Pleasure 🔥💆‍♀️",
+                text: "You straddle Volon while massaging his chest, your position giving you perfect access to work on his muscles while creating incredible intimacy. The massage becomes increasingly erotic as you grind against him while working, your movements creating friction that drives you both wild. Your hands work his chest while your body moves against his in the most sensual massage possible. 🔥💆‍♀️💋"
+            },
+            mouth_massage_ending: {
+                title: "Oral Worship 👄🔥",
+                text: "You replace your hands with your mouth, using your lips and tongue to massage Volon's chest in the most intimate way possible. Your mouth works across his muscles, tasting his skin and the massage oil as you worship his body with oral attention. The massage becomes incredibly erotic as you use your mouth to pleasure every inch of his torso. 👄🔥💋"
+            },
+            mutual_naked_ending: {
+                title: "Naked Mutual Massage 🔥💕",
+                text: "Both of you are now completely naked and covered in massage oil as you work on each other's bodies simultaneously. Your slippery, naked forms slide against each other as you massage, creating the most sensual experience imaginable. The mutual naked massage becomes a dance of desire as you both give and receive incredible pleasure. 🔥💕💋"
+            },
+            oily_passion_ending: {
+                title: "Slippery Love 🛢️🔥",
+                text: "Covered in massage oil, you and Volon make passionate love with your slippery bodies sliding against each other in the most incredible way. The oil makes every movement smooth and sensual as you explore new positions that are only possible with your oil-slicked skin. Your lovemaking becomes a slippery, sensual dance of pure passion. 🛢️🔥💋"
+            },
+            fantasy_twist_ending: {
+                title: "Fantasy Enhanced 🌟💋",
+                text: "You add your own creative twist to Volon's fantasy, making it even better than he imagined. Your enhancement of his desires creates an experience that surpasses his wildest dreams as you bring his fantasy to life with your own passionate additions. The reality becomes better than any fantasy as you create magic together. 🌟💋🔥"
+            },
+            fantasy_extreme_ending: {
+                title: "Beyond Fantasy 😈🔥",
+                text: "You make Volon's fantasy even dirtier and more intense than he ever imagined, pushing the boundaries of pleasure and desire. Your extreme version of his fantasy takes him to heights of ecstasy he never knew were possible. The experience becomes so intense and passionate that it redefines what pleasure means for both of you. 😈🔥💋"
+            },
+            mutual_exploration_ending: {
+                title: "Dual Discovery 🔍💕",
+                text: "You switch positions and explore Volon's body the same way he explored yours, your hands traveling the same intimate paths on his skin. The mutual exploration becomes a dance of discovery as you both learn each other's most sensitive spots. Your hands work in harmony as you pleasure each other simultaneously. 🔍💕🔥"
+            },
+ending_kisses: {
+title: "Submerged Erotic Kisses 💖🔥",
+text: "You dip beneath the warm bathwater, your lips trailing wet, sucking kisses along Volon’s naked skin, teasing his chest and thighs. The steamy heat and your greedy touch ignite a primal fire. Surfacing, his eyes burn with lust as you crash into a sloppy, tongue-heavy kiss, your hands groping his ass. He thrusts his thick cock deep into your dripping pussy, fucking you with slow, deliberate heat in the water, each stroke a molten surge that leaves you both trembling in a cum-soaked, shuddering climax. 💋✨"
+},
+ending_breath: {
+title: "Breathless Underwater Fuck 💕🌊",
+text: "You and Volon inhale deeply, sinking beneath the water, your naked bodies entwined in a silent, bubbly dance. Breaking the surface, your laughter turns to moans as his hands grope your slick tits, his throbbing cock plunging deep into your pussy. The candlelight flickers on your sweat-drenched skin as he fucks you with relentless rhythm, the steamy bath amplifying every thrust until you both erupt in a gasping, orgasmic frenzy, clinging to each other in the wet heat. 🔥💫"
+},
+ending_tug: {
+title: "Playful Tug to Raw Fuck 🔥💋",
+text: "You vanish under the water, giving Volon a cheeky tug that sparks a startled laugh in the steamy bathroom. His grin turns wicked as he yanks you into his arms, hands groping your bare ass and tits. The playful teasing ignites as he rams his thick cock into your dripping pussy, then flips you for a deep anal fuck, the bubbles swirling around your grinding bodies. Your moans echo, driving you both to a sweaty, shuddering climax in the steamy heat. 💕🔥"
+},
+ending_embrace: {
+title: "Steamy Bath Fuck Embrace 🛁❤️",
+text: "You pull Volon into your naked body, bubbles swirling as your slick curves melt against his hard frame in a scorching embrace. His hands grope your tits and thighs, his thick cock thrusting deep into your pussy with primal hunger. The bath’s warmth fuels the fire as he shifts to fuck you anally, each stroke a fiery jolt, your moans blending in a rhythm of raw sex that leaves you both drenched, trembling, and lost in a cum-soaked haze of passion. 🔥💋"
+}
+,
+            couch_passion_ending: {
+                title: "Couch Seduction 🛋️🔥",
+                text: "You pull Volon on top of you right there on the couch, unable to wait any longer for the passion that's been building between you. The couch becomes your playground as you make love with desperate hunger, your bodies moving together in perfect rhythm. The wine glasses are forgotten as you lose yourselves in couch-bound passion. 🛋️🔥💋"
+            },
+            mutual_dessert_ending: {
+                title: "Sweet Exchange 🍓💋",
+                text: "Volon returns the favor, turning your body into his dessert table as he covers you with strawberries, whipped cream, and chocolate. You take turns being each other's sweet treat, licking and tasting until you're both covered in delicious mess. The dessert play becomes incredibly erotic as you feast on each other. 🍓💋🔥"
+            },
+            intimate_feeding_ending: {
+                title: "Sensual Feast 🍯🔥",
+                text: "You feed each other in the most intimate ways possible, using your mouths to transfer sweet treats between your bodies. The feeding becomes incredibly erotic as you discover new ways to share food that involve every part of your bodies. Your intimate feast becomes a celebration of taste and touch. 🍯🔥💋"
+            },
+            mutual_ice_ending: {
+                title: "Ice Cold Heat 🧊💋",
+                text: "Volon returns the ice torture, using cubes to tease your blindfolded body while you gasp and arch under the cold sensations. You take turns with the ice, creating patterns of cold and heat on each other's skin. The temperature play becomes a game of pleasure and torture that drives you both to incredible heights. 🧊💋🔥"
+            },
+            melting_ice_ending: {
+                title: "Melting Desire 💧🔥",
+                text: "You use your body heat to melt ice cubes on Volon's skin, the cold water running down his heated flesh as you follow the trails with your warm tongue. The contrast between ice, water, and your heated mouth creates sensations that make him writhe with pleasure. The melting ice becomes liquid desire. 💧🔥💋"
+            },
+            body_wash_ending: {
+                title: "Total Body Care 🛁💕",
+                text: "Volon washes your entire body with gentle, loving care, his hands exploring every curve as he cleans you. The washing becomes incredibly intimate as he pays special attention to your most sensitive areas. The warm water and his gentle touch create the most relaxing and arousing experience. 🛁💕🔥"
+            },
+            mutual_wash_ending: {
+                title: "Cleansing Passion 🚿💋",
+                text: "You wash each other from head to toe, your hands exploring every inch of each other's bodies under the warm water. The mutual washing becomes incredibly intimate as you clean and pleasure each other simultaneously. The bathroom fills with steam and passion as you discover that washing can be the most erotic activity. 🚿💋🔥"
+            },
+            bath_wash_ending: {
+    title: "Heated Embrace 🔥",
+    text: "Your hands never stop moving over his warm, wet skin, exploring every inch as the water ripples around you. He pulls you close, and soon you’re both lost in the heat of the moment, bodies pressed together, hearts racing. The scent of oils, the warmth of the bath, and your shared desire explode into an unforgettable, intimate climax that leaves you both breathless and craving more..."
+},
+
+bath_explore_ending: {
+    title: "Submerged Passion 😈",
+    text: "Beneath the floating bubbles, every touch is amplified. Lips brush, fingers explore, and the water carries every shiver and gasp. You move together in a rhythm only the two of you know, melting into the sensual embrace the bath creates. The combination of water, candlelight, and playful desire turns into a deep, all-consuming passion that leaves you entwined, spent, and completely connected..."
+},
+strawberry_skin_final: {
+    title: "Juicy Bliss 🍓🔥",
+    text: "Volon devours every drop of strawberry juice on your skin, his lips and tongue exploring with hunger and care. The sweet, sticky ecstasy leaves you both panting, laughing, and collapsing together, utterly lost in the delicious chaos of desire."
+},
+
+strawberry_tease_final: {
+    title: "Tempting Control 😈🍓",
+    text: "You take the lead, teasing Volon with playful bites and slow caresses. Every shiver and moan fuels your passion, turning the strawberry play into an intense game of dominance and surrender until you both melt into each other in pure delight."
+},
+
+strawberry_sensual_final: {
+    title: "Sensual Indulgence 💕🍓",
+    text: "Each strawberry-laced touch is slow and deliberate, savoring every sensation. The two of you explore each other gently, letting desire build gradually until the room is filled with shared moans, laughter, and the soft sound of dripping juice on skin."
+},
+
+glass_tease_final: {
+    title: "Frosted Ecstasy 🥂❄️🔥",
+    text: "The cold glass teases every nerve, and Volon responds with shivers, gasps, and desperate need. The icy touch becomes a rollercoaster of pleasure, driving you both to a climactic release of fire and frost."
+},
+
+glass_kiss_final: {
+    title: "Warmth After Chill 💋🔥",
+    text: "After teasing him with the cold glass, you melt the tension with slow, heated kisses. The contrast heightens every sensation, leaving you entwined, flushed, and trembling in the afterglow of your intimate play."
+},
+
+glass_explore_final: {
+    title: "Ice & Desire 🔥❄️",
+    text: "You combine the ice glass with hands-on exploration, alternating frosty and warm touches. The intense contrast pushes both of you to new heights of ecstasy, leaving your hearts racing and bodies slick with passion."
+}
+
+        };
+
+        let currentStory = 'start';
+        let storyPath = [];
+
+        function createParticle(x, y, type = 'heart') {
+            const particles = {
+                heart: ['💖', '💕', '💗', '💝'],
+                sparkle: ['✨', '🌟', '💫', '⭐'],
+                blush: ['😊', '😍', '🥰', '😘']
+            };
+            
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.textContent = particles[type][Math.floor(Math.random() * particles[type].length)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.color = ['#FF69B4', '#FFD700', '#DDA0DD', '#FF91A4'][Math.floor(Math.random() * 4)];
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
+        }
+
+        function createBlushEffect(x, y) {
+            const blush = document.createElement('div');
+            blush.className = 'blush-effect';
+            blush.style.left = (x - 30) + 'px';
+            blush.style.top = (y - 30) + 'px';
+            
+            document.body.appendChild(blush);
+            
+            setTimeout(() => {
+                blush.remove();
+            }, 1500);
+        }
+
+        function updateStory(storyKey) {
+            const storyContainer = document.getElementById('storyContainer');
+            const storyText = document.getElementById('storyText');
+            const choicesContainer = document.getElementById('choicesContainer');
+
+            // Check if it's an ending
+            if (endings[storyKey]) {
+                showEnding(storyKey);
+                return;
+            }
+
+            const story = storyData[storyKey];
+            if (!story) return;
+
+            // Fade out current content
+            storyText.style.opacity = '0';
+            choicesContainer.style.opacity = '0';
+
+            setTimeout(() => {
+                storyText.textContent = story.text;
+                storyText.style.animation = 'none';
+                storyText.offsetHeight; // Trigger reflow
+                storyText.style.animation = 'fade-in-up 1s ease forwards';
+
+                // Clear and populate choices
+                choicesContainer.innerHTML = '';
+                story.choices.forEach((choice, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-btn';
+                    button.innerHTML = `<span class="choice-letter">${String.fromCharCode(65 + index)}.</span>${choice.text}`;
+                    
+                    button.addEventListener('click', function(e) {
+                        const rect = button.getBoundingClientRect();
+                        
+                        // Create particles
+                        for (let i = 0; i < 6; i++) {
+                            setTimeout(() => {
+                                createParticle(
+                                    rect.left + Math.random() * rect.width,
+                                    rect.top + Math.random() * rect.height,
+                                    ['heart', 'sparkle', 'blush'][Math.floor(Math.random() * 3)]
+                                );
+                            }, i * 100);
+                        }
+                        
+                        // Create blush effect
+                        createBlushEffect(e.clientX, e.clientY);
+                        
+                        // Update story path and continue
+                        storyPath.push(storyKey);
+                        setTimeout(() => {
+                            updateStory(choice.next);
+                        }, 600);
+                    });
+
+                    button.addEventListener('mouseenter', function(e) {
+                        createParticle(
+                            e.clientX + Math.random() * 20 - 10,
+                            e.clientY + Math.random() * 20 - 10,
+                            'sparkle'
+                        );
+                    });
+
+                    choicesContainer.appendChild(button);
+                });
+
+                choicesContainer.style.animation = 'none';
+                choicesContainer.offsetHeight; // Trigger reflow
+                choicesContainer.style.animation = 'fade-in-up 1s ease 0.5s forwards';
+            }, 300);
+        }
+
+        function showEnding(endingKey) {
+            const container = document.getElementById('storyContainer');
+            const ending = endings[endingKey];
+
+            // Create celebration particles
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createParticle(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight,
+                        ['heart', 'sparkle'][Math.floor(Math.random() * 2)]
+                    );
+                }, i * 200);
+            }
+
+            setTimeout(() => {
+                container.innerHTML = `
+                    <div class="ending-container">
+                        <h2 class="ending-title">${ending.title}</h2>
+                        <p class="ending-text">${ending.text}</p>
+                        <button class="restart-btn" onclick="restartStory()">Start a New Adventure ✨</button>
+                        <button class="restart-btn" onclick="exploreAll()">Explore All Endings 💕</button>
+                    </div>
+                `;
+            }, 800);
+        }
+
+        function restartStory() {
+            currentStory = 'start';
+            storyPath = [];
+            
+            const container = document.getElementById('storyContainer');
+            container.innerHTML = `
+                <div class="story-text" id="storyText"></div>
+                <div class="choices-container" id="choicesContainer"></div>
+            `;
+            
+            updateStory('start');
+        }
+
+        function exploreAll() {
+            alert("Sabrina, you can restart and try different choices to discover all the magical endings! Each path leads to a unique romantic adventure. 💖✨");
+            restartStory();
+        }
+
+        // Adds random floating particles
+        setInterval(() => {
+            createParticle(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight,
+                ['heart', 'sparkle'][Math.floor(Math.random() * 2)]
+            );
+        }, 4000);
+
+        // Initializes the story
+        updateStory('start');
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9731ae5ce2ed5963',t:'MTc1NTg1ODQ4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
